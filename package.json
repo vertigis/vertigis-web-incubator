@@ -1,0 +1,44 @@
+{
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "samples/*"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/geocortex/vertigis-web-incubator.git"
+    },
+    "author": "Ian Schmitz <ian.schmitz@vertigis.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/geocortex/vertigis-web-incubator/issues"
+    },
+    "homepage": "https://github.com/geocortex/vertigis-web-incubator#readme",
+    "scripts": {
+        "build": "yarn build:samples && yarn build:viewer",
+        "build:samples": "node ./build.js",
+        "build:viewer": "cd viewer && yarn build",
+        "postinstall": "cd viewer && yarn",
+        "test": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress run --browser chrome\"",
+        "test:watch": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress open\"",
+        "start": "cd viewer && cross-env BROWSER=none yarn start"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "concurrently": "^5.3.0",
+        "cross-env": "^7.0.3",
+        "cross-spawn": "^7.0.3",
+        "cypress": "^6.1.0",
+        "husky": "^4.3.5",
+        "prettier": "^2.2.1",
+        "pretty-quick": "^3.1.0",
+        "typescript": "~4.1.2"
+    },
+    "cldr-data-urls-filter": "(cldr-core|cldr-numbers-modern)",
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    }
+}
