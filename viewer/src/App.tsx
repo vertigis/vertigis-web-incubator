@@ -20,16 +20,29 @@ const samples = [{ id: "mapillary", title: "Mapillary" }] as const;
 
 async function getSampleData(sampleName: string): Promise<Sample> {
     const [app, layout, library, readme] = await Promise.all([
-        import(`../../samples/${sampleName}/app/app.json`),
-        import(`!!file-loader!../../samples/${sampleName}/app/layout.xml`),
-        import(`!!file-loader!../../samples/${sampleName}/build/main.js`),
-        import(`!!file-loader!../../samples/${sampleName}/README.md`),
+        import(
+            /* webpackChunkName: "[request]" */
+            `../../samples/${sampleName}/app/app.json`
+        ),
+        import(
+            /* webpackChunkName: "[request]" */
+            `!!file-loader!../../samples/${sampleName}/app/layout.xml`
+        ),
+        import(
+            /* webpackChunkName: "[request]" */
+            `!!file-loader!../../samples/${sampleName}/build/main.js`
+        ),
+        import(
+            /* webpackChunkName: "[request]" */
+            `!!file-loader!../../samples/${sampleName}/README.md`
+        ),
     ]);
 
     let parentPage;
 
     try {
         parentPage = await import(
+            /* webpackChunkName: "[request]" */
             `!!file-loader!../../samples/${sampleName}/app/parent.html`
         );
     } catch {
@@ -43,9 +56,6 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         parentPage: parentPage && parentPage.default,
         readme: readme.default,
         repositoryBasePath: `https://github.com/geocortex/vertigis-web-incubator/tree/main/samples/${sampleName}/`,
-        codesandboxLink: !!parentPage
-            ? `https://codesandbox.io/s/github/geocortex/vertigis-web-incubator/tree/main/samples/${sampleName}/?initialpath=/parent.html`
-            : `https://codesandbox.io/s/github/geocortex/vertigis-web-incubator/tree/main/samples/${sampleName}/`,
     };
 }
 
