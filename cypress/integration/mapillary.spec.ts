@@ -1,6 +1,6 @@
 import { getMapOrSceneView } from "../mapUtils";
 
-const sampleName = "embedded-map";
+const sampleName = "mapillary";
 
 // Although we provide the exact number from the street view position when
 // setting the map center position, the reported map center will not be exactly
@@ -16,7 +16,10 @@ const expectMapAndMarkerCenter = (lat: number, lon: number) =>
             const mapView = getMapOrSceneView(mapEl);
 
             // Check map center
-            expect(mapView.center.latitude).to.be.closeTo(lat, mapCenterPrecision);
+            expect(mapView.center.latitude).to.be.closeTo(
+                lat,
+                mapCenterPrecision
+            );
             expect(mapView.center.longitude).to.be.closeTo(
                 lon,
                 mapCenterPrecision
@@ -29,8 +32,14 @@ const expectMapAndMarkerCenter = (lat: number, lon: number) =>
                         layer.id === "__GCX_MAP_CONTEXT_AND_GEOLOCATION"
                 )
                 .graphics.getItemAt(0);
-            expect(locationMarker.geometry.latitude).to.be.closeTo(lat, markerCenterPrecision);
-            expect(locationMarker.geometry.longitude).to.be.closeTo(lon, markerCenterPrecision);
+            expect(locationMarker.geometry.latitude).to.be.closeTo(
+                lat,
+                markerCenterPrecision
+            );
+            expect(locationMarker.geometry.longitude).to.be.closeTo(
+                lon,
+                markerCenterPrecision
+            );
         });
 
 describe(sampleName, () => {
@@ -38,7 +47,7 @@ describe(sampleName, () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         // The following test depends on the web scene being used and the current
-        // state of the mapillary database. 
+        // state of the mapillary database.
 
         // Marker is set initially to match street view position.
         expectMapAndMarkerCenter(51.910794210150954, 4.482710573867893);
