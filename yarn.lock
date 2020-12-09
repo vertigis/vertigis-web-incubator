@@ -1992,7 +1992,7 @@ cross-spawn@^6.0.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
   integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
@@ -2483,21 +2483,16 @@ dojo-dstore@1.1.2:
   dependencies:
     dojo "^1.9.0"
 
-dojo@1.14.2:
+dojo@1.14.2, dojo@Esri/dojo#v1.14.2/esri-3.28.0:
   version "1.14.2"
-  resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.14.2.tgz#45ca90b19068230e1486f68b1531fa4ce0e21280"
-  integrity sha512-TI+Ytgfh/VfmHWERp45Jte6NFMdoJTPsvUP/uzJUvAXET8FP2h442LePWWJ/q/xZ4V0V8OtdJhx8It/GB+Zbxg==
+  resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
 
 dojo@^1.9.0:
   version "1.16.3"
   resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.16.3.tgz#f9d2343184b5e5ffda2ee5666029da20508e1013"
   integrity sha512-+mPovtmbULx5V69lWji496gMfhXuL1WCC0KBq0hig4Tz6WGAYxTOJV6ch3bewNzSJHmaHiSsIMYkW8jcUrhLIQ==
 
-"dojo@github:Esri/dojo#v1.14.2/esri-3.28.0":
-  version "1.14.2"
-  resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
-
-"dojox@github:Esri/dojox#v1.14.2/esri-3.28.0":
+dojox@Esri/dojox#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dojox/tar.gz/66a4f9a49808332c0573437ea2f9f78901124373"
   dependencies:

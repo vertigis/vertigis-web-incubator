@@ -17,7 +17,7 @@
     "homepage": "https://github.com/geocortex/vertigis-web-incubator#readme",
     "scripts": {
         "build": "yarn build:samples && yarn build:viewer",
-        "build:samples": "node ./build.js",
+        "build:samples": "yarn workspaces run build",
         "build:viewer": "cd viewer && yarn build",
         "postinstall": "cd viewer && yarn",
         "test": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress run --browser chrome\"",
@@ -28,7 +28,6 @@
     "devDependencies": {
         "concurrently": "^5.3.0",
         "cross-env": "^7.0.3",
-        "cross-spawn": "^7.0.3",
         "cypress": "^6.1.0",
         "husky": "^4.3.5",
         "prettier": "^2.2.1",
