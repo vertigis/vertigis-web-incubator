@@ -24,7 +24,7 @@ Alternatively you may install the dependencies for a single sample project by ru
 
 ### Running a library
 
-Run `yarn start` or `npm start` within the root of a sample directory. For example you can run the `i18n` sample by running `yarn start` within the [libraries/mapillary](libraries/mapillary) directory. This will launch the Geocortex Web SDK development server.
+Run `yarn start` or `npm start` within the root of a sample directory. For example you can run the `mapillary` sample by running `yarn start` within the [libraries/mapillary](libraries/mapillary) directory. This will launch the Geocortex Web SDK development server.
 
 ### Creating a new library
 
