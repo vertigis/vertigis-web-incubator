@@ -5,6 +5,8 @@ export default interface Sample {
     layout: string;
     /** The path to the custom library JavaScript bundle. */
     library: string;
+    /** The id of the sample. This will be the sample folder name. */
+    id: string;
     /** The path to the optional custom HTML parent page. */
     parentPage: string;
     /** The path to the readme of the sample. */

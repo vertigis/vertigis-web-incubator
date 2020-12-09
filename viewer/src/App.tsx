@@ -18,32 +18,21 @@ import SampleViewer from "./SampleViewer";
 
 const samples = [{ id: "mapillary", title: "Mapillary" }] as const;
 
-async function getSampleData(sampleName: string): Promise<Sample> {
+async function getSampleData(sampleId: string): Promise<Sample> {
     const [app, layout, library, readme] = await Promise.all([
+        import(`../../samples/${sampleId}/app/app.json`),
+        import(`!!file-loader!../../samples/${sampleId}/app/layout.xml`),
         import(
-            /* webpackChunkName: "[request]" */
-            `../../samples/${sampleName}/app/app.json`
+            `!!file-loader?{"name":"static/js/[name].[contenthash:8].[ext]"}!../../samples/${sampleId}/build/main.js`
         ),
-        import(
-            /* webpackChunkName: "[request]" */
-            `!!file-loader!../../samples/${sampleName}/app/layout.xml`
-        ),
-        import(
-            /* webpackChunkName: "[request]" */
-            `!!file-loader!../../samples/${sampleName}/build/main.js`
-        ),
-        import(
-            /* webpackChunkName: "[request]" */
-            `!!file-loader!../../samples/${sampleName}/README.md`
-        ),
+        import(`!!file-loader!../../samples/${sampleId}/README.md`),
     ]);
 
     let parentPage;
 
     try {
         parentPage = await import(
-            /* webpackChunkName: "[request]" */
-            `!!file-loader!../../samples/${sampleName}/app/parent.html`
+            `!!file-loader!../../samples/${sampleId}/app/parent.html`
         );
     } catch {
         // This sample doesn't have a custom page. Continue on.
@@ -53,9 +42,10 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         app: app.default,
         layout: layout.default,
         library: library.default,
+        id: sampleId,
         parentPage: parentPage && parentPage.default,
         readme: readme.default,
-        repositoryBasePath: `https://github.com/geocortex/vertigis-web-incubator/tree/main/samples/${sampleName}/`,
+        repositoryBasePath: `https://github.com/geocortex/vertigis-web-incubator/tree/main/samples/${sampleId}/`,
     };
 }
 

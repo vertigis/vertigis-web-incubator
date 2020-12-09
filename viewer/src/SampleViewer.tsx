@@ -29,7 +29,7 @@ export default function SampleViewer({ sample }: SampleViewerProps) {
             >
                 View the source code on GitHub
             </a>
-            <a href={sample.library} download>
+            <a href={sample.library} download={`${sample.id}.js`}>
                 Download this library
             </a>
             <ReadmeViewer sample={sample} />
