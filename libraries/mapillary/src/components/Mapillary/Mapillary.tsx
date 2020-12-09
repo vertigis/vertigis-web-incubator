@@ -7,14 +7,14 @@ import {
 
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.min.css";
-import EmbeddedMapModel from "./EmbeddedMapModel";
+import MapillaryModel from "./MapillaryModel";
 
 // This line should be removed when this issue is resolved:
 // https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/908
 declare const ResizeObserver;
 
-export default function EmbeddedMap(
-    props: LayoutElementProperties<EmbeddedMapModel>
+export default function Mapillary(
+    props: LayoutElementProperties<MapillaryModel>
 ): React.ReactElement {
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>();
@@ -30,7 +30,7 @@ export default function EmbeddedMap(
                     // Initialize the view immediately without user interaction.
                     cover: false,
                 },
-                transitionMode: TransitionMode.Instantaneous
+                transitionMode: TransitionMode.Instantaneous,
             }
         );
         model.mapillary = mapillary;
@@ -55,7 +55,7 @@ export default function EmbeddedMap(
 
     return (
         <LayoutElement {...props} stretch>
-            <div ref={mlyRootEl} className="EmbeddedMap-map-container"></div>
+            <div ref={mlyRootEl} className="Mapillary-map-container"></div>
         </LayoutElement>
     );
 }

@@ -26,7 +26,7 @@ interface MapillaryCamera {
 }
 
 @serializable
-export default class EmbeddedMapModel extends ComponentModelBase {
+export default class MapillaryModel extends ComponentModelBase {
     // For demonstration purposes only.
     // Replace this with your own client ID from mapillary.com
     readonly mapillaryKey =

@@ -2,7 +2,7 @@
     "private": true,
     "workspaces": {
         "packages": [
-            "samples/*"
+            "libraries/*"
         ]
     },
     "repository": {
@@ -16,8 +16,8 @@
     },
     "homepage": "https://github.com/geocortex/vertigis-web-incubator#readme",
     "scripts": {
-        "build": "yarn build:samples && yarn build:viewer",
-        "build:samples": "yarn workspaces run build",
+        "build": "yarn build:libraries && yarn build:viewer",
+        "build:libraries": "yarn workspaces run build",
         "build:viewer": "cd viewer && yarn build",
         "postinstall": "cd viewer && yarn",
         "test": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress run --browser chrome\"",

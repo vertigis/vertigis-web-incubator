@@ -16,23 +16,23 @@ import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import Sample from "./Sample";
 import SampleViewer from "./SampleViewer";
 
-const samples = [{ id: "mapillary", title: "Mapillary" }] as const;
+const libraries = [{ id: "mapillary", title: "Mapillary" }] as const;
 
-async function getSampleData(sampleId: string): Promise<Sample> {
+async function getSampleData(libraryId: string): Promise<Sample> {
     const [app, layout, library, readme] = await Promise.all([
-        import(`../../samples/${sampleId}/app/app.json`),
-        import(`!!file-loader!../../samples/${sampleId}/app/layout.xml`),
+        import(`../../libraries/${libraryId}/app/app.json`),
+        import(`!!file-loader!../../libraries/${libraryId}/app/layout.xml`),
         import(
-            `!!file-loader?{"name":"static/js/[name].[contenthash:8].[ext]"}!../../samples/${sampleId}/build/main.js`
+            `!!file-loader?{"name":"static/js/[name].[contenthash:8].[ext]"}!../../libraries/${libraryId}/build/main.js`
         ),
-        import(`!!file-loader!../../samples/${sampleId}/README.md`),
+        import(`!!file-loader!../../libraries/${libraryId}/README.md`),
     ]);
 
     let parentPage;
 
     try {
         parentPage = await import(
-            `!!file-loader!../../samples/${sampleId}/app/parent.html`
+            `!!file-loader!../../libraries/${libraryId}/app/parent.html`
         );
     } catch {
         // This sample doesn't have a custom page. Continue on.
@@ -42,10 +42,10 @@ async function getSampleData(sampleId: string): Promise<Sample> {
         app: app.default,
         layout: layout.default,
         library: library.default,
-        id: sampleId,
+        id: libraryId,
         parentPage: parentPage && parentPage.default,
         readme: readme.default,
-        repositoryBasePath: `https://github.com/geocortex/vertigis-web-incubator/tree/main/samples/${sampleId}/`,
+        repositoryBasePath: `https://github.com/geocortex/vertigis-web-incubator/tree/main/libraries/${libraryId}/`,
     };
 }
 
@@ -124,7 +124,7 @@ function App() {
     useEffect(() => {
         // Set default path if we're at the base path
         if (location.pathname === `${process.env.PUBLIC_URL}/`) {
-            history.replace(`${process.env.PUBLIC_URL}/${samples[0].id}`);
+            history.replace(`${process.env.PUBLIC_URL}/${libraries[0].id}`);
         }
     }, [location, history]);
 
@@ -161,7 +161,7 @@ function App() {
 
     const drawer = (
         <List>
-            {samples.map((sample) => (
+            {libraries.map((sample) => (
                 <ListItemLink
                     key={sample.id}
                     to={`/${sample.id}`}
@@ -186,7 +186,7 @@ function App() {
                 >
                     <MenuIcon />
                 </IconButton>
-                <nav className={classes.drawer} aria-label="samples">
+                <nav className={classes.drawer} aria-label="libraries">
                     <Hidden mdUp implementation="css">
                         <Drawer
                             classes={{ paper: classes.drawerPaper }}
