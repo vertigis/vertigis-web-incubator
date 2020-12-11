@@ -1,38 +1,43 @@
 import React, { useEffect, useRef } from "react";
+import clsx from "clsx";
 import { Viewer, TransitionMode } from "mapillary-js";
 import {
     LayoutElement,
     LayoutElementProperties,
 } from "@vertigis/web/components";
+import IconButton from "@vertigis/web/ui/IconButton";
+import Sync from "@vertigis/web/ui/icons/Sync";
+import CenterMap from "@vertigis/web/ui/icons/CenterMap";
 
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.min.css";
-import MapillaryModel from "./MapillaryModel";
+import EmbeddedMapModel from "./MapillaryModel";
+import "./Mapillary.css";
+import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
 
 // This line should be removed when this issue is resolved:
 // https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/908
 declare const ResizeObserver;
 
 export default function Mapillary(
-    props: LayoutElementProperties<MapillaryModel>
+    props: LayoutElementProperties<EmbeddedMapModel>
 ): React.ReactElement {
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>();
 
+    const onSyncToggle = () => {
+        model.sync = !model.sync;
+    };
+
+    const onRecenter = () => {
+        void model.recenter();
+    };
+
+    useWatchAndRerender(model, "sync");
+
     useEffect(() => {
-        const mapillary = new Viewer(
-            mlyRootEl.current,
-            model.mapillaryKey,
-            // Mapillary node to start on.
-            "gLV8Jn5A6b6rbVRy2xhkMA",
-            {
-                component: {
-                    // Initialize the view immediately without user interaction.
-                    cover: false,
-                },
-                transitionMode: TransitionMode.Instantaneous,
-            }
-        );
+        const mapillary = new Viewer(mlyRootEl.current, model.mapillaryKey);
+        mapillary.setTransitionMode(TransitionMode.Instantaneous);
         model.mapillary = mapillary;
 
         const handleViewportResize = () => {
@@ -55,7 +60,29 @@ export default function Mapillary(
 
     return (
         <LayoutElement {...props} stretch>
-            <div ref={mlyRootEl} className="Mapillary-map-container"></div>
+            <div className="Mapillary-ui-container">
+                <IconButton
+                    className={clsx(
+                        "EmbeddedMap-button",
+                        "EmbeddedMap-sync-button",
+                        { selected: model.sync }
+                    )}
+                    onClick={onSyncToggle}
+                >
+                    <Sync color={model.sync ? "primary" : "disabled"} />
+                </IconButton>
+                <IconButton
+                    className="EmbeddedMap-button EmbeddedMap-recenter-button"
+                    onClick={onRecenter}
+                >
+                    <CenterMap />
+                </IconButton>
+            </div>
+            <div
+                className={"Mapillary-map-container gcx-component gcx-stretchy"}
+            >
+                <div ref={mlyRootEl} />
+            </div>
         </LayoutElement>
     );
 }

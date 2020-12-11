@@ -1,0 +1,26 @@
+.Mapillary-button {
+    z-index: 3;
+    position: absolute;
+    top: 0.5rem;
+    background-color: #ffffff30;
+}
+
+.Mapillary-sync-button {
+    right: 0.5rem;
+}
+
+.Mapillary-recenter-button {
+    right: 5rem;
+}
+
+.Mapillary-button.selected {
+    background-color: #ffffff70;
+}
+
+.Mapillary-map-container {
+    height: 100%;
+}
+
+.mapillary-js {
+    height: 100%;
+}
