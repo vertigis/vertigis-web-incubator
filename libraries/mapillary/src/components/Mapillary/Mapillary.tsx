@@ -36,7 +36,10 @@ export default function Mapillary(
     useWatchAndRerender(model, "sync");
 
     useEffect(() => {
-        const mapillary = new Viewer(mlyRootEl.current, model.mapillaryKey);
+        const mapillary = new Viewer({
+            container: mlyRootEl.current,
+            apiClient: model.mapillaryKey,
+        });
         mapillary.setTransitionMode(TransitionMode.Instantaneous);
         model.mapillary = mapillary;
 
