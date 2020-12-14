@@ -92,7 +92,7 @@ export default class MapillaryModel extends ComponentModelBase {
             // https://github.com/mapillary/mapillary-js/blob/8b6fc2f36e3011218954d95d601062ff6aa41ad9/src/viewer/ComponentController.ts#L184-L192
             this.mapillary.activateCover();
 
-            void this._unsyncViews();
+            void this._unsyncMaps();
         }
 
         this._mapillary = instance;
@@ -131,7 +131,7 @@ export default class MapillaryModel extends ComponentModelBase {
 
         // If an instance already exists, clean it up first.
         if (this._map) {
-            void this._unsyncViews();
+            void this._unsyncMaps();
         }
         this._map = instance;
 
@@ -227,7 +227,7 @@ export default class MapillaryModel extends ComponentModelBase {
         ]);
     }
 
-    private async _unsyncViews(): Promise<void> {
+    private async _unsyncMaps(): Promise<void> {
         this._synced = false;
 
         await this.messages.commands.locationMarker.remove.execute({
