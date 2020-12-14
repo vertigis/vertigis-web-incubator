@@ -6,7 +6,7 @@ const sampleName = "mapillary";
 // setting the map center position, the reported map center will not be exactly
 // the same.
 const mapCenterPrecision = 1e-4;
-const markerCenterPrecision = 1e-9;
+const markerCenterPrecision = 1e-4;
 
 const expectMapAndMarkerCenter = (lat: number, lon: number) =>
     cy
