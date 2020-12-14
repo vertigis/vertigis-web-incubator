@@ -25,14 +25,8 @@ export default function Mapillary(
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>();
 
-    const onSyncToggle = () => {
-        model.sync = !model.sync;
-        0;
-    };
-
-    const onRecenter = () => {
-        void model.recenter();
-    };
+    const onSyncToggle = () => (model.sync = !model.sync);
+    const onRecenter = () => void model.recenter();
 
     useWatchAndRerender(model, "sync");
 
