@@ -6,7 +6,7 @@ View the component libraries live samples at [https://vertigis-web-incubator.net
 
 This project includes a collection of [Geocortex Web](https://www.geocortex.com/products/gxw/) component libraries built using the [Geocortex Web SDK](https://developers.geocortex.com/docs/web/sdk-overview/). Check out the [live samples](https://vertigis-web-incubator.netlify.app/) for an easy way to preview and download the component libraries in your browser without needing to run the project locally. The source for each library is located within the [libraries](libraries) directory of this project.
 
-**These component libraries are experimental and provided free of charge without warranty under the [MIT license](LICENSE).**
+**These component libraries are experimental and provided free of charge without warranty under the [MIT license](LICENSE).** We will do our best to keep them functional and up-to-date. If you need assistance to modify or improve these libraries, feel free to reach out to our [professional services department](https://www.geocortex.com/support-services/professional-services/).
 
 ## Using the component libraries in your app
 
