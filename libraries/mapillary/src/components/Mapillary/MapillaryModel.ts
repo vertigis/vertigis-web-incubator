@@ -8,7 +8,6 @@ import {
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
 import Point from "esri/geometry/Point";
-import { whenDefinedOnce } from "esri/core/watchUtils";
 import { Viewer, Node } from "mapillary-js";
 
 /**
@@ -30,15 +29,14 @@ interface MapillaryCamera {
 
 @serializable
 export default class MapillaryModel extends ComponentModelBase {
-    // For demonstration purposes only.
-    // Replace this with your own client ID from mapillary.com
+    // TODO: Make all readonly properties configurable in Designer
     readonly mapillaryKey =
         "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm";
-
     readonly imageQueryUrl = "https://a.mapillary.com/v3/images";
     readonly searchRadius = 500; // meters
+    readonly defaultScale = 3000;
 
-    // The latest location recieved from a locationmarker.update event
+    // The latest location received from a locationmarker.update event
     private _currentMarkerPosition: { latitude: number; longitude: number };
 
     // The computed position of the current Mapillary node
@@ -68,6 +66,9 @@ export default class MapillaryModel extends ComponentModelBase {
     // Set this to false to start with the maps unsynced
     sync = true;
 
+    /**
+     * This is the Mapillary API instance running within this component.
+     */
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
         return this._mapillary;
@@ -91,8 +92,7 @@ export default class MapillaryModel extends ComponentModelBase {
             // https://github.com/mapillary/mapillary-js/blob/8b6fc2f36e3011218954d95d601062ff6aa41ad9/src/viewer/ComponentController.ts#L184-L192
             this.mapillary.activateCover();
 
-            // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            this._unsyncMaps();
+            void this._unsyncViews();
         }
 
         this._mapillary = instance;
@@ -108,12 +108,17 @@ export default class MapillaryModel extends ComponentModelBase {
             );
         }
 
-        // Try to sync if we need to and can
-        if (!this._synced && this._map) {
+        // We may still need to sync if the map/view arrived first
+        if (!this._synced && this.map) {
             void this._syncMaps();
         }
     }
 
+    /**
+     * This the model associated with the Map component whose view will be
+     * synced with Mapillary. We will be automatically assigned this via the
+     * @importModel expression.
+     */
     private _map: MapModel | undefined;
     get map(): MapModel | undefined {
         return this._map;
@@ -126,19 +131,16 @@ export default class MapillaryModel extends ComponentModelBase {
 
         // If an instance already exists, clean it up first.
         if (this._map) {
-            void this._unsyncMaps();
+            void this._unsyncViews();
         }
-
         this._map = instance;
 
-        // A new instance is being set - sync the map.
         if (instance) {
-            if (!this._map.isInitialized) {
-                this.messages.events.map.initialized.subscribe(() =>
-                    this._syncMaps()
-                );
-            } else {
+            // We need to wait for the arrival of the view in order to sync with Mapillary.
+            if (instance.view) {
                 void this._syncMaps();
+            } else {
+                instance.watch("view", () => void this._syncMaps());
             }
 
             document.body.addEventListener("mousedown", this.mouseDownHandler);
@@ -163,7 +165,7 @@ export default class MapillaryModel extends ComponentModelBase {
             viewpoint: {
                 rotation: getCameraRotationFromBearing(heading),
                 targetGeometry: centerPoint,
-                scale: 3000,
+                scale: this.defaultScale,
             },
         });
     }
@@ -173,15 +175,19 @@ export default class MapillaryModel extends ComponentModelBase {
      * position.
      */
     private async _syncMaps(): Promise<void> {
-        if (!this.map || !this.map.view || !this.mapillary) {
+        if (!this.map || !this.mapillary) {
             return;
         }
 
         this._synced = true;
 
-        await whenDefinedOnce(this.map.view, "center");
+        // Wait for the arrival of the view if it isn't attached yet.
+        if (!this.map.view) {
+            this.map.watch("view", () => void this._syncMaps());
+            return;
+        }
 
-        // Set mapillary to this location
+        // Set mapillary as close as possible to the center of the view
         await this._moveCloseToPosition(
             this.map.view.center.latitude,
             this.map.view.center.longitude
@@ -214,14 +220,14 @@ export default class MapillaryModel extends ComponentModelBase {
                       viewpoint: {
                           rotation: getCameraRotationFromBearing(heading),
                           targetGeometry: centerPoint,
-                          scale: 3000,
+                          scale: this.defaultScale,
                       },
                   })
                 : undefined,
         ]);
     }
 
-    private async _unsyncMaps(): Promise<void> {
+    private async _unsyncViews(): Promise<void> {
         this._synced = false;
 
         await this.messages.commands.locationMarker.remove.execute({
@@ -245,8 +251,8 @@ export default class MapillaryModel extends ComponentModelBase {
         latitude: number,
         longitude: number
     ): Promise<void> {
+        // https://www.mapillary.com/developer/api-documentation/#images
         const url = `${this.imageQueryUrl}?client_id=${this.mapillaryKey}&closeto=${longitude},${latitude}&radius=${this.searchRadius}`;
-
         const response = await fetch(url, {
             method: "GET",
             headers: {
@@ -255,11 +261,10 @@ export default class MapillaryModel extends ComponentModelBase {
         });
 
         const data = await response.json();
+        const imgKey = data?.features?.[0]?.properties?.key;
 
-        const imgkey = data?.features?.[0]?.properties?.key;
-
-        if (imgkey) {
-            await this.mapillary.moveToKey(imgkey);
+        if (imgKey) {
+            await this.mapillary.moveToKey(imgKey);
             this._updating = false;
         } else {
             this._activateCover();

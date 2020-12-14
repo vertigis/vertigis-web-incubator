@@ -63,8 +63,8 @@ export default function Mapillary(
             <div className="Mapillary-ui-container">
                 <IconButton
                     className={clsx(
-                        "EmbeddedMap-button",
-                        "EmbeddedMap-sync-button",
+                        "Mapillary-button",
+                        "Mapillary-sync-button",
                         { selected: model.sync }
                     )}
                     onClick={onSyncToggle}
@@ -72,7 +72,7 @@ export default function Mapillary(
                     <Sync color={model.sync ? "primary" : "disabled"} />
                 </IconButton>
                 <IconButton
-                    className="EmbeddedMap-button EmbeddedMap-recenter-button"
+                    className="Mapillary-button Mapillary-recenter-button"
                     onClick={onRecenter}
                 >
                     <CenterMap />
