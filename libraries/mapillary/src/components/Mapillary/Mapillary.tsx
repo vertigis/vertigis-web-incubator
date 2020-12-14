@@ -27,6 +27,7 @@ export default function Mapillary(
 
     const onSyncToggle = () => {
         model.sync = !model.sync;
+        0;
     };
 
     const onRecenter = () => {

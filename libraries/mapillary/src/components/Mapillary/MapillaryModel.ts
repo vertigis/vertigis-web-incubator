@@ -64,11 +64,9 @@ export default class MapillaryModel extends ComponentModelBase {
     };
 
     // Set this to false to start with the maps unsynced
+    // TODO: Make the initial setting configurable in Designer
     sync = true;
 
-    /**
-     * This is the Mapillary API instance running within this component.
-     */
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
         return this._mapillary;
@@ -114,11 +112,6 @@ export default class MapillaryModel extends ComponentModelBase {
         }
     }
 
-    /**
-     * This the model associated with the Map component whose view will be
-     * synced with Mapillary. We will be automatically assigned this via the
-     * @importModel expression.
-     */
     private _map: MapModel | undefined;
     get map(): MapModel | undefined {
         return this._map;
