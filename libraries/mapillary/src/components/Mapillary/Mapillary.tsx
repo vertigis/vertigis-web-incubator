@@ -11,7 +11,7 @@ import CenterMap from "@vertigis/web/ui/icons/CenterMap";
 
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.min.css";
-import EmbeddedMapModel from "./MapillaryModel";
+import MapillaryModel from "./MapillaryModel";
 import "./Mapillary.css";
 import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
 
@@ -20,7 +20,7 @@ import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
 declare const ResizeObserver;
 
 export default function Mapillary(
-    props: LayoutElementProperties<EmbeddedMapModel>
+    props: LayoutElementProperties<MapillaryModel>
 ): React.ReactElement {
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>();
