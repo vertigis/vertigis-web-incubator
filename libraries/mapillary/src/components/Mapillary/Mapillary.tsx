@@ -25,10 +25,11 @@ export default function Mapillary(
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>();
 
-    const onSyncToggle = () => (model.sync = !model.sync);
+    const onSyncToggle = () =>
+        (model.synchronizePosition = !model.synchronizePosition);
     const onRecenter = () => void model.recenter();
 
-    useWatchAndRerender(model, "sync");
+    useWatchAndRerender(model, "synchronizePosition");
 
     useEffect(() => {
         const mapillary = new Viewer({
@@ -47,9 +48,35 @@ export default function Mapillary(
         const viewportDiv = mlyRootEl.current;
         resizeObserver.observe(viewportDiv);
 
+        // These handlers are necessary as Mapillary cannot handle the many
+        // update events caused by dragging the location marker. We'll only
+        // handle the last one fired when the mouse button is released.
+        const mouseDownHandler = (): void =>
+            (model.currentMarkerPosition = undefined);
+        const mouseUpHandler = (): void => {
+            if (
+                model.mapillary?.isNavigable &&
+                !model.updating &&
+                model.currentMarkerPosition
+            ) {
+                model.updating = true;
+
+                const { latitude, longitude } = model.currentMarkerPosition;
+                model.currentMarkerPosition = undefined;
+
+                void model.moveCloseToPosition(latitude, longitude);
+            }
+        };
+        document.body.addEventListener("mousedown", mouseDownHandler);
+        document.body.addEventListener("mouseup", mouseUpHandler);
+
         // Clean up when this component is unmounted from the DOM.
         return () => {
+            // Remove listeners.
+            document.body.removeEventListener("mousedown", mouseDownHandler);
+            document.body.removeEventListener("mouseup", mouseUpHandler);
             resizeObserver.unobserve(viewportDiv);
+
             // Clear out the Mapillary instance property. This will take care of
             // cleaning up.
             model.mapillary = undefined;
@@ -58,16 +85,20 @@ export default function Mapillary(
 
     return (
         <LayoutElement {...props} stretch>
-            <div className="Mapillary-ui-container">
+            <div>
                 <IconButton
                     className={clsx(
                         "Mapillary-button",
                         "Mapillary-sync-button",
-                        { selected: model.sync }
+                        { selected: model.synchronizePosition }
                     )}
                     onClick={onSyncToggle}
                 >
-                    <Sync color={model.sync ? "primary" : "disabled"} />
+                    <Sync
+                        color={
+                            model.synchronizePosition ? "primary" : "disabled"
+                        }
+                    />
                 </IconButton>
                 <IconButton
                     className="Mapillary-button Mapillary-recenter-button"
@@ -76,9 +107,7 @@ export default function Mapillary(
                     <CenterMap />
                 </IconButton>
             </div>
-            <div
-                className={"Mapillary-map-container gcx-component gcx-stretchy"}
-            >
+            <div className="Mapillary-map-container">
                 <div ref={mlyRootEl} />
             </div>
         </LayoutElement>

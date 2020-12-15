@@ -10,14 +10,12 @@ import { throttle } from "@vertigis/web/ui";
 import Point from "esri/geometry/Point";
 import { Viewer, Node } from "mapillary-js";
 
-/**
- *  Convert Mapillary bearing to a Scene's camera rotation.
- *  @param bearing Mapillary bearing in degrees (degrees relative to due north).
- *  @returns Scene camera rotation in degrees (degrees rotation of due north).
- */
-function getCameraRotationFromBearing(bearing: number): number {
-    return 360 - bearing;
-}
+type MapillaryModelProperties = ComponentModelProperties & {
+    mapillaryKey?: string;
+    searchRadius?: number;
+    defaultScale?: number;
+    startSynced?: boolean;
+};
 
 interface MapillaryCamera {
     latitude: number;
@@ -27,45 +25,35 @@ interface MapillaryCamera {
     fov: number;
 }
 
+/**
+ *  Convert Mapillary bearing to a Scene's camera rotation.
+ *  @param bearing Mapillary bearing in degrees (degrees relative to due north).
+ *  @returns Scene camera rotation in degrees (degrees rotation of due north).
+ */
+function getCameraRotationFromBearing(bearing: number): number {
+    return 360 - bearing;
+}
+
 @serializable
-export default class MapillaryModel extends ComponentModelBase {
-    // TODO: Make all readonly properties configurable in Designer
-    readonly mapillaryKey =
-        "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm";
+export default class MapillaryModel extends ComponentModelBase<MapillaryModelProperties> {
+    mapillaryKey: string;
+    searchRadius: number;
+    defaultScale: number;
+    startSynced: boolean;
+    synchronizePosition: boolean;
+
     readonly imageQueryUrl = "https://a.mapillary.com/v3/images";
-    readonly searchRadius = 500; // meters
-    readonly defaultScale = 3000;
 
     // The latest location received from a locationmarker.update event
-    private _currentMarkerPosition: { latitude: number; longitude: number };
+    currentMarkerPosition: { latitude: number; longitude: number };
+    updating = false;
 
     // The computed position of the current Mapillary node
     private _currentNodePosition: { lat: number; lon: number };
 
-    private _updating = false;
     private _viewerUpdateHandle: IHandle;
     private _handleMarkerUpdate = true;
     private _synced = false;
-
-    mouseDownHandler = (): void => (this._currentMarkerPosition = undefined);
-    mouseUpHandler = (): void => {
-        if (
-            this.mapillary?.isNavigable &&
-            !this._updating &&
-            this._currentMarkerPosition
-        ) {
-            this._updating = true;
-
-            const { latitude, longitude } = this._currentMarkerPosition;
-            this._currentMarkerPosition = undefined;
-
-            void this._moveCloseToPosition(latitude, longitude);
-        }
-    };
-
-    // Set this to false to start with the maps unsynced
-    // TODO: Make the initial setting configurable in Designer
-    sync = true;
 
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
@@ -76,9 +64,7 @@ export default class MapillaryModel extends ComponentModelBase {
             return;
         }
 
-        if (this._viewerUpdateHandle) {
-            this._viewerUpdateHandle.remove();
-        }
+        this._viewerUpdateHandle?.remove();
 
         // If an instance already exists, clean it up first.
         if (this._mapillary) {
@@ -128,16 +114,9 @@ export default class MapillaryModel extends ComponentModelBase {
         }
         this._map = instance;
 
+        // We need to wait for the arrival of the view in order to sync with Mapillary.
         if (instance) {
-            // We need to wait for the arrival of the view in order to sync with Mapillary.
-            if (instance.view) {
-                void this._syncMaps();
-            } else {
-                instance.watch("view", () => void this._syncMaps());
-            }
-
-            document.body.addEventListener("mousedown", this.mouseDownHandler);
-            document.body.addEventListener("mouseup", this.mouseUpHandler);
+            void this._syncMaps();
         }
     }
 
@@ -163,6 +142,29 @@ export default class MapillaryModel extends ComponentModelBase {
         });
     }
 
+    async moveCloseToPosition(
+        latitude: number,
+        longitude: number
+    ): Promise<void> {
+        try {
+            // https://www.mapillary.com/developer/api-documentation/#images
+            const url = `${this.imageQueryUrl}?client_id=${this.mapillaryKey}&closeto=${longitude},${latitude}&radius=${this.searchRadius}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            const imgKey = data?.features?.[0]?.properties?.key;
+
+            if (imgKey) {
+                await this.mapillary.moveToKey(imgKey);
+                this.updating = false;
+            } else {
+                this._activateCover();
+            }
+        } catch {
+            this.updating = false;
+            this._activateCover();
+        }
+    }
+
     /**
      * Setup the initial state of the maps such as the location marker and map
      * position.
@@ -173,6 +175,7 @@ export default class MapillaryModel extends ComponentModelBase {
         }
 
         this._synced = true;
+        this.synchronizePosition = this.startSynced ?? true;
 
         // Wait for the arrival of the view if it isn't attached yet.
         if (!this.map.view) {
@@ -181,7 +184,7 @@ export default class MapillaryModel extends ComponentModelBase {
         }
 
         // Set mapillary as close as possible to the center of the view
-        await this._moveCloseToPosition(
+        await this.moveCloseToPosition(
             this.map.view.center.latitude,
             this.map.view.center.longitude
         );
@@ -207,7 +210,7 @@ export default class MapillaryModel extends ComponentModelBase {
                 maps: this.map,
                 userDraggable: true,
             }),
-            this.sync
+            this.synchronizePosition
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
                       viewpoint: {
@@ -232,36 +235,12 @@ export default class MapillaryModel extends ComponentModelBase {
     private _handleViewerUpdate(event: any): void {
         if (this._handleMarkerUpdate) {
             const updatePoint = event.geometry as Point;
-            this._currentMarkerPosition = {
+            this.currentMarkerPosition = {
                 latitude: updatePoint.latitude,
                 longitude: updatePoint.longitude,
             };
         }
         this._handleMarkerUpdate = true;
-    }
-
-    private async _moveCloseToPosition(
-        latitude: number,
-        longitude: number
-    ): Promise<void> {
-        // https://www.mapillary.com/developer/api-documentation/#images
-        const url = `${this.imageQueryUrl}?client_id=${this.mapillaryKey}&closeto=${longitude},${latitude}&radius=${this.searchRadius}`;
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        const data = await response.json();
-        const imgKey = data?.features?.[0]?.properties?.key;
-
-        if (imgKey) {
-            await this.mapillary.moveToKey(imgKey);
-            this._updating = false;
-        } else {
-            this._activateCover();
-        }
     }
 
     /**
@@ -291,11 +270,11 @@ export default class MapillaryModel extends ComponentModelBase {
      * Handles pov changes once the node position is known.
      */
     private _onPerspectiveChange = throttle(async () => {
-        if (!this.map || !this.mapillary || this._updating) {
+        if (!this.map || !this.mapillary || this.updating) {
             return;
         }
 
-        this._updating = true;
+        this.updating = true;
 
         const {
             latitude,
@@ -321,7 +300,7 @@ export default class MapillaryModel extends ComponentModelBase {
                 id: this.id,
                 maps: this.map,
             }),
-            this.sync
+            this.synchronizePosition
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
                       viewpoint: {
@@ -331,7 +310,7 @@ export default class MapillaryModel extends ComponentModelBase {
                       },
                   })
                 : undefined,
-        ]).finally(() => (this._updating = false));
+        ]).finally(() => (this.updating = false));
     }, 128);
 
     /**
@@ -362,17 +341,33 @@ export default class MapillaryModel extends ComponentModelBase {
     }
 
     private _activateCover() {
-        this._updating = false;
+        this.updating = false;
         this.mapillary.activateCover();
     }
 
-    protected _getSerializableProperties(): PropertyDefs<ComponentModelProperties> {
+    protected _getSerializableProperties(): PropertyDefs<MapillaryModelProperties> {
         const props = super._getSerializableProperties();
         return {
             ...props,
+            mapillaryKey: {
+                serializeModes: ["initial"],
+                default: "",
+            },
+            searchRadius: {
+                serializeModes: ["initial"],
+                default: 500,
+            },
+            defaultScale: {
+                serializeModes: ["initial"],
+                default: 3000,
+            },
+            startSynced: {
+                serializeModes: ["initial"],
+                default: true,
+            },
             title: {
                 ...this._toPropertyDef(props.title),
-                default: "Mapillary",
+                default: "language-web-incubator-mapillary-title",
             },
             icon: {
                 ...this._toPropertyDef(props.icon),

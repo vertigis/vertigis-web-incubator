@@ -5,6 +5,11 @@
             "$type": "map-extension",
             "id": "map-config-1",
             "webScene": "https://www.arcgis.com/home/item.html?id=94e00add11334767afb0abdce49c9a43"
+        },
+        {
+            "$type": "mapillary",
+            "id": "mapillary-config-1",
+            "mapillaryKey": "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm"
         }
     ]
 }
