@@ -7,5 +7,8 @@
     "language-designer-mapillary-default-scale-title": "Default Scale",
     "language-designer-mapillary-start-synced-description": "Enable this to automatically link the position and viewpoint of Mapillary with the web component.",
     "language-designer-mapillary-start-synced-title": "Start Synced",
-    "language-web-incubator-mapillary-title": "Mapillary"
+    "language-web-incubator-mapillary-title": "Mapillary",
+    "language-web-incubator-mapillary-enable-sync-title": "Enable positional sync",
+    "language-web-incubator-mapillary-disable-sync-title": "Disable positional sync",
+    "language-web-incubator-mapillary-recenter-title": "Recenter the map"
 }

@@ -6,15 +6,14 @@ import {
     LayoutElementProperties,
 } from "@vertigis/web/components";
 import IconButton from "@vertigis/web/ui/IconButton";
-import Sync from "@vertigis/web/ui/icons/Sync";
-import CenterMap from "@vertigis/web/ui/icons/CenterMap";
+import ButtonGroup from "@vertigis/web/ui/ButtonGroup";
+import DynamicIcon from "@vertigis/web/ui/DynamicIcon";
 
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.min.css";
 import MapillaryModel from "./MapillaryModel";
 import "./Mapillary.css";
 import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
-
 // This line should be removed when this issue is resolved:
 // https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/908
 declare const ResizeObserver;
@@ -85,30 +84,39 @@ export default function Mapillary(
 
     return (
         <LayoutElement {...props} stretch>
-            <div>
-                <IconButton
-                    className={clsx(
-                        "Mapillary-button",
-                        "Mapillary-sync-button",
-                        { selected: model.synchronizePosition }
-                    )}
-                    onClick={onSyncToggle}
-                >
-                    <Sync
-                        color={
-                            model.synchronizePosition ? "primary" : "disabled"
-                        }
-                    />
-                </IconButton>
-                <IconButton
-                    className="Mapillary-button Mapillary-recenter-button"
-                    onClick={onRecenter}
-                >
-                    <CenterMap />
-                </IconButton>
-            </div>
-            <div className="Mapillary-map-container">
+            <div className="mapillary-map-container">
                 <div ref={mlyRootEl} />
+            </div>
+            <div>
+                <ButtonGroup className="third-party-map-controls" size="small">
+                    <IconButton
+                        className={clsx({
+                            selected: model.synchronizePosition,
+                        })}
+                        onClick={onSyncToggle}
+                        title={
+                            model.synchronizePosition
+                                ? "language-web-incubator-mapillary-disable-sync-title"
+                                : "language-web-incubator-mapillary-enable-sync-title"
+                        }
+                    >
+                        <DynamicIcon
+                            src={
+                                model.synchronizePosition
+                                    ? "map-sync-on"
+                                    : "map-sync-off"
+                            }
+                        />
+                    </IconButton>
+                    <IconButton
+                        onClick={onRecenter}
+                        title={
+                            "language-web-incubator-mapillary-recenter-title"
+                        }
+                    >
+                        <DynamicIcon src={"center-map"} />
+                    </IconButton>
+                </ButtonGroup>
             </div>
         </LayoutElement>
     );

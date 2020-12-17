@@ -1,23 +1,32 @@
-.Mapillary-button {
-    z-index: 3;
+.third-party-map-controls {
     position: absolute;
-    top: 0.5rem;
-    background-color: #ffffff30;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--buttonBackground);
+    opacity: 0.8;
 }
 
-.Mapillary-sync-button {
-    right: 0.5rem;
+.third-party-map-controls:hover {
+    opacity: 1;
 }
 
-.Mapillary-recenter-button {
-    right: 5rem;
+.third-party-map-controls button {
+    border-radius: inherit;
 }
 
-.Mapillary-button.selected {
-    background-color: #ffffff70;
+.third-party-map-controls svg {
+    fill: var(--buttonIcon);
 }
 
-.Mapillary-map-container {
+.third-party-map-controls button.selected {
+    background-color: var(--emphasizedButtonBackground);
+}
+
+.third-party-map-controls button.selected svg {
+    fill: var(--emphasizedButtonIcon);
+}
+
+.mapillary-map-container {
     height: 100%;
 }
 
