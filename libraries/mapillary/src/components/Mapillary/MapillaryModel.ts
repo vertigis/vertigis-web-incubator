@@ -306,7 +306,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
                       viewpoint: {
                           rotation: getCameraRotationFromBearing(heading),
                           targetGeometry: centerPoint,
-                          scale: 3000,
+                          scale: this.defaultScale,
                       },
                   })
                 : undefined,
