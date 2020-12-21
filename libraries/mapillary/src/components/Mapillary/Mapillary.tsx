@@ -7,7 +7,9 @@ import {
 } from "@vertigis/web/components";
 import IconButton from "@vertigis/web/ui/IconButton";
 import ButtonGroup from "@vertigis/web/ui/ButtonGroup";
-import DynamicIcon from "@vertigis/web/ui/DynamicIcon";
+import MapSyncOn from "@vertigis/web/ui/icons/MapSyncOn";
+import MapSyncOff from "@vertigis/web/ui/icons/MapSyncOff";
+import CenterMap from "@vertigis/web/ui/icons/CenterMap";
 
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.min.css";
@@ -100,13 +102,11 @@ export default function Mapillary(
                                 : "language-web-incubator-mapillary-enable-sync-title"
                         }
                     >
-                        <DynamicIcon
-                            src={
-                                model.synchronizePosition
-                                    ? "map-sync-on"
-                                    : "map-sync-off"
-                            }
-                        />
+                        {model.synchronizePosition ? (
+                            <MapSyncOn />
+                        ) : (
+                            <MapSyncOff />
+                        )}
                     </IconButton>
                     <IconButton
                         onClick={onRecenter}
@@ -114,7 +114,7 @@ export default function Mapillary(
                             "language-web-incubator-mapillary-recenter-title"
                         }
                     >
-                        <DynamicIcon src={"center-map"} />
+                        <CenterMap />
                     </IconButton>
                 </ButtonGroup>
             </div>
