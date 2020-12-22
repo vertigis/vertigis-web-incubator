@@ -7,6 +7,8 @@ import {
     ComponentModelProperties,
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
+import { whenDefinedOnce } from "esri/core/watchUtils";
+import Accessor from "esri/core/Accessor";
 import Point from "esri/geometry/Point";
 import { Viewer, Node } from "mapillary-js";
 
@@ -51,7 +53,6 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     // The computed position of the current Mapillary node
     private _currentNodePosition: { lat: number; lon: number };
 
-    private _awaitViewHandle: IHandle;
     private _viewerUpdateHandle: IHandle;
     private _handleMarkerUpdate = true;
     private _synced = false;
@@ -116,12 +117,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         this._map = instance;
 
         // We may need to wait for the view to arrive before proceeding.
-        this._awaitViewHandle = this.watch("this.map.view", (view) => {
-            if (view) {
-                this._awaitViewHandle.remove();
-                void this._syncMaps();
-            }
-        });
+        void this._awaitViewThenSync();
     }
 
     async recenter(): Promise<void> {
@@ -174,13 +170,11 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
      * We need to wait for the map.view property to be defined before attempting
      * to sync.
      */
-    private _awaitViewThenSync(): void {
-        const awaitViewHandle = this.watch("this.map.view", (view) => {
-            if (view) {
-                awaitViewHandle.remove();
-                void this._syncMaps();
-            }
-        });
+    private async _awaitViewThenSync(): Promise<void> {
+        // It is valid to cast any Geocortex model to esri.Accessor in order to
+        // use the utility methods in esri/core/watchUtils.
+        await whenDefinedOnce((this.map as unknown) as Accessor, "view");
+        void this._syncMaps();
     }
 
     /**
@@ -360,7 +354,6 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     protected async _onDestroy(): Promise<void> {
         await super._onDestroy();
         this._viewerUpdateHandle?.remove();
-        this._awaitViewHandle?.remove();
     }
 
     protected _getSerializableProperties(): PropertyDefs<MapillaryModelProperties> {
