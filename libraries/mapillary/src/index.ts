@@ -4,7 +4,7 @@ import {
     applySettings,
     getSettings,
     getSettingsSchema,
-} from "./components/Mapillary/MapillarySettings";
+} from "./components/Mapillary/designer";
 import invLanguage from "./locale/inv.json";
 
 export default function (registry: LibraryRegistry): void {
