@@ -6,7 +6,7 @@ const sampleName = "mapillary";
 // setting the map center position, the reported map center will not be exactly
 // the same.
 const mapCenterPrecision = 1e-4;
-const markerCenterPrecision = 1e-9;
+const markerCenterPrecision = 1e-4;
 
 const expectMapAndMarkerCenter = (lat: number, lon: number) =>
     cy
@@ -50,13 +50,13 @@ describe(sampleName, () => {
         // state of the mapillary database.
 
         // Marker is set initially to match street view position.
-        expectMapAndMarkerCenter(51.910794210150954, 4.482710573867893);
+        expectMapAndMarkerCenter(51.908070806028164, 4.486175772780554);
 
         // Find the forward arrow by querying for the mapillary node id that
         // represents the next node in the forward direction.
-        cy.getViewer().find('[data-key="6YM7-YAF5IMObwarROA2ZA"]').click();
+        cy.getViewer().find('[data-key="f_wCfca88pFHl-CM1EKtLg"]').click();
 
         // Marker is updated to match new street view position.
-        expectMapAndMarkerCenter(51.910737342093, 4.482764649480002);
+        expectMapAndMarkerCenter(51.908175485049426, 4.4862970380600515);
     });
 });

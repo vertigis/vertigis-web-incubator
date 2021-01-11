@@ -1,0 +1,35 @@
+.third-party-map-controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--buttonBackground);
+    opacity: 0.8;
+}
+
+.third-party-map-controls:hover {
+    opacity: 1;
+}
+
+.third-party-map-controls button {
+    border-radius: inherit;
+}
+
+.third-party-map-controls svg {
+    fill: var(--buttonIcon);
+}
+
+.third-party-map-controls button.selected {
+    background-color: var(--emphasizedButtonBackground);
+}
+
+.third-party-map-controls button.selected svg {
+    fill: var(--emphasizedButtonIcon);
+}
+
+.mapillary-map-container {
+    height: 100%;
+}
+
+.mapillary-js {
+    height: 100%;
+}
