@@ -1,6 +1,6 @@
 import { makeStyles } from "@vertigis/react-ui/styles";
 import marked from "marked";
-import React from "react";
+import { useEffect, useState } from "react";
 import Sample from "./Sample";
 
 interface ReadmeViewerProps {
@@ -16,9 +16,9 @@ const useStyles = makeStyles({
 export default function ReadmeViewer({ sample }: ReadmeViewerProps) {
     const classes = useStyles();
 
-    const [readmeHtml, setReadmeHtml] = React.useState<string>();
+    const [readmeHtml, setReadmeHtml] = useState<string>();
 
-    React.useEffect(() => {
+    useEffect(() => {
         let didCancel = false;
 
         (async () => {

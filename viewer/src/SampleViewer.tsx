@@ -1,5 +1,4 @@
 import { makeStyles } from "@vertigis/react-ui/styles";
-import React from "react";
 import Sample from "./Sample";
 import WebViewer from "./WebViewer";
 import ReadmeViewer from "./ReadmeViewer";

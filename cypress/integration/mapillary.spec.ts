@@ -5,8 +5,8 @@ const sampleName = "mapillary";
 // Although we provide the exact number from the street view position when
 // setting the map center position, the reported map center will not be exactly
 // the same.
-const mapCenterPrecision = 1e-4;
-const markerCenterPrecision = 1e-4;
+const mapCenterPrecision = 1e-3;
+const markerCenterPrecision = 1e-3;
 
 const expectMapAndMarkerCenter = (lat: number, lon: number) =>
     cy
