@@ -88,9 +88,10 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
             this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
 
             // Change the current mapillary node when the location marker is moved.
-            this._viewerUpdateHandle = this.messages.events.locationMarker.updated.subscribe(
-                (event) => this._handleViewerUpdate(event)
-            );
+            this._viewerUpdateHandle =
+                this.messages.events.locationMarker.updated.subscribe((event) =>
+                    this._handleViewerUpdate(event)
+                );
         }
 
         // We may need to sync if the map and initialized view have arrived first.
@@ -125,11 +126,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     }
 
     async recenter(): Promise<void> {
-        const {
-            latitude,
-            longitude,
-            heading,
-        } = await this._getMapillaryCamera();
+        const { latitude, longitude, heading } =
+            await this._getMapillaryCamera();
 
         const centerPoint = new Point({
             latitude,
@@ -190,13 +188,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
 
         // Create location marker based on current location from Mapillary and
         // pan/zoom Geocortex map to the location.
-        const {
-            latitude,
-            longitude,
-            heading,
-            tilt,
-            fov,
-        } = await this._getMapillaryCamera();
+        const { latitude, longitude, heading, tilt, fov } =
+            await this._getMapillaryCamera();
 
         const centerPoint = new Point({ latitude, longitude });
         await Promise.all([
@@ -268,6 +261,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     /**
      * Handles pov changes once the node position is known.
      */
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     private _onPerspectiveChange = throttle(async () => {
         if (!this.map || !this.mapillary || this.updating) {
             return;
@@ -275,13 +269,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
 
         this.updating = true;
 
-        const {
-            latitude,
-            longitude,
-            heading,
-            tilt,
-            fov,
-        } = await this._getMapillaryCamera();
+        const { latitude, longitude, heading, tilt, fov } =
+            await this._getMapillaryCamera();
 
         const centerPoint = new Point({
             latitude,
