@@ -42,7 +42,9 @@ const expectMapAndMarkerCenter = (lat: number, lon: number) =>
             );
         });
 
-describe(sampleName, () => {
+// TODO: Temporarily disabled as this scene does not currently render on the
+// GitHub agents.
+xdescribe(sampleName, () => {
     it("synchronizes marker position with street view position", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
