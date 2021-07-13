@@ -7,11 +7,11 @@
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@vertigis/web": "^5.10.0",
-        "mapillary-js": "^3.0.0"
+        "@vertigis/web": "^5.13.0",
+        "mapillary-js": "^3.1.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.3.5",
-        "typescript": "~4.1.3"
+        "@vertigis/web-sdk": "^1.4.0",
+        "typescript": "~4.3.5"
     }
 }

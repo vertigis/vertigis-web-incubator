@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Viewer, TransitionMode } from "mapillary-js";
 import {
@@ -22,7 +22,7 @@ declare const ResizeObserver;
 
 export default function Mapillary(
     props: LayoutElementProperties<MapillaryModel>
-): React.ReactElement {
+): ReactElement {
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>();
 

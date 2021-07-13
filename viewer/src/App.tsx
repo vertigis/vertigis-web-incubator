@@ -11,7 +11,7 @@ import MenuIcon from "@vertigis/react-ui/icons/Menu";
 import List from "@vertigis/react-ui/List";
 import ListItem from "@vertigis/react-ui/ListItem";
 import ListItemText from "@vertigis/react-ui/ListItemText";
-import React, { useEffect, useState } from "react";
+import { forwardRef, useEffect, useMemo, useState } from "react";
 import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import Sample from "./Sample";
 import SampleViewer from "./SampleViewer";
@@ -52,9 +52,9 @@ async function getSampleData(libraryId: string): Promise<Sample> {
 function ListItemLink(props) {
     const { children, to, ...other } = props;
 
-    const renderLink = React.useMemo(
+    const renderLink = useMemo(
         () =>
-            React.forwardRef<HTMLAnchorElement>((itemProps, ref) => (
+            forwardRef<HTMLAnchorElement>((itemProps, ref) => (
                 <RouterLink to={to} ref={ref} {...itemProps} />
             )),
         [to]
@@ -119,7 +119,7 @@ function App() {
         ""
     );
     const [selectedSample, setCurrentSample] = useState<Sample>();
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         // Set default path if we're at the base path
