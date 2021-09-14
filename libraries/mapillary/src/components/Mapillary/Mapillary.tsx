@@ -12,13 +12,10 @@ import MapSyncOff from "@vertigis/web/ui/icons/MapSyncOff";
 import CenterMap from "@vertigis/web/ui/icons/CenterMap";
 
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
-import "mapillary-js/dist/mapillary.min.css";
+import "mapillary-js/dist/mapillary.css";
 import MapillaryModel from "./MapillaryModel";
 import "./Mapillary.css";
 import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
-// This line should be removed when this issue is resolved:
-// https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/908
-declare const ResizeObserver;
 
 export default function Mapillary(
     props: LayoutElementProperties<MapillaryModel>
@@ -34,8 +31,13 @@ export default function Mapillary(
 
     useEffect(() => {
         const mapillary = new Viewer({
+            imageId: "2935399116683438",
             container: mlyRootEl.current,
-            apiClient: model.mapillaryKey,
+            accessToken: model.mapillaryKey,
+            component: {
+                // Initialize the view immediately without user interaction.
+                cover: false,
+            },
         });
         mapillary.setTransitionMode(TransitionMode.Instantaneous);
         model.mapillary = mapillary;

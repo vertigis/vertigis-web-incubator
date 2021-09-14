@@ -7,8 +7,8 @@ import {
     ComponentModelProperties,
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
-import Point from "esri/geometry/Point";
-import { Viewer, Node } from "mapillary-js";
+import Point from "@arcgis/core/geometry/Point";
+import { IViewer, ViewerImageEvent, LngLat } from "mapillary-js";
 
 interface MapillaryModelProperties extends ComponentModelProperties {
     mapillaryKey?: string;
@@ -49,18 +49,18 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     updating = false;
 
     // The computed position of the current Mapillary node
-    private _currentNodePosition: { lat: number; lon: number };
+    private _currentNodePosition: LngLat;
 
     private _awaitViewHandle: IHandle;
     private _viewerUpdateHandle: IHandle;
     private _handleMarkerUpdate = true;
     private _synced = false;
 
-    private _mapillary: any | undefined;
-    get mapillary(): any | undefined {
+    private _mapillary: IViewer | undefined;
+    get mapillary(): IViewer | undefined {
         return this._mapillary;
     }
-    set mapillary(instance: any | undefined) {
+    set mapillary(instance: IViewer | undefined) {
         if (instance === this._mapillary) {
             return;
         }
@@ -70,8 +70,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         // If an instance already exists, clean it up first.
         if (this._mapillary) {
             // Clean up event handlers.
-            this.mapillary.off(Viewer.nodechanged, this._onNodeChange);
-            this.mapillary.off(Viewer.povchanged, this._onPerspectiveChange);
+            this.mapillary.off("image", this._onNodeChange);
+            this.mapillary.off("pov", this._onPerspectiveChange);
 
             // Activating the cover appears to be the best way to "clean up" Mapillary.
             // https://github.com/mapillary/mapillary-js/blob/8b6fc2f36e3011218954d95d601062ff6aa41ad9/src/viewer/ComponentController.ts#L184-L192
@@ -85,7 +85,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         // A new instance is being set - add the event handlers.
         if (instance) {
             // Listen for changes to the currently displayed mapillary node
-            this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
+            this.mapillary.on("image", this._onNodeChange);
 
             // Change the current mapillary node when the location marker is moved.
             this._viewerUpdateHandle =
@@ -149,14 +149,14 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         longitude: number
     ): Promise<void> {
         try {
-            // https://www.mapillary.com/developer/api-documentation/#images
+            // TODO: This needs to be fixed as is an incorrect url
             const url = `${this.imageQueryUrl}?client_id=${this.mapillaryKey}&closeto=${longitude},${latitude}&radius=${this.searchRadius}`;
             const response = await fetch(url);
             const data = await response.json();
             const imgKey = data?.features?.[0]?.properties?.key;
 
             if (imgKey) {
-                await this.mapillary.moveToKey(imgKey);
+                await this.mapillary.moveTo(imgKey);
                 this.updating = false;
             } else {
                 this.updating = false;
@@ -180,7 +180,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         this._synced = true;
         this.synchronizePosition = this.startSynced ?? true;
 
-        // Set mapillary as close as possible to the center of the view
+        // // Set mapillary as close as possible to the center of the view
         await this.moveCloseToPosition(
             this.map.view.center.latitude,
             this.map.view.center.longitude
@@ -243,18 +243,19 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
      * position of the camera. See:
      * https://bl.ocks.org/oscarlorentzon/16946cb9eedfad2a64669cb1121e6c75
      */
-    private _onNodeChange = (node: Node) => {
-        if (node.merged) {
-            this._currentNodePosition = node.latLon;
+    private _onNodeChange = (event: ViewerImageEvent) => {
+        const { image } = event;
+        if (image.merged) {
+            this._currentNodePosition = image.lngLat;
 
             // Set the initial marker position for this node.
             this._onPerspectiveChange();
 
             // Handle further pov changes.
-            this.mapillary.on(Viewer.povchanged, this._onPerspectiveChange);
+            this.mapillary.on("pov", this._onPerspectiveChange);
         } else {
             this._currentNodePosition = undefined;
-            this.mapillary.off(Viewer.povchanged, this._onPerspectiveChange);
+            this.mapillary.off("pov", this._onPerspectiveChange);
         }
     };
 
@@ -310,7 +311,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         }
 
         // Will return a raw GPS value if the node position has not yet been calculated.
-        const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
+        const [{ lat, lng }, { bearing, tilt }, fov] = await Promise.all([
             this._currentNodePosition ?? this.mapillary.getPosition(),
             this.mapillary.getPointOfView() as Promise<{
                 bearing: number;
@@ -321,7 +322,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
 
         return {
             latitude: lat,
-            longitude: lon,
+            longitude: lng,
             heading: bearing,
             tilt: tilt + 90,
             fov,
