@@ -88,9 +88,7 @@ export default function Mapillary(
 
     return (
         <LayoutElement {...props} stretch>
-            <div className="mapillary-map-container">
-                <div ref={mlyRootEl} />
-            </div>
+            <div ref={mlyRootEl} className="mapillary-map-container" />
             <div>
                 <ButtonGroup className="third-party-map-controls" size="small">
                     <IconButton

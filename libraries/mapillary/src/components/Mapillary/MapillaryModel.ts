@@ -149,8 +149,14 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         longitude: number
     ): Promise<void> {
         try {
-            // TODO: This needs to be fixed as is an incorrect url
-            const url = `${this.imageQueryUrl}?client_id=${this.mapillaryKey}&closeto=${longitude},${latitude}&radius=${this.searchRadius}`;
+            const connectUrl = `https://graph.mapillary.com/${2935399116683438}?access_token=${
+                this.mapillaryKey
+            }&fields=id,computed_geometry`;
+            const r = await fetch(connectUrl);
+            const d = await r.json();
+
+            const url = `https://tiles.mapillary.com/maps/vtp/mly1_public/2/17/${latitude}/${longitude}?access_token=${this.mapillaryKey}`;
+            // const url = `https://tiles.mapillary.com/maps/vtp/mly1/2/1/0?access_token=${this.mapillaryKey}`;
             const response = await fetch(url);
             const data = await response.json();
             const imgKey = data?.features?.[0]?.properties?.key;
