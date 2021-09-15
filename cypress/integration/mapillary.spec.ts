@@ -52,13 +52,13 @@ xdescribe(sampleName, () => {
         // state of the mapillary database.
 
         // Marker is set initially to match street view position.
-        expectMapAndMarkerCenter(51.908070806028164, 4.486175772780554);
+        expectMapAndMarkerCenter(51.90797166666704, 4.489869999999996);
 
-        // Find the forward arrow by querying for the mapillary node id that
-        // represents the next node in the forward direction.
-        cy.getViewer().find('[data-key="f_wCfca88pFHl-CM1EKtLg"]').click();
+        // Find the forward arrow by querying for the mapillary image id that
+        // represents the next image in the forward direction.
+        cy.getViewer().find('[data-id="1876951449133876"]').click();
 
         // Marker is updated to match new street view position.
-        expectMapAndMarkerCenter(51.908175485049426, 4.4862970380600515);
+        expectMapAndMarkerCenter(51.908061666667, 4.4896200000001);
     });
 });

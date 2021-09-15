@@ -64,10 +64,11 @@ export default function Mapillary(
             ) {
                 model.updating = true;
 
-                const { latitude, longitude } = model.currentMarkerPosition;
+                // const { latitude, longitude } = model.currentMarkerPosition;
                 model.currentMarkerPosition = undefined;
 
-                void model.moveCloseToPosition(latitude, longitude);
+                // See comment in MapillaryModel.ts
+                // void model.moveCloseToPosition(latitude, longitude);
             }
         };
         document.body.addEventListener("mousedown", mouseDownHandler);

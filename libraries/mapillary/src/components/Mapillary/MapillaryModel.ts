@@ -48,8 +48,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     currentMarkerPosition: { latitude: number; longitude: number };
     updating = false;
 
-    // The computed position of the current Mapillary node
-    private _currentNodePosition: LngLat;
+    // The computed position of the current Mapillary image
+    private _currentImagePosition: LngLat;
 
     private _awaitViewHandle: IHandle;
     private _viewerUpdateHandle: IHandle;
@@ -70,7 +70,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         // If an instance already exists, clean it up first.
         if (this._mapillary) {
             // Clean up event handlers.
-            this.mapillary.off("image", this._onNodeChange);
+            this.mapillary.off("image", this._onImageChange);
             this.mapillary.off("pov", this._onPerspectiveChange);
 
             // Activating the cover appears to be the best way to "clean up" Mapillary.
@@ -84,10 +84,10 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
 
         // A new instance is being set - add the event handlers.
         if (instance) {
-            // Listen for changes to the currently displayed mapillary node
-            this.mapillary.on("image", this._onNodeChange);
+            // Listen for changes to the currently displayed mapillary image
+            this.mapillary.on("image", this._onImageChange);
 
-            // Change the current mapillary node when the location marker is moved.
+            // Change the current mapillary image when the location marker is moved.
             this._viewerUpdateHandle =
                 this.messages.events.locationMarker.updated.subscribe((event) =>
                     this._handleViewerUpdate(event)
@@ -144,35 +144,28 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         });
     }
 
-    async moveCloseToPosition(
-        latitude: number,
-        longitude: number
-    ): Promise<void> {
-        try {
-            const connectUrl = `https://graph.mapillary.com/${2935399116683438}?access_token=${
-                this.mapillaryKey
-            }&fields=id,computed_geometry`;
-            const r = await fetch(connectUrl);
-            const d = await r.json();
+    // TODO: Bring back when CORS issue is resolved.
+    // https://forum.mapillary.com/t/web-app-blocked-by-cors-policy-mapillary/5357
+    // https://forum.mapillary.com/t/cors-error-when-requesting-coverage-vector-tiles/5303
 
-            const url = `https://tiles.mapillary.com/maps/vtp/mly1_public/2/17/${latitude}/${longitude}?access_token=${this.mapillaryKey}`;
-            // const url = `https://tiles.mapillary.com/maps/vtp/mly1/2/1/0?access_token=${this.mapillaryKey}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            const imgKey = data?.features?.[0]?.properties?.key;
+    // async moveCloseToPosition(latitude: number, longitude: number):
+    // Promise<void> {try {const url =
+    // `https://tiles.mapillary.com/maps/vtp/mly1_public/2/17/${latitude}/${longitude}?access_token=${this.mapillaryKey}`;
+    // const response = await fetch(url); const data = await response.json();
+    // const imgKey = data?.features?.[0]?.properties?.key;
 
-            if (imgKey) {
-                await this.mapillary.moveTo(imgKey);
-                this.updating = false;
-            } else {
-                this.updating = false;
-                this._activateCover();
-            }
-        } catch {
-            this.updating = false;
-            this._activateCover();
-        }
-    }
+    //         if (imgKey) {
+    //             await this.mapillary.moveTo(imgKey);
+    //             this.updating = false;
+    //         } else {
+    //             this.updating = false;
+    //             this._activateCover();
+    //         }
+    //     } catch {
+    //         this.updating = false;
+    //         this._activateCover();
+    //     }
+    // }
 
     /**
      * Setup the initial state of the maps such as the location marker and map
@@ -186,11 +179,11 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         this._synced = true;
         this.synchronizePosition = this.startSynced ?? true;
 
-        // // Set mapillary as close as possible to the center of the view
-        await this.moveCloseToPosition(
-            this.map.view.center.latitude,
-            this.map.view.center.longitude
-        );
+        // Set mapillary as close as possible to the center of the view
+        // await this.moveCloseToPosition(
+        //     this.map.view.center.latitude,
+        //     this.map.view.center.longitude
+        // );
 
         // Create location marker based on current location from Mapillary and
         // pan/zoom Geocortex map to the location.
@@ -206,7 +199,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
                 tilt,
                 id: this.id,
                 maps: this.map,
-                userDraggable: true,
+                // When the CORS issue above is resolved change this to `true`
+                userDraggable: false,
             }),
             this.synchronizePosition
                 ? this.messages.commands.map.zoomToViewpoint.execute({
@@ -242,31 +236,31 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     }
 
     /**
-     * When the 'merged' property is set on the node we know that the position
+     * When the 'merged' property is set on the image we know that the position
      * reported will be the computed location rather than a raw GPS value. We
      * ignore all updates sent while the computed position is unknown as the raw
      * GPS value can be inaccurate and will not exactly match the observed
      * position of the camera. See:
      * https://bl.ocks.org/oscarlorentzon/16946cb9eedfad2a64669cb1121e6c75
      */
-    private _onNodeChange = (event: ViewerImageEvent) => {
+    private _onImageChange = (event: ViewerImageEvent) => {
         const { image } = event;
         if (image.merged) {
-            this._currentNodePosition = image.lngLat;
+            this._currentImagePosition = image.lngLat;
 
-            // Set the initial marker position for this node.
+            // Set the initial marker position for this image.
             this._onPerspectiveChange();
 
             // Handle further pov changes.
             this.mapillary.on("pov", this._onPerspectiveChange);
         } else {
-            this._currentNodePosition = undefined;
+            this._currentImagePosition = undefined;
             this.mapillary.off("pov", this._onPerspectiveChange);
         }
     };
 
     /**
-     * Handles pov changes once the node position is known.
+     * Handles pov changes once the image position is known.
      */
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     private _onPerspectiveChange = throttle(async () => {
@@ -316,9 +310,9 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
             return undefined;
         }
 
-        // Will return a raw GPS value if the node position has not yet been calculated.
+        // Will return a raw GPS value if the image position has not yet been calculated.
         const [{ lat, lng }, { bearing, tilt }, fov] = await Promise.all([
-            this._currentNodePosition ?? this.mapillary.getPosition(),
+            this._currentImagePosition ?? this.mapillary.getPosition(),
             this.mapillary.getPointOfView() as Promise<{
                 bearing: number;
                 tilt: number;
