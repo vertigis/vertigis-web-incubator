@@ -12,6 +12,9 @@ jobs:
         steps:
             - uses: actions/checkout@v2
 
+            # Fixes https://github.com/expo/expo-github-action/issues/20
+            - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
             - name: Use Node.js 14
               uses: actions/setup-node@v1
               with:
