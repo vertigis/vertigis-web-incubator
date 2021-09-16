@@ -7,8 +7,8 @@
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@vertigis/web": "^5.13.0",
-        "mapillary-js": "^3.1.0"
+        "@vertigis/web": "^5.14.0",
+        "mapillary-js": "^4.0.0"
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.4.0",
