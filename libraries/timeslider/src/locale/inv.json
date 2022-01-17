@@ -1,0 +1,21 @@
+{
+    "language-web-incubator-timeslider-title": "Time Slider",
+    "language-designer-timeslider-slider-min-description": "The minimum time for the complete time extent represented by this time slider.",
+    "language-designer-timeslider-slider-min-title": "Start Date",
+    "language-designer-timeslider-slider-max-description": "The maximum time for the complete time extent represented by this time slider.",
+    "language-designer-timeslider-slider-max-title": "End Date",
+    "language-designer-timeslider-layout-description": "",
+    "language-designer-timeslider-layout-title": "Layout",
+    "language-designer-timeslider-loop-description": "",
+    "language-designer-timeslider-loop-title": "Loop",
+    "language-designer-timeslider-play-rate-description": "",
+    "language-designer-timeslider-play-rate-title": "Play Rate",
+    "language-designer-timeslider-mode-description": "",
+    "language-designer-timeslider-mode-title": "Mode",
+    "language-designer-timeslider-time-interval-description": "",
+    "language-designer-timeslider-time-interval-title": "Time Interval",
+    "language-designer-timeslider-time-interval-unit-description": "",
+    "language-designer-timeslider-time-interval-unit-title": "Time Interval Unit",
+    "language-designer-timeslider-time-visible-description": "",
+    "language-designer-timeslider-time-visible-title": "Time Visible"
+}

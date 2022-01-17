@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "jsx": "react"
+    },
+    "extends": "@vertigis/web-sdk/config/tsconfig.json",
+    "include": ["src"]
+}
