@@ -1,5 +1,7 @@
 import { LibraryRegistry } from "@vertigis/web/config";
-import AreaMeasurement3D from "./components/AreaMeasurement3D";
+import AreaMeasurement3D, {
+    AreaMeasurement3DModel,
+} from "./components/AreaMeasurement3D";
 
 import invLanguage from "./locale/inv.json";
 
@@ -9,9 +11,13 @@ export default function (registry: LibraryRegistry): void {
         namespace: "vertigis.web.incubator",
         getComponentType: () => AreaMeasurement3D,
 
-        itemType: "mapillary",
-        title: "language-web-incubator-mapillary-title",
+        itemType: "area-measurement-3d",
+        title: "language-web-incubator-area-measurement-3d-title",
         iconId: "map-3rd-party",
+    });
+    registry.registerModel({
+        getModel: (config) => new AreaMeasurement3DModel(config),
+        itemType: "area-measurement-3d",
     });
     registry.registerLanguageResources({
         locale: "inv",

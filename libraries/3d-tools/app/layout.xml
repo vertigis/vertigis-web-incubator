@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="vertigis.web.incubator">
-    <map id="map-1" config="map-config-1" />
+    <map id="map-1" config="map-config-1">
+        <custom:area-measurement-3d config="area-measurement-3d"/>
+    </map>
 </layout>
