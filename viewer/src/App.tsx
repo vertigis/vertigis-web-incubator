@@ -114,7 +114,6 @@ const theme = createTheme();
 
 function App() {
     const classes = useStyles();
-
     const location = useLocation();
     const history = useHistory();
     const selectedSampleId = location.pathname.replace(

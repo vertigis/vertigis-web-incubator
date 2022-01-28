@@ -4,6 +4,8 @@
         {
             "$type": "map-extension",
             "id": "map-config-1",
+            "initialViewMode": "scene",
+            "webMap": "https://www.arcgis.com/home/item.html?id=97e38e28b80444b38fde3a5c6c8f8360",
             "webScene": "https://www.arcgis.com/home/item.html?id=94e00add11334767afb0abdce49c9a43"
         }
     ]

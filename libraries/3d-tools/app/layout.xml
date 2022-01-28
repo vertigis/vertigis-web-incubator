@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="vertigis.web.incubator">
+<layout xmlns="https://geocortex.com/layout/v1"
+    xmlns:custom="vertigis.web.incubator">
     <map id="map-1" config="map-config-1">
-        <custom:area-measurement-3d config="area-measurement-3d"/>
+        <custom:slice-3d slot="top-start" config="slice-3d"/>
+        <custom:area-measurement-3d slot="top-end" config="area-measurement-3d"/>
+        <custom:line-of-sight-3d slot="top-end" config="line-of-sight-3d"/>
+        <custom:daylight-widget-3d slot="top-start" config="daylight-widget-3d"/>
+        <custom:elevation-profile-3d slot="bottom-end" config="elevation-profile-3d"/>
+        <custom:shadow-cast-3d slot="bottom-start" config="shadow-cast-3d"/>
     </map>
 </layout>

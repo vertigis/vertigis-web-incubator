@@ -7,14 +7,14 @@ import {
     importModel,
 } from "@vertigis/web/models";
 
-type AreaMeasurement3DModelProperties = ComponentModelProperties;
+type SliceModelProperties = ComponentModelProperties;
 
 @serializable
-export default class AreaMeasurement3DModel extends ComponentModelBase<AreaMeasurement3DModelProperties> {
+export default class SliceModel extends ComponentModelBase<SliceModelProperties> {
     @importModel("map-extension")
     map: MapModel | undefined;
 
-    protected _getSerializableProperties(): PropertyDefs<AreaMeasurement3DModelProperties> {
+    protected _getSerializableProperties(): PropertyDefs<SliceModelProperties> {
         return super._getSerializableProperties();
     }
 }
