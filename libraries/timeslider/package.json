@@ -7,7 +7,7 @@
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@arcgis/core": "^4.22.2",
+        "@arcgis/core": "^4.21.2",
         "@vertigis/arcgis-extensions": "^34.1.0",
         "@vertigis/viewer-spec": "^43.6.0",
         "@vertigis/web": "^5.15.0"

@@ -8,25 +8,35 @@ import {
 import { ItemType } from "@vertigis/arcgis-extensions/ItemType";
 import { TimeIntervalUnit, TimeSliderLayout, TimeSliderMode } from "./designer";
 import { MapModel } from "@vertigis/web/mapping/MapModel";
+import EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
 
 interface TimeSliderModelProperties extends ComponentModelProperties {
     layout?: TimeSliderLayout;
     loop?: boolean;
     playRate?: number;
     mode?: TimeSliderMode;
+    overrideStops?: boolean;
     timeInterval?: number;
     timeIntervalUnit?: TimeIntervalUnit;
     timeVisible?: boolean;
+    inheritedWidgetConfig?: boolean;
 }
 
 @serializable
 export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelProperties> {
     @importModel(ItemType.MAP_EXTENSION)
     map: MapModel | undefined;
+    widget: EsriTimeSlider;
+    inheritedWidgetConfig: boolean;
     layout: TimeSliderLayout;
     loop: boolean;
     playRate: number;
     mode: TimeSliderMode;
+    overrideStops: boolean;
+    defaultStops:
+        | __esri.StopsByCount
+        | __esri.StopsByDates
+        | __esri.StopsByInterval;
     timeInterval: number;
     timeIntervalUnit: TimeIntervalUnit;
     timeVisible: boolean;
@@ -37,7 +47,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
             ...props,
             layout: {
                 serializeModes: ["initial"],
-                default: "auto",
+                default: "compact",
             },
             loop: {
                 serializeModes: ["initial"],
@@ -51,21 +61,27 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
                 serializeModes: ["initial"],
                 default: "time-window",
             },
+            overrideStops: {
+                serializeModes: ["initial"],
+                default: false,
+            },
             timeInterval: {
                 serializeModes: ["initial"],
-                default: 1,
             },
             timeIntervalUnit: {
                 serializeModes: ["initial"],
-                default: "milliseconds",
             },
             timeVisible: {
                 serializeModes: ["initial"],
                 default: false,
             },
+            inheritedWidgetConfig: {
+                serializeModes: ["initial"],
+                default: false,
+            },
             title: {
                 ...this._toPropertyDef(props.title),
-                default: "language-web-incubator-mapillary-title",
+                default: "language-web-incubator-timeslider-title",
             },
             icon: {
                 ...this._toPropertyDef(props.icon),

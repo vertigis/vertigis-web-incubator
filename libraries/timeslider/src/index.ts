@@ -8,7 +8,6 @@ import {
 import invLanguage from "./locale/inv.json";
 
 export default function (registry: LibraryRegistry): void {
-    console.log(registry);
     registry.registerComponent({
         name: "timeslider",
         namespace: "vertigis.web.incubator",
@@ -21,7 +20,7 @@ export default function (registry: LibraryRegistry): void {
         iconId: "range-start",
     });
     registry.registerModel({
-        getModel: () => new TimeSliderModel(),
+        getModel: (config) => new TimeSliderModel(config),
         itemType: "timeslider",
     });
     registry.registerLanguageResources({

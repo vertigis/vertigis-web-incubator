@@ -36,6 +36,7 @@ export interface TimeSliderSettings extends ComponentModelDesignerSettings {
     loop: boolean;
     playRate: number;
     mode: TimeSliderMode;
+    overrideStops: boolean;
     timeInterval: number;
     timeIntervalUnit: TimeIntervalUnit;
     timeVisible: boolean;
@@ -62,6 +63,7 @@ export const getSettings: GetDesignerSettingsCallback<
         loop,
         playRate,
         mode,
+        overrideStops,
         timeInterval,
         timeIntervalUnit,
         timeVisible,
@@ -72,6 +74,7 @@ export const getSettings: GetDesignerSettingsCallback<
         loop,
         playRate,
         mode,
+        overrideStops,
         timeInterval,
         timeIntervalUnit,
         timeVisible,
@@ -90,10 +93,6 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             id: "layout",
             type: "select",
             values: [
-                {
-                    displayName: "Auto",
-                    value: "auto",
-                },
                 {
                     displayName: "Compact",
                     value: "compact",
@@ -143,11 +142,19 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             displayName: "language-designer-timeslider-mode-title",
         },
         {
+            id: "overrideStops",
+            type: "checkbox",
+            description:
+                "language-designer-timeslider-override-stops-description",
+            displayName: "language-designer-timeslider-override-stops-title",
+        },
+        {
             id: "timeInterval",
             type: "number",
             description:
                 "language-designer-timeslider-time-interval-description",
             displayName: "language-designer-timeslider-time-interval-title",
+            isVisible: (data) => data.overrideStops,
         },
         {
             id: "timeIntervalUnit",
@@ -198,6 +205,7 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
                 "language-designer-timeslider-time-interval-unit-description",
             displayName:
                 "language-designer-timeslider-time-interval-unit-title",
+            isVisible: (data) => data.overrideStops,
         },
         {
             id: "timeVisible",
