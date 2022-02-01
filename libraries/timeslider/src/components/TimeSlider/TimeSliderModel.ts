@@ -67,9 +67,11 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
             },
             timeInterval: {
                 serializeModes: ["initial"],
+                default: 1000,
             },
             timeIntervalUnit: {
                 serializeModes: ["initial"],
+                default: "milliseconds",
             },
             timeVisible: {
                 serializeModes: ["initial"],

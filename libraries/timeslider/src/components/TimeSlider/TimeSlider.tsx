@@ -69,6 +69,8 @@ const TimeSlider = (
                                     value: model.timeInterval,
                                 }),
                             });
+                            // Ensure time slider playback will end on the latest date in the full
+                            // time extent.
                             if (
                                 widget.effectiveStops &&
                                 widget.effectiveStops[
@@ -79,6 +81,15 @@ const TimeSlider = (
                                     widget.fullTimeExtent.end
                                 );
                             }
+                            // Reset the default time extent to match the new
+                            // stops.
+                            widget.set(
+                                "timeExtent",
+                                new TimeExtent({
+                                    start: widget.effectiveStops[0],
+                                    end: widget.effectiveStops[1],
+                                })
+                            );
                         }
                     }
                     // Apply Time Slider model properties to the widget.
@@ -125,6 +136,8 @@ const TimeSlider = (
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         return Promise.all(promises).then(() => {
             widget.set("fullTimeExtent", new TimeExtent({ start, end }));
+            // Ensure time slider playback will end on the latest date in the full
+            // time extent.
             if (
                 widget.effectiveStops &&
                 widget.effectiveStops[widget.effectiveStops.length - 1] <
@@ -145,7 +158,7 @@ const TimeSlider = (
             widget.set("timeExtent", timeSlider.currentTimeExtent);
         } else {
             widget.set("fullTimeExtent", timeSlider.currentTimeExtent);
-            timeExtentOption = "current";
+            timeExtentOption = "currentTimeExtent";
         }
         // Set stops based on available properties in the time slider
         // config in this order: StopByDate, StopByCount, StopByInterval
@@ -165,7 +178,16 @@ const TimeSlider = (
                 timeExtent: widget.fullTimeExtent,
             });
         }
-        if (timeExtentOption === "current") {
+        // Ensure time slider playback will end on the latest date in the full
+        // time extent.
+        if (
+            widget.effectiveStops &&
+            widget.effectiveStops[widget.effectiveStops.length - 1] <
+                widget.fullTimeExtent.end
+        ) {
+            widget.effectiveStops.push(widget.fullTimeExtent.end);
+        }
+        if (timeExtentOption === "currentTimeExtent") {
             // Set a default timeExtent if fullTimeExtent was null.
             widget.set(
                 "timeExtent",
@@ -174,13 +196,6 @@ const TimeSlider = (
                     end: widget.effectiveStops[1],
                 })
             );
-        }
-        if (
-            widget.effectiveStops &&
-            widget.effectiveStops[widget.effectiveStops.length - 1] <
-                widget.fullTimeExtent.end
-        ) {
-            widget.effectiveStops.push(widget.fullTimeExtent.end);
         }
     };
 
@@ -222,8 +237,27 @@ const TimeSlider = (
     useWatch(model, "overrideStops", (newValue) => {
         if (model.widget) {
             model.widget.stop();
-            if (!newValue) {
-                model.widget.stops = model.defaultStops;
+            if (newValue) {
+                model.widget.set("stops", {
+                    interval: new TimeInterval({
+                        unit: model.timeIntervalUnit,
+                        value: model.timeInterval,
+                    }),
+                });
+                // Ensure time slider playback will end on the latest date in the full
+                // time extent.
+                if (
+                    model.widget.effectiveStops &&
+                    model.widget.effectiveStops[
+                        model.widget.effectiveStops.length - 1
+                    ] < model.widget.fullTimeExtent.end
+                ) {
+                    model.widget.effectiveStops.push(
+                        model.widget.fullTimeExtent.end
+                    );
+                }
+            } else {
+                model.widget.set("stops", model.defaultStops);
             }
         }
     });
@@ -238,6 +272,8 @@ const TimeSlider = (
                         value: newValue,
                     }),
                 });
+                // Ensure time slider playback will end on the latest date in the full
+                // time extent.
                 if (
                     model.widget.effectiveStops &&
                     model.widget.effectiveStops[
@@ -262,6 +298,8 @@ const TimeSlider = (
                         value: model.timeInterval,
                     }),
                 });
+                // Ensure time slider playback will end on the latest date in the full
+                // time extent.
                 if (
                     model.widget.effectiveStops &&
                     model.widget.effectiveStops[
@@ -283,20 +321,17 @@ const TimeSlider = (
         }
     });
 
-    // Watch for map updates, as the overall time extent may be changed.
-    useWatchAndRerender(model, "map.view");
+    // Watch for map updates, as the overall time extent may have changed.
+    useWatchAndRerender(model, "map.map");
     useWatch(
         model,
-        "map.view",
-        (newView) => {
+        "map.map",
+        (newMap) => {
+            // Only update the model if the web map has changed.
             if (model.widget) {
                 model.widget.stop();
-                // New TimeSlider or Layer TimeInfo config, so the widget config
-                // will need to be inherited again.
-                model.inheritedWidgetConfig = undefined;
-                model.overrideStops = false;
                 // Check the web map for existing time slider config
-                updateTimeSliderWidget(model.widget, newView.map);
+                updateTimeSliderWidget(model.widget, newMap);
             }
         },
         [model.map.view]
@@ -314,7 +349,7 @@ const TimeSlider = (
             const webMap = map.map as WebMap;
             updateTimeSliderWidget(widget, webMap);
         },
-        [model.map, updateTimeSliderWidget]
+        [model, updateTimeSliderWidget]
     );
     const onWidgetDestroyed = useCallback(() => {
         // Remove the time extent filter on the map view.
