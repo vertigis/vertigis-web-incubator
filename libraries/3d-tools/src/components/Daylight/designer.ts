@@ -18,6 +18,8 @@ export interface DaylightSettings extends ComponentModelDesignerSettings {
     shadowsToggle: boolean;
     datePicker: boolean;
     timezone: boolean;
+    dateOrSeason: "date" | "season";
+    playSpeedMultiplier: number;
 }
 
 export type SettingsMap = DesignerSettings<DaylightSettings>;
@@ -36,13 +38,22 @@ export const getSettings: GetDesignerSettingsCallback<
     SettingsMap
 > = async (args) => {
     const { model } = args;
-    const { playButtons, shadowsToggle, datePicker, timezone } = model;
+    const {
+        playButtons,
+        shadowsToggle,
+        datePicker,
+        timezone,
+        dateOrSeason,
+        playSpeedMultiplier,
+    } = model;
     return {
         ...(await getComponentModelDesignerSettings(args)),
         playButtons,
         shadowsToggle,
         datePicker,
         timezone,
+        dateOrSeason,
+        playSpeedMultiplier,
     };
 };
 
@@ -57,28 +68,62 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
         {
             id: "playButtons",
             type: "checkbox",
-            description: "language-designer-mapillary-key-description",
-            displayName: "language-designer-mapillary-key-title",
+            description:
+                "language-designer-3d-tools-daylight-playButtons-description",
+            displayName:
+                "language-designer-3d-tools-daylight-playButtons-title",
         },
         {
             id: "shadowsToggle",
             type: "checkbox",
             description:
-                "language-designer-mapillary-search-radius-description",
-            displayName: "language-designer-mapillary-search-radius-title",
+                "language-designer-3d-tools-daylight-shadowsToggle-description",
+            displayName:
+                "language-designer-3d-tools-daylight-shadowsToggle-title",
         },
         {
             id: "datePicker",
             type: "checkbox",
             description:
-                "language-designer-mapillary-default-scale-description",
-            displayName: "language-designer-mapillary-default-scale-title",
+                "language-designer-3d-tools-daylight-datePicker-description",
+            displayName: "language-designer-3d-tools-daylight-datePicker-title",
         },
         {
             id: "timezone",
             type: "checkbox",
-            description: "language-designer-mapillary-start-synced-description",
-            displayName: "language-designer-mapillary-start-synced-title",
+            description:
+                "language-designer-3d-tools-daylight-timezone-description",
+            displayName: "language-designer-3d-tools-daylight-timezone-title",
+        },
+        {
+            id: "playSpeedMultiplier",
+            type: "number",
+            description:
+                "language-designer-3d-tools-daylight-playSpeedMultiplier-description",
+            displayName:
+                "language-designer-3d-tools-daylight-playSpeedMultiplier-title",
+            isRequired: true,
+            min: 0,
+        },
+        {
+            id: "dateOrSeason",
+            type: "select",
+            description:
+                "language-designer-3d-tools-daylight-dateOrSeason-description",
+            displayName:
+                "language-designer-3d-tools-daylight-dateOrSeason-title",
+            values: [
+                {
+                    displayName:
+                        "language-designer-3d-tools-daylight-dateOrSeason-date",
+                    value: "date",
+                },
+                {
+                    displayName:
+                        "language-designer-3d-tools-daylight-dateOrSeason-season",
+                    value: "season",
+                },
+            ],
         },
     ]);
     const schema: SettingsSchema<DaylightSettings> = {

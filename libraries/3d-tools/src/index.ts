@@ -2,7 +2,6 @@ import { LibraryRegistry } from "@vertigis/web/config";
 import AreaMeasurement3D, {
     AreaMeasurementModel,
 } from "./components/AreaMeasurement";
-import Daylight, { DaylightModel } from "./components/Daylight";
 import ElevationProfile, {
     ElevationProfileModel,
 } from "./components/ElevationProfile";
