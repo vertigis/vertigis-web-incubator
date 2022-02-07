@@ -5,6 +5,7 @@ import AreaMeasurement3D, {
 import ElevationProfile, {
     ElevationProfileModel,
 } from "./components/ElevationProfile";
+import ShadowCast, { ShadowCastModel } from "./components/ShadowCast";
 import Slice, { SliceModel } from "./components/Slice";
 
 import invLanguage from "./locale/inv.json";
@@ -32,7 +33,7 @@ export default function (registry: LibraryRegistry): void {
         itemType: "elevation-profile-3d",
     });
     registry.registerModel({
-        getModel: (config) => new ElevationProfileModel(config),
+        getModel: (config) => new ShadowCastModel(config),
         itemType: "shadow-cast-3d",
     });
     registry.registerModel({
@@ -89,7 +90,7 @@ export default function (registry: LibraryRegistry): void {
     registry.registerComponent({
         name: "shadow-cast-3d",
         namespace: "vertigis.web.incubator",
-        getComponentType: () => ElevationProfile,
+        getComponentType: () => ShadowCast,
         category: "map",
         itemType: "shadow-cast-3d",
         title: "language-web-incubator-shadow-cast-3d-title",

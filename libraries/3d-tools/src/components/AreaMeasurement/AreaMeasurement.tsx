@@ -27,7 +27,8 @@ const AreaMeasurement2DWrapper = createEsriMapWidget<
 export default function AreaMeasurement3D(
     props: DaylightWidgetProps
 ): ReactElement {
-    const { map, regionService } = props.model;
+    const { model } = props;
+    const { map, regionService } = model;
     const [widget, setWidget] = useState<
         AreaMeasurement2DWidget | AreaMeasurement3DWidget
     >();
@@ -36,8 +37,9 @@ export default function AreaMeasurement3D(
         if (!widget) {
             return;
         }
+        widget.label = model.title;
         widget.unit = regionService.measurementSystem;
-    }, [widget, regionService.measurementSystem]);
+    }, [widget, model.title, regionService.measurementSystem]);
 
     if (map.viewMode === "scene") {
         return (

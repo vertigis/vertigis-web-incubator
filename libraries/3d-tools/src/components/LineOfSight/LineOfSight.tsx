@@ -1,28 +1,44 @@
-import { ReactElement } from "react";
-import { LayoutElementProperties } from "@vertigis/web/components";
-import { createEsriMapWidget } from "../../common/EsriMapWidgets";
+import { ReactElement, useEffect, useState } from "react";
 import LineOfSightWidget from "@arcgis/core/widgets/LineOfSight";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import type Accessor from "@arcgis/core/core/Accessor";
-import { ComponentType } from "react";
-import { AreaMeasurementModel } from "../AreaMeasurement";
+import {
+    createEsriMapWidget,
+    MapWidgetProps,
+} from "@vertigis/web/ui/esriUtils";
+import LineOfSightModel from "./LineOfSightModel";
 
-import "./LineOfSight.css";
+export type LineOfSightWidgetProps = MapWidgetProps<
+    LineOfSightModel & Accessor
+>;
 
-const LineOfSightWrapper: ComponentType<LayoutElementProperties> =
-    createEsriMapWidget<AreaMeasurementModel & Accessor, LineOfSightWidget>(
-        LineOfSightWidget
-    );
+const LineOfSightWrapper = createEsriMapWidget<
+    LineOfSightModel & Accessor,
+    LineOfSightWidget
+>(LineOfSightWidget, false, true);
 
-export default function AreaMeasurement3D(
-    props: LayoutElementProperties<AreaMeasurementModel>
+export default function LineOfSight(
+    props: LineOfSightWidgetProps
 ): ReactElement {
-    const { map } = props.model;
+    const { model } = props;
+    const { map } = model;
+    const [widget, setWidget] = useState<LineOfSightWidget>();
     useWatchAndRerender(map, "map");
+    useEffect(() => {
+        if (!widget) {
+            return;
+        }
+        widget.label = model.title;
+    }, [widget, model.title]);
 
     if (map.viewMode === "map") {
         return null;
     }
 
-    return <LineOfSightWrapper {...props}></LineOfSightWrapper>;
+    return (
+        <LineOfSightWrapper
+            onWidgetCreated={setWidget}
+            {...props}
+        ></LineOfSightWrapper>
+    );
 }
