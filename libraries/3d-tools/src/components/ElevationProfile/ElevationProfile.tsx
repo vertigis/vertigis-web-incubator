@@ -1,22 +1,25 @@
 import { ReactElement } from "react";
-import { LayoutElementProperties } from "@vertigis/web/components";
-import { createEsriMapWidget } from "../../common/EsriMapWidgets";
 import ElevationProfileWidget from "@arcgis/core/widgets/ElevationProfile";
-import { useWatchAndRerender } from "@vertigis/web/ui";
 import type Accessor from "@arcgis/core/core/Accessor";
-import { ComponentType } from "react";
+import { useWatchAndRerender } from "@vertigis/web/ui";
+import {
+    createEsriMapWidget,
+    MapWidgetProps,
+} from "@vertigis/web/ui/esriUtils";
 
-import "./ElevationProfile.css";
 import { ElevationProfileModel } from ".";
 
-const ElevationProfileWidgetWrapper: ComponentType<LayoutElementProperties> =
-    createEsriMapWidget<
-        ElevationProfileModel & Accessor,
-        ElevationProfileWidget
-    >(ElevationProfileWidget);
+export type ElevationProfileWidgetProps = MapWidgetProps<
+    ElevationProfileModel & Accessor
+>;
+
+const ElevationProfileWidgetWrapper = createEsriMapWidget<
+    ElevationProfileModel & Accessor,
+    ElevationProfileWidget
+>(ElevationProfileWidget, false, true);
 
 export default function ElevationProfile(
-    props: LayoutElementProperties<ElevationProfileModel>
+    props: ElevationProfileWidgetProps
 ): ReactElement {
     const { map } = props.model;
     useWatchAndRerender(map, "map");

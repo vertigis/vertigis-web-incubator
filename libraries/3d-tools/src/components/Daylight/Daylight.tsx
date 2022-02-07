@@ -4,8 +4,8 @@ import {
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
 import DaylightWidget from "@arcgis/core/widgets/Daylight";
-import { useWatchAndRerender } from "@vertigis/web/ui";
 import type Accessor from "@arcgis/core/core/Accessor";
+import { useWatchAndRerender } from "@vertigis/web/ui";
 import { DaylightModel } from ".";
 
 export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
@@ -22,6 +22,7 @@ export default function Daylight(props: DaylightWidgetProps): ReactElement {
 
     useWatchAndRerender(map, "map");
     useWatchAndRerender(model, [
+        "title",
         "datePicker",
         "playButtons",
         "shadowsToggle",
@@ -39,11 +40,13 @@ export default function Daylight(props: DaylightWidgetProps): ReactElement {
             shadowsToggle: model.shadowsToggle,
             timezone: model.timezone,
         };
+        widget.label = model.title;
         widget.dateOrSeason = model.dateOrSeason;
         widget.playSpeedMultiplier = model.playSpeedMultiplier;
     }, [
         widget,
         model,
+        model.title,
         model.datePicker,
         model.playButtons,
         model.shadowsToggle,
