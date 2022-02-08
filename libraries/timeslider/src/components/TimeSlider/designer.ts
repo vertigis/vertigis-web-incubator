@@ -11,25 +11,11 @@ import {
     SettingsSchema,
 } from "@vertigis/web/designer";
 
-import TimeSliderModel from "./TimeSliderModel";
-
-export type TimeSliderLayout = "auto" | "compact" | "wide";
-export type TimeSliderMode =
-    | "instant"
-    | "time-window"
-    | "cumulative-from-start"
-    | "cumulative-from-end";
-export type TimeIntervalUnit =
-    | "milliseconds"
-    | "seconds"
-    | "minutes"
-    | "hours"
-    | "days"
-    | "weeks"
-    | "months"
-    | "years"
-    | "decades"
-    | "centuries";
+import TimeSliderModel, {
+    TimeIntervalUnit,
+    TimeSliderLayout,
+    TimeSliderMode,
+} from "./TimeSliderModel";
 
 export interface TimeSliderSettings extends ComponentModelDesignerSettings {
     layout: TimeSliderLayout;
@@ -94,66 +80,69 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             type: "select",
             values: [
                 {
-                    displayName: "Compact",
+                    displayName: "language-designer-time-slider-layout-compact",
                     value: "compact",
                 },
                 {
-                    displayName: "Wide",
+                    displayName: "language-designer-time-slider-layout-wide",
                     value: "wide",
                 },
             ],
-            description: "language-designer-timeslider-layout-description",
-            displayName: "language-designer-timeslider-layout-title",
+            description: "language-designer-time-slider-layout-description",
+            displayName: "language-designer-time-slider-layout-title",
         },
         {
             id: "loop",
             type: "checkbox",
-            description: "language-designer-timeslider-loop-description",
-            displayName: "language-designer-timeslider-loop-title",
+            description: "language-designer-time-slider-loop-description",
+            displayName: "language-designer-time-slider-loop-title",
         },
         {
             id: "playRate",
             type: "number",
-            description: "language-designer-timeslider-play-rate-description",
-            displayName: "language-designer-timeslider-play-rate-title",
+            description: "language-designer-time-slider-play-rate-description",
+            displayName: "language-designer-time-slider-play-rate-title",
         },
         {
             id: "mode",
             type: "select",
             values: [
                 {
-                    displayName: "Instant",
+                    displayName: "language-designer-time-slider-mode-instant",
                     value: "instant",
                 },
                 {
-                    displayName: "Time Window",
+                    displayName:
+                        "language-designer-time-slider-mode-time-window",
                     value: "time-window",
                 },
                 {
-                    displayName: "Cumulative From Start",
+                    displayName:
+                        "language-designer-time-slider-mode-cumulative-from-start",
                     value: "cumulative-from-start",
                 },
                 {
-                    displayName: "Cumulative From End",
+                    displayName:
+                        "language-designer-time-slider-mode-cumulative-from-end",
                     value: "cumulative-from-end",
                 },
             ],
-            description: "language-designer-timeslider-mode-description",
-            displayName: "language-designer-timeslider-mode-title",
+            description: "language-designer-time-slider-mode-description",
+            displayName: "language-designer-time-slider-mode-title",
         },
         {
             id: "overrideStops",
             type: "checkbox",
             description:
-                "language-designer-timeslider-override-stops-description",
-            displayName: "language-designer-timeslider-override-stops-title",
+                "language-designer-time-slider-override-stops-description",
+            displayName: "language-designer-time-slider-override-stops-title",
         },
         {
             id: "timeInterval",
             type: "number",
             description:
-                "language-designer-timeslider-time-interval-description",
-            displayName: "language-designer-timeslider-time-interval-title",
+                "language-designer-time-slider-time-interval-description",
+            displayName: "language-designer-time-slider-time-interval-title",
             isVisible: (data) => data.overrideStops,
         },
         {
@@ -161,58 +150,68 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             type: "select",
             values: [
                 {
-                    displayName: "Milliseconds",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-milliseconds",
                     value: "milliseconds",
                 },
                 {
-                    displayName: "Seconds",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-seconds",
                     value: "seconds",
                 },
                 {
-                    displayName: "Minutes",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-minutes",
                     value: "minutes",
                 },
                 {
-                    displayName: "Hours",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-hours",
                     value: "hours",
                 },
                 {
-                    displayName: "Days",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-days",
                     value: "days",
                 },
                 {
-                    displayName: "Weeks",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-weeks",
                     value: "weeks",
                 },
                 {
-                    displayName: "Months",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-months",
                     value: "months",
                 },
                 {
-                    displayName: "Years",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-years",
                     value: "years",
                 },
                 {
-                    displayName: "Decades",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-decades",
                     value: "decades",
                 },
                 {
-                    displayName: "Centuries",
+                    displayName:
+                        "language-designer-time-slider-time-interval-unit-centuries",
                     value: "centuries",
                 },
             ],
             description:
-                "language-designer-timeslider-time-interval-unit-description",
+                "language-designer-time-slider-time-interval-unit-description",
             displayName:
-                "language-designer-timeslider-time-interval-unit-title",
+                "language-designer-time-slider-time-interval-unit-title",
             isVisible: (data) => data.overrideStops,
         },
         {
             id: "timeVisible",
             type: "checkbox",
             description:
-                "language-designer-timeslider-time-visible-description",
-            displayName: "language-designer-timeslider-time-visible-title",
+                "language-designer-time-slider-time-visible-description",
+            displayName: "language-designer-time-slider-time-visible-title",
         },
     ]);
     const schema: SettingsSchema<TimeSliderSettings> = {

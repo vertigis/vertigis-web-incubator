@@ -9,19 +9,19 @@ import invLanguage from "./locale/inv.json";
 
 export default function (registry: LibraryRegistry): void {
     registry.registerComponent({
-        name: "timeslider",
-        namespace: "vertigis.web.incubator",
+        name: "time-slider",
+        namespace: "vertigis.web.incubator.time-slider",
         getComponentType: () => TimeSlider,
         getDesignerSettings: (args) => getSettings(args),
         applyDesignerSettings: (args) => applySettings(args),
         getDesignerSettingsSchema: (args) => getSettingsSchema(args),
-        itemType: "timeslider",
-        title: "language-web-incubator-timeslider-title",
+        itemType: "time-slider",
+        title: "language-web-incubator-time-slider-title",
         iconId: "range-start",
     });
     registry.registerModel({
         getModel: (config) => new TimeSliderModel(config),
-        itemType: "timeslider",
+        itemType: "time-slider",
     });
     registry.registerLanguageResources({
         locale: "inv",

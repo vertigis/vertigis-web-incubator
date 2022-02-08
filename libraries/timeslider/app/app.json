@@ -7,8 +7,8 @@
             "webMap": "https://latitudegeo.maps.arcgis.com/home/item.html?id=f20f372791414ef390432fc94faa5baf"
         },
         {
-            "$type": "timeslider",
-            "id": "timeslider-config-1"
+            "$type": "time-slider",
+            "id": "time-slider-config-1"
         }
     ]
 }
