@@ -3,12 +3,9 @@ import {
     createEsriMapWidget,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-import { useWatchAndRerender } from "@vertigis/web/ui";
 import AreaMeasurement3DWidget from "@arcgis/core/widgets/AreaMeasurement3D";
-import AreaMeasurement2DWidget from "@arcgis/core/widgets/AreaMeasurement2D";
 import type Accessor from "@arcgis/core/core/Accessor";
-
-import { AreaMeasurementModel } from ".";
+import AreaMeasurementModel from "./AreaMeasurementModel";
 
 export type DaylightWidgetProps = MapWidgetProps<
     AreaMeasurementModel & Accessor
@@ -19,41 +16,27 @@ const AreaMeasurement3DWrapper = createEsriMapWidget<
     AreaMeasurement3DWidget
 >(AreaMeasurement3DWidget, false, true);
 
-const AreaMeasurement2DWrapper = createEsriMapWidget<
-    AreaMeasurementModel & Accessor,
-    AreaMeasurement2DWidget
->(AreaMeasurement2DWidget, false, true);
-
 export default function AreaMeasurement3D(
     props: DaylightWidgetProps
 ): ReactElement {
     const { model } = props;
-    const { map, regionService } = model;
-    const [widget, setWidget] = useState<
-        AreaMeasurement2DWidget | AreaMeasurement3DWidget
-    >();
-    useWatchAndRerender(regionService, "measurementSystem");
+    const { map } = model;
+    const [widget, setWidget] = useState<AreaMeasurement3DWidget>();
     useEffect(() => {
         if (!widget) {
             return;
         }
         widget.label = model.title;
-        widget.unit = regionService.measurementSystem;
-    }, [widget, model.title, regionService.measurementSystem]);
+    }, [widget, model.title]);
 
-    if (map.viewMode === "scene") {
-        return (
-            <AreaMeasurement3DWrapper
-                onWidgetCreated={setWidget}
-                {...props}
-            ></AreaMeasurement3DWrapper>
-        );
-    } else {
-        return (
-            <AreaMeasurement2DWrapper
-                onWidgetCreated={setWidget}
-                {...props}
-            ></AreaMeasurement2DWrapper>
-        );
+    if (map.viewMode === "map") {
+        return null;
     }
+
+    return (
+        <AreaMeasurement3DWrapper
+            onWidgetCreated={setWidget}
+            {...props}
+        ></AreaMeasurement3DWrapper>
+    );
 }

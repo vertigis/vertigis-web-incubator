@@ -15,6 +15,17 @@ export default class LineOfSightModel extends ComponentModelBase<LineOfSightMode
     map: MapModel | undefined;
 
     protected _getSerializableProperties(): PropertyDefs<LineOfSightModelProperties> {
-        return super._getSerializableProperties();
+        const props = super._getSerializableProperties();
+        return {
+            ...props,
+            title: {
+                ...this._toPropertyDef(props.title),
+                default: "language-web-incubator-line-of-sight-3d-title",
+            },
+            icon: {
+                ...this._toPropertyDef(props.icon),
+                default: "map-3rd-party",
+            },
+        };
     }
 }

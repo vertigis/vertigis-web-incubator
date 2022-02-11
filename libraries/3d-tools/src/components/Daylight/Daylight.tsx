@@ -6,7 +6,7 @@ import {
 import DaylightWidget from "@arcgis/core/widgets/Daylight";
 import type Accessor from "@arcgis/core/core/Accessor";
 import { useWatchAndRerender } from "@vertigis/web/ui";
-import { DaylightModel } from ".";
+import DaylightModel from "./DaylightModel";
 
 export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 

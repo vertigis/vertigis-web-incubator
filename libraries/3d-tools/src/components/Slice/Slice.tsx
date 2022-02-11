@@ -1,20 +1,22 @@
 import { ReactElement } from "react";
-import { LayoutElementProperties } from "@vertigis/web/components";
-import { createEsriMapWidget } from "../../common/EsriMapWidgets";
 import SliceWidget from "@arcgis/core/widgets/Slice";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import type Accessor from "@arcgis/core/core/Accessor";
-import { ComponentType } from "react";
+import {
+    createEsriMapWidget,
+    MapWidgetProps,
+} from "@vertigis/web/ui/esriUtils";
 
-import "./Slice.css";
 import SliceModel from "./SliceModel";
 
-const SliceWidgetWrapper: ComponentType<LayoutElementProperties> =
-    createEsriMapWidget<SliceModel & Accessor, SliceWidget>(SliceWidget);
+export type SliceWidgetProps = MapWidgetProps<SliceModel & Accessor>;
 
-export default function ShadowCast(
-    props: LayoutElementProperties<SliceModel>
-): ReactElement {
+const SliceWidgetWrapper = createEsriMapWidget<
+    SliceModel & Accessor,
+    SliceWidget
+>(SliceWidget, false, true);
+
+export default function Slice(props: SliceWidgetProps): ReactElement {
     const { map } = props.model;
     useWatchAndRerender(map, "map");
 

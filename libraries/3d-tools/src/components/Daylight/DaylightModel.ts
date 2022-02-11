@@ -58,7 +58,7 @@ export default class DaylightModel extends ComponentModelBase<DaylightModelPrope
             },
             title: {
                 ...this._toPropertyDef(props.title),
-                default: "language-web-incubator-mapillary-title",
+                default: "language-web-incubator-daylight-widget-3d-title",
             },
             icon: {
                 ...this._toPropertyDef(props.icon),

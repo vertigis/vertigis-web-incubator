@@ -1,7 +1,17 @@
-# Mapillary Component
+# Esri 3d Widget Components
 
-The `Mapillary` component in this library renders a [Mapillary](https://www.mapillary.com/) viewer and facilitates bi-directional communication with the rest of the Geocortex Web application. In this sample we've used Mapillary to present street-level imagery alongside the Geocortex Map component.
+Esri's JavaScript 4.x API contains a series of ready-to-use UI widgets. Included in this library are some of Esri's 3d widgets wrapped in VertiGIS Studio Web component and ready to use.
 
-The [component model](src/components/Mapillary/MapillaryModel.ts) initializes the Mapillary viewer by referencing their [mapillary-js JavaScript library](https://github.com/mapillary/mapillary-js) that was installed as a [project dependency](package.json) of this sample.
+The [component](src\components\AreaMeasurement\AreaMeasurement.tsx) initializes Esri's [AreaMeasurement3D JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-AreaMeasurement3D.html) and acts as a wrapper so it can be placed anywhere in a VertiGIS Studio Web application.
 
-The Geocortex Map component in the sample is controlled using the [`map.zoom-to-viewpoint`](https://developers.geocortex.com/docs/web/api-commands-operations-events#command-map.zoom-to-viewpoint) and [`location-marker.*`](https://developers.geocortex.com/docs/web/api-commands-operations-events#command-location-marker.create) commands in response to events from the Mapillary viewer.
+The [component](src\components\Daylight\Daylight.tsx) initializes Esri's [Daylight JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Daylight.html) and acts as a wrapper so it can be placed anywhere in a VertiGIS Studio Web application.
+
+The [component](src\components\ElevationProfile\ElevationProfile.tsx) initializes Esri's [ElevationProfile JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-ElevationProfile.html) and acts as a wrapper so it can be placed anywhere in a VertiGIS Studio Web application.
+
+The [component](src\components\LineOfSight\LineOfSight.tsx) initializes Esri's [LineOfSight JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-LineOfSight.html) and acts as a wrapper so it can be placed anywhere in a VertiGIS Studio Web application.
+
+The [component](src\components\ShadowCast\ShadowCast.tsx) initializes Esri's [ShadowCast JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-ShadowCast.html) and acts as a wrapper so it can be placed anywhere in a VertiGIS Studio Web application.
+
+The [component](src\components\Slice\Slice.tsx) initializes Esri's [Slice JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Slice.html) and acts as a wrapper so it can be placed anywhere in a VertiGIS Studio Web application.
+
+The VertiGIS Studio Map component in the sample instantiates a sample VertiGIS Studio Web application with the included 3D component pre-configured.

@@ -20,6 +20,17 @@ export default class ElevationProfileModel extends ComponentModelBase<ElevationP
     regionService: RegionService | undefined;
 
     protected _getSerializableProperties(): PropertyDefs<ElevationProfileModelProperties> {
-        return super._getSerializableProperties();
+        const props = super._getSerializableProperties();
+        return {
+            ...props,
+            title: {
+                ...this._toPropertyDef(props.title),
+                default: "language-web-incubator-elevation-profile-3d-title",
+            },
+            icon: {
+                ...this._toPropertyDef(props.icon),
+                default: "map-3rd-party",
+            },
+        };
     }
 }

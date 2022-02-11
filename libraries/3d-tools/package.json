@@ -7,6 +7,7 @@
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
+        "@arcgis/core": "^4.22.2",
         "@vertigis/web": "5.16.0-rc.14825",
         "mapillary-js": "^4.0.0"
     },

@@ -24,5 +24,22 @@
     "language-designer-3d-tools-daylight-dateOrSeason-date": "Date",
     "language-designer-3d-tools-daylight-dateOrSeason-season": "Season",
     "language-designer-3d-tools-daylight-playSpeedMultiplier-description": "Controls the speed of the daytime and date animation.",
-    "language-designer-3d-tools-daylight-playSpeedMultiplier-title": "Play Speed Multiplier"
+    "language-designer-3d-tools-daylight-playSpeedMultiplier-title": "Play Speed Multiplier",
+    "language-designer-3d-tools-shadow-cast-timeRangeSlider-description": "When disabled, the slider used to select a time range for the analysis is not displayed.",
+    "language-designer-3d-tools-shadow-cast-timeRangeSlider-title": "Show Widget Time Range Slider",
+    "language-designer-3d-tools-shadow-cast-timezone-description": "When disabled, the dropdown used to select a timezone for the time range is not displayed.",
+    "language-designer-3d-tools-shadow-cast-timezone-title": "Show Widget Time Range Timezone",
+    "language-designer-3d-tools-shadow-cast-datePicker-description": "When disabled, the date picker is not displayed.",
+    "language-designer-3d-tools-shadow-cast-datePicker-title": "Show Widget Date Picker",
+    "language-designer-3d-tools-shadow-cast-visualizationOptions-description": "When disabled, the options for the various visualization modes are not displayed.",
+    "language-designer-3d-tools-shadow-cast-visualizationOptions-title": "Show Widget Visualization Options",
+    "language-designer-3d-tools-shadow-cast-colorPicker-description": "When disabled, the color picker is not displayed in the options for any of the visualization modes.",
+    "language-designer-3d-tools-shadow-cast-colorPicker-title": "Show Widget Color Picker",
+    "language-designer-3d-tools-shadow-cast-tooltip-description": "When disabled, the tooltip with the accumulated shadow time is not displayed when hovering the view.",
+    "language-designer-3d-tools-shadow-cast-tooltip-title": "Show Tooltip in View",
+    "language-designer-3d-tools-shadow-cast-visualizationType-description": "Type of visualization to use when showing the shadows.",
+    "language-designer-3d-tools-shadow-cast-visualizationType-title": "Default Shadow Visualization",
+    "language-designer-3d-tools-shadow-cast-visualizationType-threshold": "Areas Above Threshold",
+    "language-designer-3d-tools-shadow-cast-visualizationType-duration": "Total Shadow Duration",
+    "language-designer-3d-tools-shadow-cast-visualizationType-discrete": "Discrete Shadows"
 }

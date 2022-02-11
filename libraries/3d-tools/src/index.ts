@@ -1,21 +1,18 @@
 import { LibraryRegistry } from "@vertigis/web/config";
-import AreaMeasurement3D, {
-    AreaMeasurementModel,
-} from "./components/AreaMeasurement";
-import ElevationProfile, {
-    ElevationProfileModel,
-} from "./components/ElevationProfile";
-import ShadowCast, { ShadowCastModel } from "./components/ShadowCast";
-import Slice, { SliceModel } from "./components/Slice";
 
 import invLanguage from "./locale/inv.json";
 
-const getLineOfSight = () => import("./components/LineOfSight");
+const getAreaMeasurement = () => import("./components/AreaMeasurement");
 const getDaylight = () => import("./components/Daylight");
+const getElevationProfile = () => import("./components/ElevationProfile");
+const getLineOfSight = () => import("./components/LineOfSight");
+const getSlice = () => import("./components/Slice");
+const getShadowCast = () => import("./components/ShadowCast");
 
 export default function (registry: LibraryRegistry): void {
     registry.registerModel({
-        getModel: (config) => new AreaMeasurementModel(config),
+        getModel: async (config) =>
+            new (await getAreaMeasurement()).AreaMeasurementModel(config),
         itemType: "area-measurement-3d",
     });
     registry.registerModel({
@@ -29,22 +26,24 @@ export default function (registry: LibraryRegistry): void {
         itemType: "daylight-widget-3d",
     });
     registry.registerModel({
-        getModel: (config) => new ElevationProfileModel(config),
+        getModel: async (config) =>
+            new (await getElevationProfile()).ElevationProfileModel(config),
         itemType: "elevation-profile-3d",
     });
     registry.registerModel({
-        getModel: (config) => new ShadowCastModel(config),
+        getModel: async (config) =>
+            new (await getShadowCast()).ShadowCastModel(config),
         itemType: "shadow-cast-3d",
     });
     registry.registerModel({
-        getModel: (config) => new SliceModel(config),
+        getModel: async (config) => new (await getSlice()).SliceModel(config),
         itemType: "slice-3d",
     });
 
     registry.registerComponent({
         name: "area-measurement-3d",
         namespace: "vertigis.web.incubator",
-        getComponentType: () => AreaMeasurement3D,
+        getComponentType: async () => (await getAreaMeasurement()).default,
         category: "map",
         itemType: "area-measurement-3d",
         title: "language-web-incubator-area-measurement-3d-title",
@@ -80,7 +79,7 @@ export default function (registry: LibraryRegistry): void {
     registry.registerComponent({
         name: "elevation-profile-3d",
         namespace: "vertigis.web.incubator",
-        getComponentType: () => ElevationProfile,
+        getComponentType: async () => (await getElevationProfile()).default,
         category: "map",
         itemType: "elevation-profile-3d",
         title: "language-web-incubator-elevation-profile-3d-title",
@@ -90,7 +89,13 @@ export default function (registry: LibraryRegistry): void {
     registry.registerComponent({
         name: "shadow-cast-3d",
         namespace: "vertigis.web.incubator",
-        getComponentType: () => ShadowCast,
+        getComponentType: async () => (await getShadowCast()).default,
+        getDesignerSettings: async (args) =>
+            (await getShadowCast()).getSettings(args),
+        applyDesignerSettings: async (args) =>
+            (await getShadowCast()).applySettings(args),
+        getDesignerSettingsSchema: async (args) =>
+            (await getShadowCast()).getSettingsSchema(args),
         category: "map",
         itemType: "shadow-cast-3d",
         title: "language-web-incubator-shadow-cast-3d-title",
@@ -100,7 +105,7 @@ export default function (registry: LibraryRegistry): void {
     registry.registerComponent({
         name: "slice-3d",
         namespace: "vertigis.web.incubator",
-        getComponentType: () => Slice,
+        getComponentType: async () => (await getSlice()).default,
         category: "map",
         itemType: "slice-3d",
         title: "language-web-incubator-slice-3d-title",

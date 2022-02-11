@@ -6,8 +6,7 @@ import {
     createEsriMapWidget,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-
-import { ElevationProfileModel } from ".";
+import ElevationProfileModel from "./ElevationProfileModel";
 
 export type ElevationProfileWidgetProps = MapWidgetProps<
     ElevationProfileModel & Accessor
