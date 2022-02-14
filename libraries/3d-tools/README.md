@@ -1,6 +1,6 @@
 # Esri 3d Widget Components
 
-Esri's JavaScript 4.x API contains a series of ready-to-use UI widgets. Included in this library are some of Esri's 3d widgets wrapped in VertiGIS Studio Web component and ready to use.
+Esri's JavaScript 4.x API contains a series of ready-to-use UI widgets. Included in this library are some of Esri's 3d widgets wrapped in a VertiGIS Studio Web component and ready to use.
 
 The [AreaMeasurement component](src\components\AreaMeasurement\AreaMeasurement.tsx) initializes Esri's [AreaMeasurement3D JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-AreaMeasurement3D.html) and acts as a wrapper so it can be placed anywhere in a VertiGIS Studio Web application.
 
