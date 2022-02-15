@@ -21,35 +21,7 @@ const TimeSlider: FC<TimeSliderProps> = (props) => {
     // Any time the Time Slider model properties change, we need to re-render
     // the component so our UI is consistent, as well as set the Esri widget
     // configuration.
-    useWatchAndRerender(model, [
-        "layout",
-        "loop",
-        "playRate",
-        "mode",
-        "overrideStops",
-        "timeInterval",
-        "timeIntervalUnit",
-        "timeVisible",
-        "map.map",
-    ]);
-    useWatch(
-        model,
-        [
-            "layout",
-            "loop",
-            "playRate",
-            "mode",
-            "overrideStops",
-            "timeInterval",
-            "timeIntervalUnit",
-            "timeVisible",
-        ],
-        (newValue, _oldValue, propertyName) => {
-            if (model.widget) {
-                model[propertyName] = newValue;
-            }
-        }
-    );
+    useWatchAndRerender(model, ["map.map"]);
     useWatch(
         model,
         "map.map",
