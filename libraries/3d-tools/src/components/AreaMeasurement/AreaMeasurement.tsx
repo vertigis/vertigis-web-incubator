@@ -7,7 +7,7 @@ import AreaMeasurement3DWidget from "@arcgis/core/widgets/AreaMeasurement3D";
 import type Accessor from "@arcgis/core/core/Accessor";
 import AreaMeasurementModel from "./AreaMeasurementModel";
 
-export type DaylightWidgetProps = MapWidgetProps<
+export type AreaMeasurementProps = MapWidgetProps<
     AreaMeasurementModel & Accessor
 >;
 
@@ -17,7 +17,7 @@ const AreaMeasurement3DWrapper = createEsriMapWidget<
 >(AreaMeasurement3DWidget, false, true);
 
 export default function AreaMeasurement3D(
-    props: DaylightWidgetProps
+    props: AreaMeasurementProps
 ): ReactElement {
     const { model } = props;
     const { map } = model;

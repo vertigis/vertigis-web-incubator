@@ -6,8 +6,6 @@ import {
     ComponentModelProperties,
     importModel,
 } from "@vertigis/web/models";
-import { RegionService } from "@vertigis/web/region";
-import { inject } from "@vertigis/web/services";
 
 type ElevationProfileModelProperties = ComponentModelProperties;
 
@@ -15,9 +13,6 @@ type ElevationProfileModelProperties = ComponentModelProperties;
 export default class ElevationProfileModel extends ComponentModelBase<ElevationProfileModelProperties> {
     @importModel("map-extension")
     map: MapModel | undefined;
-
-    @inject("region")
-    regionService: RegionService | undefined;
 
     protected _getSerializableProperties(): PropertyDefs<ElevationProfileModelProperties> {
         const props = super._getSerializableProperties();

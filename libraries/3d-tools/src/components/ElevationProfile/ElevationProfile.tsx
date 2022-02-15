@@ -21,25 +21,16 @@ export default function ElevationProfile(
     props: ElevationProfileWidgetProps
 ): ReactElement {
     const { model } = props;
-    const { map, regionService } = model;
+    const { map } = model;
     const [widget, setWidget] = useState<ElevationProfileWidget>();
     useWatchAndRerender(map, "map");
-    useWatchAndRerender(model, [
-        "title",
-        "datePicker",
-        "playButtons",
-        "shadowsToggle",
-        "timezone",
-        "dateOrSeason",
-        "playSpeedMultiplier",
-    ]);
+    useWatchAndRerender(model, ["title"]);
     useEffect(() => {
         if (!widget) {
             return;
         }
         widget.label = model.title;
-        widget.unit = regionService.measurementSystem;
-    }, [widget, model.title, regionService.measurementSystem]);
+    }, [widget, model.title]);
 
     if (map.viewMode === "map") {
         return null;
