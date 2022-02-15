@@ -16,7 +16,7 @@ const TimeSliderWrapper: ComponentType<TimeSliderProps> = createEsriMapWidget<
 >(EsriTimeSlider, undefined, true);
 
 const TimeSlider: FC<TimeSliderProps> = (props) => {
-    const model: TimeSliderModel = props.model;
+    const { model, ...other } = props;
 
     // Any time the Time Slider model properties change, we need to re-render
     // the component so our UI is consistent, as well as set the Esri widget
@@ -63,6 +63,7 @@ const TimeSlider: FC<TimeSliderProps> = (props) => {
             onWidgetCreated={onWidgetCreated}
             onWidgetDestroyed={onWidgetDestroyed}
             stretch={true}
+            {...other}
         />
     );
 };
