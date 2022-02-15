@@ -4,9 +4,9 @@
 
 View the component libraries live samples at [https://vertigis-web-incubator.netlify.app](https://vertigis-web-incubator.netlify.app).
 
-This project includes a collection of [Geocortex Web](https://vertigisstudio.com/products/vertigis-studio-web/) component libraries built using the [Geocortex Web SDK](https://developers.geocortex.com/docs/web/sdk-overview/). Check out the [live samples](https://vertigis-web-incubator.netlify.app/) for an easy way to preview and download the component libraries in your browser without needing to run the project locally. The source for each library is located within the [libraries](libraries) directory of this project.
+This project includes a collection of [Geocortex Web](https://geocortex.com/products/vertigis-studio-web/) component libraries built using the [Geocortex Web SDK](https://developers.geocortex.com/docs/web/sdk-overview/). Check out the [live samples](https://vertigis-web-incubator.netlify.app/) for an easy way to preview and download the component libraries in your browser without needing to run the project locally. The source for each library is located within the [libraries](libraries) directory of this project.
 
-**These component libraries are experimental and provided free of charge without warranty under the [MIT license](LICENSE).** We will do our best to keep them functional and up-to-date. If you need assistance to modify or improve these libraries, feel free to reach out to our [professional services department](https://vertigisstudio.com/support-services/professional-services/).
+**These component libraries are experimental and provided free of charge without warranty under the [MIT license](LICENSE).** We will do our best to keep them functional and up-to-date. If you need assistance to modify or improve these libraries, feel free to reach out to our [professional services department](https://geocortex.com/support-services/professional-services/).
 
 ## Using the component libraries in your app
 
@@ -42,4 +42,4 @@ To run the samples viewer, first build all of the sample projects by running `ya
 
 ## Documentation
 
-Before diving into the Geocortex Web SDK, be sure to check out our [Developer Center](https://developers.geocortex.com/docs/web/overview/) to learn the various concepts of building and configuring Geocortex Web applications. There is a surprising amount that can be accomplished through [layout](https://developers.geocortex.com/docs/web/configuration-layout-getting-started/), [app config](https://developers.geocortex.com/docs/web/configuration-app-config-getting-started/), and [Geocortex Workflow](https://vertigisstudio.com/products/vertigis-studio-workflow/) which can be [configured in the app config](https://developers.geocortex.com/docs/web/tutorial-run-workflow-app-config/) without even needing to use the SDK!
+Before diving into the Geocortex Web SDK, be sure to check out our [Developer Center](https://developers.geocortex.com/docs/web/overview/) to learn the various concepts of building and configuring Geocortex Web applications. There is a surprising amount that can be accomplished through [layout](https://developers.geocortex.com/docs/web/configuration-layout-getting-started/), [app config](https://developers.geocortex.com/docs/web/configuration-app-config-getting-started/), and [Geocortex Workflow](https://geocortex.com/products/vertigis-studio-workflow/) which can be [configured in the app config](https://developers.geocortex.com/docs/web/tutorial-run-workflow-app-config/) without even needing to use the SDK!
