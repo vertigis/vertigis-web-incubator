@@ -4,7 +4,7 @@
         {
             "$type": "map-extension",
             "id": "map-config-1",
-            "webMap": "https://latitudegeo.maps.arcgis.com/home/item.html?id=f20f372791414ef390432fc94faa5baf"
+            "webMap": "https://latitudegeo.maps.arcgis.com/home/item.html?id=3033d37311d147768ec787d875382965"
         },
         {
             "$type": "time-slider",

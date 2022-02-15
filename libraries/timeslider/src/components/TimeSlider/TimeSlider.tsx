@@ -1,5 +1,4 @@
-import React, { ComponentType, ReactElement, useCallback } from "react";
-import { LayoutElementProperties } from "@vertigis/web/components";
+import React, { ComponentType, FC, useCallback } from "react";
 import EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
 import TimeSliderModel from "./TimeSliderModel";
 import {
@@ -16,10 +15,7 @@ const TimeSliderWrapper: ComponentType<TimeSliderProps> = createEsriMapWidget<
     EsriTimeSlider
 >(EsriTimeSlider, undefined, true);
 
-const TimeSlider = (
-    props: LayoutElementProperties<TimeSliderModel>
-): ReactElement => {
-    // A unique DOM ID to be used for a11y purposes.
+const TimeSlider: FC<TimeSliderProps> = (props) => {
     const model: TimeSliderModel = props.model;
 
     // Any time the Time Slider model properties change, we need to re-render
@@ -73,7 +69,7 @@ const TimeSlider = (
             const map = model.map;
 
             // Synchronize values from model.
-            if (!map && !map.map) {
+            if (!map?.map) {
                 return;
             }
 
@@ -94,6 +90,7 @@ const TimeSlider = (
             preloadChildren={() => Promise.resolve()}
             onWidgetCreated={onWidgetCreated}
             onWidgetDestroyed={onWidgetDestroyed}
+            stretch={true}
         />
     );
 };
