@@ -93,87 +93,86 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         }
     }
 
-    public updateTimeSliderWidget = (
+    public updateTimeSliderWidget = async (
         widget: EsriTimeSlider,
         webMap: WebMap
-    ): void => {
+    ): Promise<void> => {
         // Reset model with default values.
         this.layout = "auto";
         this.loop = true;
         this.playRate = 1000;
         this.mode = "time-window";
         this.timeVisible = false;
-        const promises: Promise<void>[] = [];
         // Check the web map for existing time slider config.
-        console.log(webMap?.widgets?.timeSlider);
-        if (webMap.widgets && webMap.widgets.timeSlider) {
+        if (webMap?.widgets?.timeSlider) {
             const timeSlider = webMap.widgets.timeSlider;
-            this._updateWidgetFromWebMapTimeSlider(widget, timeSlider, webMap);
+            await this._updateWidgetFromWebMapTimeSlider(
+                widget,
+                timeSlider,
+                webMap
+            );
         } else {
             // Extract slider min and max range from the web map layers.
-            promises.push(this._updateWidgetFromLayerTimeInfos(widget, webMap));
+            await this._updateWidgetFromLayerTimeInfos(widget, webMap);
         }
         // This is only asynchronous when updating the widget from layer time
         // infos.
-        void Promise.all(promises).then(() => {
-            // Sync model properties with the time slider widget.
-            widget.layout = this.layout;
-            widget.loop = this.loop;
-            widget.playRate = this.playRate;
-            widget.mode = this.mode;
-            widget.timeVisible = this.timeVisible;
-            this.widget = widget;
-        });
+        // Sync model properties with the time slider widget.
+        widget.layout = this.layout;
+        widget.loop = this.loop;
+        widget.playRate = this.playRate;
+        widget.mode = this.mode;
+        widget.timeVisible = this.timeVisible;
+        this.widget = widget;
     };
 
-    private _updateWidgetFromLayerTimeInfos = (
+    private _updateWidgetFromLayerTimeInfos = async (
         widget: EsriTimeSlider,
         map: __esri.Map
     ): Promise<void> => {
-        let start, end;
-        const promises: Promise<void>[] = [];
-        map.layers.forEach((tempLayer) => {
+        let start, end: Date;
+        let timeVisible: boolean;
+        for (const tempLayer of map.layers) {
             const layer = tempLayer as FeatureLayer;
-
-            promises.push(
-                layer.load().then(() => {
-                    if (layer.timeInfo) {
-                        if (
-                            start === undefined ||
-                            start > layer.timeInfo.fullTimeExtent.start
-                        ) {
-                            start = layer.timeInfo.fullTimeExtent.start;
-                        }
-                        if (
-                            end === undefined ||
-                            end < layer.timeInfo.fullTimeExtent.end
-                        ) {
-                            end = layer.timeInfo.fullTimeExtent.end;
-                        }
-                        this.timeVisible = layer.timeInfo["useTime"];
+            await layer.load();
+            if (layer.timeInfo) {
+                if (
+                    start === undefined ||
+                    start > layer.timeInfo.fullTimeExtent.start
+                ) {
+                    start = layer.timeInfo.fullTimeExtent.start;
+                }
+                if (
+                    end === undefined ||
+                    end < layer.timeInfo.fullTimeExtent.end
+                ) {
+                    end = layer.timeInfo.fullTimeExtent.end;
+                }
+                if (layer.timeInfo) {
+                    if (!timeVisible) {
+                        timeVisible = layer.timeInfo["useTime"];
+                        break;
                     }
-                })
-            );
-        });
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        return Promise.all(promises).then(() => {
-            widget.fullTimeExtent = new TimeExtent({ start, end });
-            // Ensure time slider playback will end on the latest date in the full
-            // time extent.
-            if (
-                widget.effectiveStops?.[widget.effectiveStops.length - 1] <
-                widget.fullTimeExtent.end
-            ) {
-                widget.effectiveStops.push(widget.fullTimeExtent.end);
+                }
             }
-        });
+        }
+        widget.fullTimeExtent = new TimeExtent({ start, end });
+        // Ensure time slider playback will end on the latest date in the full
+        // time extent.
+        if (
+            widget.effectiveStops?.[widget.effectiveStops.length - 1] <
+            widget.fullTimeExtent.end
+        ) {
+            widget.effectiveStops.push(widget.fullTimeExtent.end);
+        }
+        this.timeVisible = timeVisible;
     };
 
-    private _updateWidgetFromWebMapTimeSlider = (
+    private _updateWidgetFromWebMapTimeSlider = async (
         widget: EsriTimeSlider,
         timeSlider: __esri.WebMapTimeSlider,
         map: WebMap
-    ): void => {
+    ): Promise<void> => {
         let timeExtentOption: string;
         if (timeSlider.fullTimeExtent) {
             widget.fullTimeExtent = timeSlider.fullTimeExtent;
@@ -230,21 +229,17 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         // Need to find the timeVisible boolean inside layer infos - it isn't in
         // the time slider config.
         let timeVisible = false;
-        const promises: Promise<void>[] = [];
-        map.layers.forEach((tempLayer) => {
+        for (const tempLayer of map.layers) {
             const layer = tempLayer as FeatureLayer;
-            promises.push(
-                layer.load().then(() => {
-                    if (layer.timeInfo) {
-                        timeVisible = layer.timeInfo["useTime"];
-                    }
-                })
-            );
-        });
-
-        void Promise.all(promises).then(() => {
-            this.timeVisible = timeVisible;
-        });
+            await layer.load();
+            if (layer.timeInfo) {
+                if (!timeVisible) {
+                    timeVisible = layer.timeInfo["useTime"];
+                    break;
+                }
+            }
+        }
+        this.timeVisible = timeVisible;
     };
 
     protected _getSerializableProperties(): PropertyDefs<TimeSliderModelProperties> {

@@ -1,5 +1,5 @@
 {
-    "name": "library-timeslider",
+    "name": "library-time-slider",
     "version": "0.0.0",
     "private": true,
     "scripts": {
@@ -8,9 +8,9 @@
     },
     "dependencies": {
         "@arcgis/core": "^4.21.2",
-        "@vertigis/arcgis-extensions": "^34.1.0",
-        "@vertigis/viewer-spec": "^43.6.0",
-        "@vertigis/web": "^5.15.0"
+        "@vertigis/arcgis-extensions": "^34.2.2",
+        "@vertigis/viewer-spec": "^45.2.0",
+        "@vertigis/web": "^5.16.0"
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.4.0",

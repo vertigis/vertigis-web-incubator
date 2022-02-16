@@ -30,6 +30,7 @@ const TimeSlider: FC<TimeSliderProps> = (props) => {
             if (model.widget) {
                 model.widget.stop();
                 // Check the web map for existing time slider config
+                // eslint-disable-next-line @typescript-eslint/no-floating-promises
                 model.updateTimeSliderWidget(model.widget, newMap);
             }
         },
@@ -46,6 +47,7 @@ const TimeSlider: FC<TimeSliderProps> = (props) => {
             }
 
             const webMap = map.map as WebMap;
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
             model.updateTimeSliderWidget(widget, webMap);
         },
         [model]
@@ -59,7 +61,6 @@ const TimeSlider: FC<TimeSliderProps> = (props) => {
     return (
         <TimeSliderWrapper
             model={props.model}
-            preloadChildren={() => Promise.resolve()}
             onWidgetCreated={onWidgetCreated}
             onWidgetDestroyed={onWidgetDestroyed}
             stretch={true}
