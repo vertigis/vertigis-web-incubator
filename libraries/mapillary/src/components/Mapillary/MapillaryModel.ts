@@ -186,7 +186,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         // );
 
         // Create location marker based on current location from Mapillary and
-        // pan/zoom Geocortex map to the location.
+        // pan/zoom VertiGIS Studio map to the location.
         const { latitude, longitude, heading, tilt, fov } =
             await this._getMapillaryCamera();
 
