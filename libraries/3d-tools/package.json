@@ -1,18 +1,16 @@
 {
     "name": "library-3d-tools",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "build": "vertigis-web-sdk build",
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@arcgis/core": "^4.22.2",
-        "@vertigis/web": "5.16.0-rc.14825",
-        "mapillary-js": "^4.0.0"
+        "@vertigis/web": "^5.16.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.4.0",
+        "@vertigis/web-sdk": "^1.4.1",
         "typescript": "~4.3.5"
     }
 }
