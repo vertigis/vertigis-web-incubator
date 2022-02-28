@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="vertigis.web.incubator">
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:incubator="vertigis.web.incubator">
     <split>
         <panel width="25" resizable="true" show-close-button="false" show-back-button="false">
             <tabs xmlns="https://geocortex.com/layout/web/v1">
-                <custom:area-measurement-3d config="area-measurement-3d" />
-                <custom:daylight-widget-3d config="daylight-widget-3d" />
-                <custom:elevation-profile-3d config="elevation-profile-3d" />
-                <custom:line-of-sight-3d config="line-of-sight-3d" />
-                <custom:shadow-cast-3d config="shadow-cast-3d" />
-                <custom:slice-3d config="slice-3d" />
+                <incubator:area-measurement-3d config="area-measurement-3d" />
+                <incubator:daylight-widget-3d config="daylight-widget-3d" />
+                <incubator:elevation-profile-3d config="elevation-profile-3d" />
+                <incubator:line-of-sight-3d config="line-of-sight-3d" />
+                <incubator:shadow-cast-3d config="shadow-cast-3d" />
+                <incubator:slice-3d config="slice-3d" />
             </tabs>
         </panel>
         <map id="map-1" config="map-config-1" />
