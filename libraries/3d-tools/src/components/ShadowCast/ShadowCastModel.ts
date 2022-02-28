@@ -7,6 +7,8 @@ import {
     importModel,
 } from "@vertigis/web/models";
 
+type VisualizationType = "threshold" | "duration" | "discrete";
+
 interface ShadowCastModelProperties extends ComponentModelProperties {
     timeRangeSlider?: boolean;
     timezone?: boolean;
@@ -14,7 +16,7 @@ interface ShadowCastModelProperties extends ComponentModelProperties {
     visualizationOptions?: boolean;
     colorPicker?: boolean;
     tooltip?: boolean;
-    visualizationType?: "threshold" | "duration" | "discrete";
+    visualizationType?: VisualizationType;
 }
 
 @serializable
@@ -28,7 +30,7 @@ export default class ShadowCastModel extends ComponentModelBase<ShadowCastModelP
     visualizationOptions?: boolean;
     colorPicker?: boolean;
     tooltip?: boolean;
-    visualizationType?: "threshold" | "duration" | "discrete";
+    visualizationType?: VisualizationType;
 
     protected _getSerializableProperties(): PropertyDefs<ShadowCastModelProperties> {
         const props = super._getSerializableProperties();

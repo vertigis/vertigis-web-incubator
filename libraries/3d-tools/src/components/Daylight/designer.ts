@@ -13,12 +13,14 @@ import {
 
 import DaylightModel from "./DaylightModel";
 
+type DateOrSeason = "date" | "season";
+
 export interface DaylightSettings extends ComponentModelDesignerSettings {
     playButtons: boolean;
     shadowsToggle: boolean;
     datePicker: boolean;
     timezone: boolean;
-    dateOrSeason: "date" | "season";
+    dateOrSeason: DateOrSeason;
     playSpeedMultiplier: number;
 }
 
@@ -69,24 +71,25 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             id: "playButtons",
             type: "checkbox",
             description:
-                "language-designer-3d-tools-daylight-playButtons-description",
+                "language-designer-3d-tools-daylight-play-buttons-description",
             displayName:
-                "language-designer-3d-tools-daylight-playButtons-title",
+                "language-designer-3d-tools-daylight-play-buttons-title",
         },
         {
             id: "shadowsToggle",
             type: "checkbox",
             description:
-                "language-designer-3d-tools-daylight-shadowsToggle-description",
+                "language-designer-3d-tools-daylight-shadows-toggle-description",
             displayName:
-                "language-designer-3d-tools-daylight-shadowsToggle-title",
+                "language-designer-3d-tools-daylight-shadows-toggle-title",
         },
         {
             id: "datePicker",
             type: "checkbox",
             description:
-                "language-designer-3d-tools-daylight-datePicker-description",
-            displayName: "language-designer-3d-tools-daylight-datePicker-title",
+                "language-designer-3d-tools-daylight-date-picker-description",
+            displayName:
+                "language-designer-3d-tools-daylight-date-picker-title",
         },
         {
             id: "timezone",
@@ -99,9 +102,9 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             id: "playSpeedMultiplier",
             type: "number",
             description:
-                "language-designer-3d-tools-daylight-playSpeedMultiplier-description",
+                "language-designer-3d-tools-daylight-play-speed-multiplier-description",
             displayName:
-                "language-designer-3d-tools-daylight-playSpeedMultiplier-title",
+                "language-designer-3d-tools-daylight-play-speed-multiplier-title",
             isRequired: true,
             min: 0,
         },
@@ -109,18 +112,18 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             id: "dateOrSeason",
             type: "select",
             description:
-                "language-designer-3d-tools-daylight-dateOrSeason-description",
+                "language-designer-3d-tools-daylight-date-or-season-description",
             displayName:
-                "language-designer-3d-tools-daylight-dateOrSeason-title",
+                "language-designer-3d-tools-daylight-date-or-season-title",
             values: [
                 {
                     displayName:
-                        "language-designer-3d-tools-daylight-dateOrSeason-date",
+                        "language-designer-3d-tools-daylight-date-or-season-date",
                     value: "date",
                 },
                 {
                     displayName:
-                        "language-designer-3d-tools-daylight-dateOrSeason-season",
+                        "language-designer-3d-tools-daylight-date-or-season-season",
                     value: "season",
                 },
             ],

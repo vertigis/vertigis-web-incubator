@@ -72,9 +72,9 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             id: "timeRangeSlider",
             type: "checkbox",
             description:
-                "language-designer-3d-tools-shadow-cast-timeRangeSlider-description",
+                "language-designer-3d-tools-shadow-cast-time-range-slider-description",
             displayName:
-                "language-designer-3d-tools-shadow-cast-timeRangeSlider-title",
+                "language-designer-3d-tools-shadow-cast-time-range-slider-title",
         },
         {
             id: "timezone",
@@ -88,25 +88,25 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             id: "datePicker",
             type: "checkbox",
             description:
-                "language-designer-3d-tools-shadow-cast-datePicker-description",
+                "language-designer-3d-tools-shadow-cast-date-picker-description",
             displayName:
-                "language-designer-3d-tools-shadow-cast-datePicker-title",
+                "language-designer-3d-tools-shadow-cast-date-picker-title",
         },
         {
             id: "visualizationOptions",
             type: "checkbox",
             description:
-                "language-designer-3d-tools-shadow-cast-visualizationOptions-description",
+                "language-designer-3d-tools-shadow-cast-visualization-options-description",
             displayName:
-                "language-designer-3d-tools-shadow-cast-visualizationOptions-title",
+                "language-designer-3d-tools-shadow-cast-visualization-options-title",
         },
         {
             id: "colorPicker",
             type: "checkbox",
             description:
-                "language-designer-3d-tools-shadow-cast-colorPicker-description",
+                "language-designer-3d-tools-shadow-cast-color-picker-description",
             displayName:
-                "language-designer-3d-tools-shadow-cast-colorPicker-title",
+                "language-designer-3d-tools-shadow-cast-color-picker-title",
         },
         {
             id: "tooltip",
@@ -119,23 +119,23 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
             id: "visualizationType",
             type: "select",
             description:
-                "language-designer-3d-tools-shadow-cast-visualizationType-description",
+                "language-designer-3d-tools-shadow-cast-visualization-type-description",
             displayName:
-                "language-designer-3d-tools-shadow-cast-visualizationType-title",
+                "language-designer-3d-tools-shadow-cast-visualization-type-title",
             values: [
                 {
                     displayName:
-                        "language-designer-3d-tools-shadow-cast-visualizationType-threshold",
+                        "language-designer-3d-tools-shadow-cast-visualization-type-threshold",
                     value: "threshold",
                 },
                 {
                     displayName:
-                        "language-designer-3d-tools-shadow-cast-visualizationType-duration",
+                        "language-designer-3d-tools-shadow-cast-visualization-type-duration",
                     value: "duration",
                 },
                 {
                     displayName:
-                        "language-designer-3d-tools-shadow-cast-visualizationType-discrete",
+                        "language-designer-3d-tools-shadow-cast-visualization-type-discrete",
                     value: "discrete",
                 },
             ],

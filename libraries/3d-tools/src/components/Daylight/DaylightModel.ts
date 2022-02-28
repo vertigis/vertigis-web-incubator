@@ -7,12 +7,14 @@ import {
     importModel,
 } from "@vertigis/web/models";
 
+type DateOrSeason = "date" | "season";
+
 interface DaylightModelProperties extends ComponentModelProperties {
     playButtons?: boolean;
     shadowsToggle?: boolean;
     datePicker?: boolean;
     timezone?: boolean;
-    dateOrSeason?: "date" | "season";
+    dateOrSeason?: DateOrSeason;
     playSpeedMultiplier?: number;
 }
 
@@ -25,7 +27,7 @@ export default class DaylightModel extends ComponentModelBase<DaylightModelPrope
     shadowsToggle: boolean;
     datePicker: boolean;
     timezone: boolean;
-    dateOrSeason: "date" | "season";
+    dateOrSeason: DateOrSeason;
     playSpeedMultiplier: number;
 
     protected _getSerializableProperties(): PropertyDefs<DaylightModelProperties> {
