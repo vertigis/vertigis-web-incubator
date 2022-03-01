@@ -80,6 +80,12 @@ export default function (registry: LibraryRegistry): void {
         name: "elevation-profile-3d",
         namespace: "vertigis.web.incubator",
         getComponentType: async () => (await getElevationProfile()).default,
+        getDesignerSettings: async (args) =>
+            (await getElevationProfile()).getSettings(args),
+        applyDesignerSettings: async (args) =>
+            (await getElevationProfile()).applySettings(args),
+        getDesignerSettingsSchema: async (args) =>
+            (await getElevationProfile()).getSettingsSchema(args),
         category: "map",
         itemType: "elevation-profile-3d",
         title: "language-web-incubator-elevation-profile-3d-title",
