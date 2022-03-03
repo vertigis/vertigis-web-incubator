@@ -77,9 +77,6 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         this._mode = value;
         if (this.widget) {
             this.widget.mode = value;
-            // Switching from between specific modes can result in timeExtent
-            // being null, which breaks the UI.
-            this.widget.timeExtent = this.widget.fullTimeExtent;
         }
     }
 
@@ -132,7 +129,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
     ): Promise<void> => {
         let start, end: Date;
         let timeVisible: boolean;
-        for (const tempLayer of map.layers) {
+        for (const tempLayer of map.layers.toArray()) {
             const layer = tempLayer as FeatureLayer;
             await layer.load();
             if (layer.timeInfo) {
@@ -173,13 +170,10 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         timeSlider: __esri.WebMapTimeSlider,
         map: WebMap
     ): Promise<void> => {
-        let timeExtentOption: string;
         if (timeSlider.fullTimeExtent) {
             widget.fullTimeExtent = timeSlider.fullTimeExtent;
-            widget.timeExtent = timeSlider.currentTimeExtent;
         } else {
             widget.fullTimeExtent = timeSlider.currentTimeExtent;
-            timeExtentOption = "currentTimeExtent";
         }
         // Set stops based on available properties in the time slider
         // config in this order: StopByDate, StopByCount, StopByInterval
@@ -207,13 +201,6 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         ) {
             widget.effectiveStops.push(widget.fullTimeExtent.end);
         }
-        if (timeExtentOption === "currentTimeExtent") {
-            // Set a default timeExtent if fullTimeExtent was null.
-            widget.timeExtent = new TimeExtent({
-                start: widget.effectiveStops[0],
-                end: widget.effectiveStops[1],
-            });
-        }
         // Set properties to model from time slider config.
         if (timeSlider.loop) {
             this.loop = widget.loop;
@@ -229,7 +216,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         // Need to find the timeVisible boolean inside layer infos - it isn't in
         // the time slider config.
         let timeVisible = false;
-        for (const tempLayer of map.layers) {
+        for (const tempLayer of map.layers.toArray()) {
             const layer = tempLayer as FeatureLayer;
             await layer.load();
             if (layer.timeInfo) {
