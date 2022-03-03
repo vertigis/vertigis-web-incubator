@@ -16,7 +16,10 @@ import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import Sample from "./Sample";
 import SampleViewer from "./SampleViewer";
 
-const libraries = [{ id: "mapillary", title: "Mapillary" }] as const;
+const libraries = [
+    { id: "mapillary", title: "Mapillary" },
+    { id: "timeslider", title: "Esri Time Slider" },
+] as const;
 
 async function getSampleData(libraryId: string): Promise<Sample> {
     const [app, layout, library, readme] = await Promise.all([
