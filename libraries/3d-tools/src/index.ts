@@ -3,6 +3,7 @@ import { LibraryRegistry } from "@vertigis/web/config";
 import invLanguage from "./locale/inv.json";
 
 const getAreaMeasurement = () => import("./components/AreaMeasurement");
+const getLineMeasurement = () => import("./components/LineMeasurement");
 const getDaylight = () => import("./components/Daylight");
 const getElevationProfile = () => import("./components/ElevationProfile");
 const getLineOfSight = () => import("./components/LineOfSight");
@@ -14,6 +15,11 @@ export default function (registry: LibraryRegistry): void {
         getModel: async (config) =>
             new (await getAreaMeasurement()).AreaMeasurementModel(config),
         itemType: "area-measurement-3d",
+    });
+    registry.registerModel({
+        getModel: async (config) =>
+            new (await getLineMeasurement()).LineMeasurementModel(config),
+        itemType: "line-measurement-3d",
     });
     registry.registerModel({
         getModel: async (config) =>
@@ -58,6 +64,16 @@ export default function (registry: LibraryRegistry): void {
         itemType: "line-of-sight-3d",
         title: "language-web-incubator-line-of-sight-3d-title",
         description: "language-web-incubator-line-of-sight-3d-description",
+        iconId: "map-3rd-party",
+    });
+    registry.registerComponent({
+        name: "line-measurement-3d",
+        namespace: "vertigis.web.incubator",
+        getComponentType: async () => (await getLineMeasurement()).default,
+        category: "map",
+        itemType: "line-measurement-3d",
+        title: "language-web-incubator-line-measurement-3d-title",
+        description: "language-web-incubator-line-measurement-3d-description",
         iconId: "map-3rd-party",
     });
     registry.registerComponent({
@@ -112,6 +128,12 @@ export default function (registry: LibraryRegistry): void {
         name: "slice-3d",
         namespace: "vertigis.web.incubator",
         getComponentType: async () => (await getSlice()).default,
+        getDesignerSettings: async (args) =>
+            (await getSlice()).getSettings(args),
+        applyDesignerSettings: async (args) =>
+            (await getSlice()).applySettings(args),
+        getDesignerSettingsSchema: async (args) =>
+            (await getSlice()).getSettingsSchema(args),
         category: "map",
         itemType: "slice-3d",
         title: "language-web-incubator-slice-3d-title",

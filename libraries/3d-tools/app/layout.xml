@@ -3,12 +3,13 @@
     <split resizable="true">
         <panel width="25" show-close-button="false" show-back-button="false">
             <tabs xmlns="https://geocortex.com/layout/web/v1">
-                <incubator:area-measurement-3d scrollContainerY="true" stretch="true" config="area-measurement-3d" />
-                <incubator:daylight-widget-3d scrollContainerY="true" stretch="true" config="daylight-widget-3d" />
-                <incubator:elevation-profile-3d scrollContainerY="true" stretch="true" config="elevation-profile-3d" />
-                <incubator:line-of-sight-3d scrollContainerY="true" stretch="true" config="line-of-sight-3d" />
-                <incubator:shadow-cast-3d scrollContainerY="true" stretch="true" config="shadow-cast-3d" />
-                <incubator:slice-3d scrollContainerY="true" stretch="true" config="slice-3d" />
+                <incubator:area-measurement-3d scrollContainerY="true" config="area-measurement-3d" />
+                <incubator:line-measurement-3d scrollContainerY="true" config="line-measurement-3d" />
+                <incubator:daylight-widget-3d scrollContainerY="true" config="daylight-widget-3d" />
+                <incubator:elevation-profile-3d scrollContainerY="true" config="elevation-profile-3d" />
+                <incubator:line-of-sight-3d scrollContainerY="true" config="line-of-sight-3d" />
+                <incubator:shadow-cast-3d scrollContainerY="true" config="shadow-cast-3d" />
+                <incubator:slice-3d scrollContainerY="true" config="slice-3d" />
             </tabs>
         </panel>
         <map id="map-1" config="map-config-1" />

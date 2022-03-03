@@ -69,6 +69,7 @@ export default function ShadowCast(
 
     return (
         <ShadowCastWrapper
+            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></ShadowCastWrapper>

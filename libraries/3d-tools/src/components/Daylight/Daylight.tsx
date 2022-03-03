@@ -61,6 +61,7 @@ export default function Daylight(props: DaylightWidgetProps): ReactElement {
 
     return (
         <DaylightWidgetWrapper
+            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></DaylightWidgetWrapper>

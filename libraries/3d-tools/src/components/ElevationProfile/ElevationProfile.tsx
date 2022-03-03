@@ -103,6 +103,7 @@ export default function ElevationProfile(
 
     return (
         <ElevationProfileWidgetWrapper
+            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></ElevationProfileWidgetWrapper>

@@ -37,6 +37,7 @@ export default function LineOfSight(
 
     return (
         <LineOfSightWrapper
+            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></LineOfSightWrapper>

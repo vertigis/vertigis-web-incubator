@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import SliceWidget from "@arcgis/core/widgets/Slice";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import type Accessor from "@arcgis/core/core/Accessor";
@@ -17,12 +17,35 @@ const SliceWidgetWrapper = createEsriMapWidget<
 >(SliceWidget, false, true);
 
 export default function Slice(props: SliceWidgetProps): ReactElement {
-    const { map } = props.model;
+    const { model } = props;
+    const { map } = model;
+    const [widget, setWidget] = useState<SliceWidget>();
+
     useWatchAndRerender(map, "map");
+    useWatchAndRerender(model, ["title", "tiltEnabled"]);
+    useEffect(() => {
+        if (!widget) {
+            return;
+        }
+
+        map["_suppressMapClick"] = true;
+        widget.label = model.title;
+        widget.viewModel.tiltEnabled = model.tiltEnabled;
+
+        return () => {
+            map["_suppressMapClick"] = true;
+        };
+    }, [map, model.tiltEnabled, model.title, widget]);
 
     if (map.viewMode === "map") {
         return null;
     }
 
-    return <SliceWidgetWrapper {...props}></SliceWidgetWrapper>;
+    return (
+        <SliceWidgetWrapper
+            stretch
+            onWidgetCreated={setWidget}
+            {...props}
+        ></SliceWidgetWrapper>
+    );
 }

@@ -3,25 +3,25 @@ import {
     createEsriMapWidget,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-import AreaMeasurement3DWidget from "@arcgis/core/widgets/AreaMeasurement3D";
+import DirectLineMeasurement3DWidget from "@arcgis/core/widgets/DirectLineMeasurement3D";
 import type Accessor from "@arcgis/core/core/Accessor";
-import AreaMeasurementModel from "./AreaMeasurementModel";
+import LineMeasurementModel from "./LineMeasurementModel";
 
 export type AreaMeasurementProps = MapWidgetProps<
-    AreaMeasurementModel & Accessor
+    LineMeasurementModel & Accessor
 >;
 
-const AreaMeasurement3DWrapper = createEsriMapWidget<
-    AreaMeasurementModel & Accessor,
-    AreaMeasurement3DWidget
->(AreaMeasurement3DWidget, false, true);
+const DirectLineMeasurement3DWidgetWrapper = createEsriMapWidget<
+    LineMeasurementModel & Accessor,
+    DirectLineMeasurement3DWidget
+>(DirectLineMeasurement3DWidget, false, true);
 
-export default function AreaMeasurement3D(
+export default function LineMeasurement(
     props: AreaMeasurementProps
 ): ReactElement {
     const { model } = props;
     const { map } = model;
-    const [widget, setWidget] = useState<AreaMeasurement3DWidget>();
+    const [widget, setWidget] = useState<DirectLineMeasurement3DWidget>();
     useEffect(() => {
         if (!widget) {
             return;
@@ -34,10 +34,10 @@ export default function AreaMeasurement3D(
     }
 
     return (
-        <AreaMeasurement3DWrapper
+        <DirectLineMeasurement3DWidgetWrapper
             stretch
             onWidgetCreated={setWidget}
             {...props}
-        ></AreaMeasurement3DWrapper>
+        ></DirectLineMeasurement3DWidgetWrapper>
     );
 }

@@ -4,6 +4,8 @@ Esri's JavaScript 4.x API contains a series of ready-to-use UI widgets. Included
 
 The [AreaMeasurement component](src\components\AreaMeasurement\AreaMeasurement.tsx) wraps Esri's [AreaMeasurement3D JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-AreaMeasurement3D.html).
 
+The [LineMeasurement component](src\components\LineMeasurement\LineMeasurement.tsx) wraps Esri's [DirectLineMeasurement3D JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-DirectLineMeasurement3D.html).
+
 The [Daylight component](src\components\Daylight\Daylight.tsx) wraps Esri's [Daylight JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Daylight.html).
 
 The [ElevationProfile component](src\components\ElevationProfile\ElevationProfile.tsx) wraps Esri's [ElevationProfile JavaScript widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-ElevationProfile.html).
