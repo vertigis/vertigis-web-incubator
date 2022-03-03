@@ -18,7 +18,7 @@ import SampleViewer from "./SampleViewer";
 
 const libraries = [
     { id: "mapillary", title: "Mapillary" },
-    { id: "timeslider", title: "Esri Time Slider" },
+    { id: "time-slider", title: "Esri Time Slider" },
 ] as const;
 
 async function getSampleData(libraryId: string): Promise<Sample> {
