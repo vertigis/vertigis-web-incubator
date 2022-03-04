@@ -14,7 +14,7 @@ export type AreaMeasurementProps = MapWidgetProps<
 const AreaMeasurement3DWrapper = createEsriMapWidget<
     AreaMeasurementModel & Accessor,
     AreaMeasurement3DWidget
->(AreaMeasurement3DWidget, false, true);
+>(AreaMeasurement3DWidget, true, true);
 
 export default function AreaMeasurement3D(
     props: AreaMeasurementProps
@@ -35,7 +35,6 @@ export default function AreaMeasurement3D(
 
     return (
         <AreaMeasurement3DWrapper
-            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></AreaMeasurement3DWrapper>

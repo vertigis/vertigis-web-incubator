@@ -14,7 +14,7 @@ export type SliceWidgetProps = MapWidgetProps<SliceModel & Accessor>;
 const SliceWidgetWrapper = createEsriMapWidget<
     SliceModel & Accessor,
     SliceWidget
->(SliceWidget, false, true);
+>(SliceWidget, true, true);
 
 export default function Slice(props: SliceWidgetProps): ReactElement {
     const { model } = props;
@@ -43,7 +43,6 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
 
     return (
         <SliceWidgetWrapper
-            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></SliceWidgetWrapper>

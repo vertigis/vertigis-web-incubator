@@ -14,7 +14,7 @@ export type AreaMeasurementProps = MapWidgetProps<
 const DirectLineMeasurement3DWidgetWrapper = createEsriMapWidget<
     LineMeasurementModel & Accessor,
     DirectLineMeasurement3DWidget
->(DirectLineMeasurement3DWidget, false, true);
+>(DirectLineMeasurement3DWidget, true, true);
 
 export default function LineMeasurement(
     props: AreaMeasurementProps
@@ -35,7 +35,6 @@ export default function LineMeasurement(
 
     return (
         <DirectLineMeasurement3DWidgetWrapper
-            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></DirectLineMeasurement3DWidgetWrapper>

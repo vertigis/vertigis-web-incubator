@@ -15,7 +15,7 @@ export type LineOfSightWidgetProps = MapWidgetProps<
 const LineOfSightWrapper = createEsriMapWidget<
     LineOfSightModel & Accessor,
     LineOfSightWidget
->(LineOfSightWidget, false, true);
+>(LineOfSightWidget, true, true);
 
 export default function LineOfSight(
     props: LineOfSightWidgetProps
@@ -37,7 +37,6 @@ export default function LineOfSight(
 
     return (
         <LineOfSightWrapper
-            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></LineOfSightWrapper>

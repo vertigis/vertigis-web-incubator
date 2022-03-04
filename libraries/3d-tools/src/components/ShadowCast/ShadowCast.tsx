@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 import ShadowCastWidget from "@arcgis/core/widgets/ShadowCast";
-import { useWatchAndRerender } from "@vertigis/web/ui";
+import { Theme, useWatchAndRerender } from "@vertigis/web/ui";
 import type Accessor from "@arcgis/core/core/Accessor";
 import { useEffect, useState } from "react";
 import {
@@ -17,7 +17,13 @@ export type ShadowCastModelWidgetProps = MapWidgetProps<
 const ShadowCastWrapper = createEsriMapWidget<
     ShadowCastModel & Accessor,
     ShadowCastWidget
->(ShadowCastWidget, false, true);
+>(ShadowCastWidget, true, true);
+
+const widgetStyle = (theme: Theme) => ({
+    "& calcite-select": {
+        "--calcite-select-font-size": theme.typography.fontSize,
+    },
+});
 
 export default function ShadowCast(
     props: ShadowCastModelWidgetProps
@@ -69,8 +75,8 @@ export default function ShadowCast(
 
     return (
         <ShadowCastWrapper
-            stretch
             onWidgetCreated={setWidget}
+            sx={widgetStyle}
             {...props}
         ></ShadowCastWrapper>
     );

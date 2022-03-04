@@ -18,7 +18,7 @@ export type ElevationProfileWidgetProps = MapWidgetProps<
 const ElevationProfileWidgetWrapper = createEsriMapWidget<
     ElevationProfileModel & Accessor,
     ElevationProfileWidget
->(ElevationProfileWidget, false, true);
+>(ElevationProfileWidget, true, true);
 
 export default function ElevationProfile(
     props: ElevationProfileWidgetProps
@@ -103,7 +103,6 @@ export default function ElevationProfile(
 
     return (
         <ElevationProfileWidgetWrapper
-            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></ElevationProfileWidgetWrapper>

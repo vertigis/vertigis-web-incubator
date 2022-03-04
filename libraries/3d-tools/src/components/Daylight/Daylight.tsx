@@ -13,7 +13,7 @@ export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 const DaylightWidgetWrapper = createEsriMapWidget<
     DaylightModel & Accessor,
     DaylightWidget
->(DaylightWidget, false, true);
+>(DaylightWidget, true, true);
 
 export default function Daylight(props: DaylightWidgetProps): ReactElement {
     const { model } = props;
@@ -61,7 +61,6 @@ export default function Daylight(props: DaylightWidgetProps): ReactElement {
 
     return (
         <DaylightWidgetWrapper
-            stretch
             onWidgetCreated={setWidget}
             {...props}
         ></DaylightWidgetWrapper>
