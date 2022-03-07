@@ -1,4 +1,5 @@
 import { ReactElement, useState, useEffect } from "react";
+import { useWatchAndRerender } from "@vertigis/web/ui";
 import {
     createEsriMapWidget,
     MapWidgetProps,
@@ -22,6 +23,8 @@ export default function AreaMeasurement3D(
     const { model } = props;
     const { map } = model;
     const [widget, setWidget] = useState<AreaMeasurement3DWidget>();
+
+    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useEffect(() => {
         if (!widget) {
             return;

@@ -21,7 +21,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     const { map } = model;
     const [widget, setWidget] = useState<SliceWidget>();
 
-    useWatchAndRerender(map, "map");
+    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useWatchAndRerender(model, ["title", "tiltEnabled"]);
     useEffect(() => {
         if (!widget) {

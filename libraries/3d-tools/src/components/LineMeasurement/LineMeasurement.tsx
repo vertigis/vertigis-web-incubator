@@ -6,6 +6,7 @@ import {
 import DirectLineMeasurement3DWidget from "@arcgis/core/widgets/DirectLineMeasurement3D";
 import type Accessor from "@arcgis/core/core/Accessor";
 import LineMeasurementModel from "./LineMeasurementModel";
+import { useWatchAndRerender } from "@vertigis/web/ui";
 
 export type AreaMeasurementProps = MapWidgetProps<
     LineMeasurementModel & Accessor
@@ -22,6 +23,8 @@ export default function LineMeasurement(
     const { model } = props;
     const { map } = model;
     const [widget, setWidget] = useState<DirectLineMeasurement3DWidget>();
+
+    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useEffect(() => {
         if (!widget) {
             return;

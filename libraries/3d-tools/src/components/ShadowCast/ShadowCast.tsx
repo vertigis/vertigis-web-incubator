@@ -23,6 +23,9 @@ const widgetStyle = (theme: Theme) => ({
     "& calcite-select": {
         "--calcite-select-font-size": theme.typography.fontSize,
     },
+    "& calcite-button": {
+        "--calcite-font-size--2": theme.typography.fontSize,
+    },
 });
 
 export default function ShadowCast(
@@ -31,7 +34,8 @@ export default function ShadowCast(
     const { model } = props;
     const { map } = model;
     const [widget, setWidget] = useState<ShadowCastWidget>();
-    useWatchAndRerender(map, "map");
+
+    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useWatchAndRerender(model, [
         "title",
         "timeRangeSlider",

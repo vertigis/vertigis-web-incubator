@@ -23,7 +23,8 @@ export default function LineOfSight(
     const { model } = props;
     const { map } = model;
     const [widget, setWidget] = useState<LineOfSightWidget>();
-    useWatchAndRerender(map, "map");
+
+    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useEffect(() => {
         if (!widget) {
             return;
