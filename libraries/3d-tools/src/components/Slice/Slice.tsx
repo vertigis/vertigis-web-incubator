@@ -37,6 +37,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
         if (!containerRef.current) {
             return;
         }
+
         const observer = new MutationObserver((results) => {
             results.forEach((mutation) => {
                 const buttonAdded = !![...mutation.addedNodes.values()].find(
@@ -64,7 +65,11 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
             subtree: true,
             childList: true,
         });
-        return () => observer.disconnect();
+
+        return () => {
+            observer.disconnect();
+            map["_suppressMapClick"] = false;
+        };
     });
 
     if (map.viewMode === "map") {
