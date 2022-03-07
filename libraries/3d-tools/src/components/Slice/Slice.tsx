@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState, useRef } from "react";
 import SliceWidget from "@arcgis/core/widgets/Slice";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import type Accessor from "@arcgis/core/core/Accessor";
@@ -21,6 +21,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     const { map } = model;
     const [widget, setWidget] = useState<SliceWidget>();
 
+    const containerRef = useRef<HTMLDivElement>();
     useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useWatchAndRerender(model, ["title", "tiltEnabled"]);
     useEffect(() => {
@@ -28,23 +29,54 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
             return;
         }
 
-        map["_suppressMapClick"] = true;
         widget.label = model.title;
         widget.viewModel.tiltEnabled = model.tiltEnabled;
-
-        return () => {
-            map["_suppressMapClick"] = true;
-        };
     }, [map, model.tiltEnabled, model.title, widget]);
+
+    useEffect(() => {
+        if (!containerRef.current) {
+            return;
+        }
+        const observer = new MutationObserver((results) => {
+            results.forEach((mutation) => {
+                const buttonAdded = !![...mutation.addedNodes.values()].find(
+                    (node) => {
+                        const className: string = node["className"] ?? "";
+                        return className.includes("esri-slice__cancel-button");
+                    }
+                );
+                if (buttonAdded) {
+                    map["_suppressMapClick"] = true;
+                }
+
+                const buttonRemoved = !![
+                    ...mutation.removedNodes.values(),
+                ].find((node) => {
+                    const className: string = node["className"] ?? "";
+                    return className.includes("esri-slice__cancel-button");
+                });
+                if (buttonRemoved) {
+                    map["_suppressMapClick"] = false;
+                }
+            });
+        });
+        observer.observe(containerRef.current, {
+            subtree: true,
+            childList: true,
+        });
+        return () => observer.disconnect();
+    });
 
     if (map.viewMode === "map") {
         return null;
     }
 
     return (
-        <SliceWidgetWrapper
-            onWidgetCreated={setWidget}
-            {...props}
-        ></SliceWidgetWrapper>
+        <div ref={containerRef} className="gcx-component">
+            <SliceWidgetWrapper
+                onWidgetCreated={setWidget}
+                {...props}
+            ></SliceWidgetWrapper>
+        </div>
     );
 }
