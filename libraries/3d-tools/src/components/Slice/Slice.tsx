@@ -79,19 +79,21 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     }
 
     return (
-        <SliceWidgetWrapper
-            onWidgetCreated={setWidget}
-            {...props}
-            sx={{ background: "white", pb: "1.5rem" }}
-        >
-            {widget?.viewModel.state === "sliced" && (
-                <Link
-                    sx={{ m: "1.5rem", cursor: "pointer" }}
-                    onClick={() => widget.viewModel.clear()}
-                >
-                    language-web-incubator-common-clear
-                </Link>
-            )}
-        </SliceWidgetWrapper>
+        <div ref={containerRef} className="gcx-component">
+            <SliceWidgetWrapper
+                onWidgetCreated={setWidget}
+                {...props}
+                sx={{ background: "white", pb: "1.5rem" }}
+            >
+                {widget?.viewModel.state !== "ready" && (
+                    <Link
+                        sx={{ m: "1.5rem", cursor: "pointer" }}
+                        onClick={() => widget.viewModel.clear()}
+                    >
+                        language-web-incubator-common-clear
+                    </Link>
+                )}
+            </SliceWidgetWrapper>
+        </div>
     );
 }

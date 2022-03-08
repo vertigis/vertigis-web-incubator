@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import LineOfSightWidget from "@arcgis/core/widgets/LineOfSight";
 import { useWatchAndRerender } from "@vertigis/web/ui";
+import Link from "@vertigis/web/ui/Link";
 import type Accessor from "@arcgis/core/core/Accessor";
 import {
     createEsriMapWidget,
@@ -25,6 +26,7 @@ export default function LineOfSight(
     const [widget, setWidget] = useState<LineOfSightWidget>();
 
     useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
+    useWatchAndRerender(widget?.viewModel, "state");
     useEffect(() => {
         if (!widget) {
             return;
@@ -40,6 +42,16 @@ export default function LineOfSight(
         <LineOfSightWrapper
             onWidgetCreated={setWidget}
             {...props}
-        ></LineOfSightWrapper>
+            sx={{ background: "white", pb: "1.5rem" }}
+        >
+            {widget?.viewModel.state !== "ready" && (
+                <Link
+                    sx={{ m: "1.5rem", cursor: "pointer" }}
+                    onClick={() => widget.viewModel.clear()}
+                >
+                    language-web-incubator-common-clear
+                </Link>
+            )}
+        </LineOfSightWrapper>
     );
 }
