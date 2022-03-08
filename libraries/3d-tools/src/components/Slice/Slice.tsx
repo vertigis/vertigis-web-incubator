@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState, useRef } from "react";
 import SliceWidget from "@arcgis/core/widgets/Slice";
 import { useWatchAndRerender } from "@vertigis/web/ui";
+import Link from "@vertigis/web/ui/Link";
 import type Accessor from "@arcgis/core/core/Accessor";
 import {
     createEsriMapWidget,
@@ -77,11 +78,17 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     }
 
     return (
-        <div ref={containerRef} className="gcx-component">
-            <SliceWidgetWrapper
-                onWidgetCreated={setWidget}
-                {...props}
-            ></SliceWidgetWrapper>
-        </div>
+        <SliceWidgetWrapper
+            onWidgetCreated={setWidget}
+            {...props}
+            sx={{ background: "white", pb: "1.5rem" }}
+        >
+            <Link
+                sx={{ m: "1.5rem", cursor: "pointer" }}
+                onClick={() => widget.viewModel.clear()}
+            >
+                language-web-incubator-common-clear
+            </Link>
+        </SliceWidgetWrapper>
     );
 }

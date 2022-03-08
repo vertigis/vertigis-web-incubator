@@ -4,6 +4,7 @@ import {
     createEsriMapWidget,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
+import Link from "@vertigis/web/ui/Link";
 import AreaMeasurement3DWidget from "@arcgis/core/widgets/AreaMeasurement3D";
 import type Accessor from "@arcgis/core/core/Accessor";
 import AreaMeasurementModel from "./AreaMeasurementModel";
@@ -40,6 +41,14 @@ export default function AreaMeasurement3D(
         <AreaMeasurement3DWrapper
             onWidgetCreated={setWidget}
             {...props}
-        ></AreaMeasurement3DWrapper>
+            sx={{ background: "white", pb: "1.5rem" }}
+        >
+            <Link
+                sx={{ m: "1.5rem", cursor: "pointer" }}
+                onClick={() => widget.viewModel.clear()}
+            >
+                language-web-incubator-common-clear
+            </Link>
+        </AreaMeasurement3DWrapper>
     );
 }

@@ -3,6 +3,7 @@ import {
     createEsriMapWidget,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
+import Link from "@vertigis/web/ui/Link";
 import DirectLineMeasurement3DWidget from "@arcgis/core/widgets/DirectLineMeasurement3D";
 import type Accessor from "@arcgis/core/core/Accessor";
 import LineMeasurementModel from "./LineMeasurementModel";
@@ -40,6 +41,14 @@ export default function LineMeasurement(
         <DirectLineMeasurement3DWidgetWrapper
             onWidgetCreated={setWidget}
             {...props}
-        ></DirectLineMeasurement3DWidgetWrapper>
+            sx={{ background: "white", pb: "1.5rem" }}
+        >
+            <Link
+                sx={{ m: "1.5rem", cursor: "pointer" }}
+                onClick={() => widget.viewModel.clear()}
+            >
+                language-web-incubator-common-clear
+            </Link>
+        </DirectLineMeasurement3DWidgetWrapper>
     );
 }
