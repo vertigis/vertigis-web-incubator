@@ -72,11 +72,15 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
             observer.disconnect();
             map["_suppressMapClick"] = false;
         };
-    });
+    }, [widget, map]);
 
     if (map.viewMode === "map") {
         return null;
     }
+
+    const widgetIsSlicing =
+        widget?.viewModel.state === "sliced" ||
+        widget?.viewModel.state === "slicing";
 
     return (
         <div ref={containerRef} className="gcx-component">
@@ -85,7 +89,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
                 {...props}
                 sx={{ background: "white", pb: "1.5rem" }}
             >
-                {widget?.viewModel.state !== "ready" && (
+                {widgetIsSlicing && (
                     <Link
                         sx={{ m: "1.5rem", cursor: "pointer" }}
                         onClick={() => widget.viewModel.clear()}
