@@ -25,6 +25,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     const containerRef = useRef<HTMLDivElement>();
     useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useWatchAndRerender(model, ["title", "tiltEnabled"]);
+    useWatchAndRerender(widget?.viewModel, "state");
     useEffect(() => {
         if (!widget) {
             return;
@@ -83,12 +84,14 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
             {...props}
             sx={{ background: "white", pb: "1.5rem" }}
         >
-            <Link
-                sx={{ m: "1.5rem", cursor: "pointer" }}
-                onClick={() => widget.viewModel.clear()}
-            >
-                language-web-incubator-common-clear
-            </Link>
+            {widget?.viewModel.state === "sliced" && (
+                <Link
+                    sx={{ m: "1.5rem", cursor: "pointer" }}
+                    onClick={() => widget.viewModel.clear()}
+                >
+                    language-web-incubator-common-clear
+                </Link>
+            )}
         </SliceWidgetWrapper>
     );
 }

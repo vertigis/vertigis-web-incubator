@@ -26,6 +26,7 @@ export default function AreaMeasurement3D(
     const [widget, setWidget] = useState<AreaMeasurement3DWidget>();
 
     useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
+    useWatchAndRerender(widget?.viewModel, "state");
     useEffect(() => {
         if (!widget) {
             return;
@@ -43,12 +44,14 @@ export default function AreaMeasurement3D(
             {...props}
             sx={{ background: "white", pb: "1.5rem" }}
         >
-            <Link
-                sx={{ m: "1.5rem", cursor: "pointer" }}
-                onClick={() => widget.viewModel.clear()}
-            >
-                language-web-incubator-common-clear
-            </Link>
+            {widget?.viewModel.state === "measured" && (
+                <Link
+                    sx={{ m: "1.5rem", cursor: "pointer" }}
+                    onClick={() => widget.viewModel.clear()}
+                >
+                    language-web-incubator-common-clear
+                </Link>
+            )}
         </AreaMeasurement3DWrapper>
     );
 }
