@@ -38,13 +38,17 @@ export default function LineOfSight(
         return null;
     }
 
+    const widgetIsActive =
+        widget?.viewModel.state === "creating" ||
+        widget?.viewModel.state === "created";
+
     return (
         <LineOfSightWrapper
             onWidgetCreated={setWidget}
             {...props}
             sx={{ background: "white", pb: "1.5rem" }}
         >
-            {widget?.viewModel.state !== "ready" && (
+            {widgetIsActive && (
                 <Link
                     sx={{ m: "1.5rem", cursor: "pointer" }}
                     onClick={() => widget.viewModel.clear()}
