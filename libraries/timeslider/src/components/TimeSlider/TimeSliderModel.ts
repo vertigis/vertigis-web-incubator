@@ -129,7 +129,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
     ): Promise<void> => {
         let start, end: Date;
         let timeVisible: boolean;
-        for (const tempLayer of map.layers.toArray()) {
+        for (const tempLayer of map.allLayers.toArray()) {
             const layer = tempLayer as FeatureLayer;
             await layer.load();
             if (layer.timeInfo) {
@@ -148,7 +148,6 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
                 if (layer.timeInfo) {
                     if (!timeVisible) {
                         timeVisible = layer.timeInfo["useTime"];
-                        break;
                     }
                 }
             }
@@ -170,10 +169,13 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         timeSlider: __esri.WebMapTimeSlider,
         map: WebMap
     ): Promise<void> => {
+        let timeExtentOption: string;
         if (timeSlider.fullTimeExtent) {
             widget.fullTimeExtent = timeSlider.fullTimeExtent;
+            widget.set("timeExtent", timeSlider.currentTimeExtent);
         } else {
             widget.fullTimeExtent = timeSlider.currentTimeExtent;
+            timeExtentOption = "currentTimeExtent";
         }
         // Set stops based on available properties in the time slider
         // config in this order: StopByDate, StopByCount, StopByInterval
@@ -200,6 +202,16 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
             widget.fullTimeExtent.end
         ) {
             widget.effectiveStops.push(widget.fullTimeExtent.end);
+        }
+        if (timeExtentOption === "currentTimeExtent") {
+            // Set a default timeExtent if fullTimeExtent was null.
+            widget.set(
+                "timeExtent",
+                new TimeExtent({
+                    start: widget.effectiveStops[0],
+                    end: widget.effectiveStops[1],
+                })
+            );
         }
         // Set properties to model from time slider config.
         if (timeSlider.loop) {
