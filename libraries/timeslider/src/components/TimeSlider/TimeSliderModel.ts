@@ -132,7 +132,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         for (const tempLayer of map.allLayers.toArray()) {
             const layer = tempLayer as FeatureLayer;
             await layer.load();
-            if (layer.timeInfo) {
+            if (layer?.timeInfo?.fullTimeExtent) {
                 if (
                     start === undefined ||
                     start > layer.timeInfo.fullTimeExtent.start
