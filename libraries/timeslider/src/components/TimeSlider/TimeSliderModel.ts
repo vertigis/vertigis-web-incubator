@@ -109,11 +109,8 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
                 webMap
             );
         } else {
-            // Extract slider min and max range from the web map layers.
             await this._updateWidgetFromLayerTimeInfos(widget, webMap);
         }
-        // This is only asynchronous when updating the widget from layer time
-        // infos.
         // Sync model properties with the time slider widget.
         widget.layout = this.layout;
         widget.loop = this.loop;
@@ -169,6 +166,17 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         timeSlider: __esri.WebMapTimeSlider,
         map: WebMap
     ): Promise<void> => {
+        let timeExtentOption: string;
+        if (timeSlider.fullTimeExtent) {
+            widget.fullTimeExtent = timeSlider.fullTimeExtent;
+            widget.set("timeExtent", timeSlider.currentTimeExtent);
+        } else {
+            widget.fullTimeExtent = timeSlider.currentTimeExtent;
+            timeExtentOption = "currentTimeExtent";
+        }
+        // Override full extent from the time slider config with layer timeInfos
+        // instead - the config isn't always accurate to the layers in the web
+        // map/scene.
         await this._updateWidgetFromLayerTimeInfos(widget, map);
         if (timeSlider.stops) {
             widget.stops = {
@@ -193,6 +201,16 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
             widget.fullTimeExtent.end
         ) {
             widget.effectiveStops.push(widget.fullTimeExtent.end);
+        }
+        if (timeExtentOption === "currentTimeExtent") {
+            // Set a default timeExtent if fullTimeExtent was null.
+            widget.set(
+                "timeExtent",
+                new TimeExtent({
+                    start: widget.effectiveStops[0],
+                    end: widget.effectiveStops[1],
+                })
+            );
         }
         // Set properties to model from time slider config.
         if (timeSlider.loop) {
