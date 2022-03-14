@@ -169,16 +169,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         timeSlider: __esri.WebMapTimeSlider,
         map: WebMap
     ): Promise<void> => {
-        let timeExtentOption: string;
-        if (timeSlider.fullTimeExtent) {
-            widget.fullTimeExtent = timeSlider.fullTimeExtent;
-            widget.set("timeExtent", timeSlider.currentTimeExtent);
-        } else {
-            widget.fullTimeExtent = timeSlider.currentTimeExtent;
-            timeExtentOption = "currentTimeExtent";
-        }
-        // Set stops based on available properties in the time slider
-        // config in this order: StopByDate, StopByCount, StopByInterval
+        await this._updateWidgetFromLayerTimeInfos(widget, map);
         if (timeSlider.stops) {
             widget.stops = {
                 dates: timeSlider.stops,
@@ -203,16 +194,6 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         ) {
             widget.effectiveStops.push(widget.fullTimeExtent.end);
         }
-        if (timeExtentOption === "currentTimeExtent") {
-            // Set a default timeExtent if fullTimeExtent was null.
-            widget.set(
-                "timeExtent",
-                new TimeExtent({
-                    start: widget.effectiveStops[0],
-                    end: widget.effectiveStops[1],
-                })
-            );
-        }
         // Set properties to model from time slider config.
         if (timeSlider.loop) {
             this.loop = widget.loop;
@@ -225,20 +206,6 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         } else {
             this.mode = "time-window";
         }
-        // Need to find the timeVisible boolean inside layer infos - it isn't in
-        // the time slider config.
-        let timeVisible = false;
-        for (const tempLayer of map.layers.toArray()) {
-            const layer = tempLayer as FeatureLayer;
-            await layer.load();
-            if (layer.timeInfo) {
-                if (!timeVisible) {
-                    timeVisible = layer.timeInfo["useTime"];
-                    break;
-                }
-            }
-        }
-        this.timeVisible = timeVisible;
     };
 
     protected _getSerializableProperties(): PropertyDefs<TimeSliderModelProperties> {
