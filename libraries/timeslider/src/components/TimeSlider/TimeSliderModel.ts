@@ -153,8 +153,9 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         // Ensure time slider playback will end on the latest date in the full
         // time extent.
         if (
+            widget.fullTimeExtent &&
             widget.effectiveStops?.[widget.effectiveStops.length - 1] <
-            widget.fullTimeExtent.end
+                widget.fullTimeExtent.end
         ) {
             widget.effectiveStops.push(widget.fullTimeExtent.end);
         }
@@ -197,8 +198,9 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         // Ensure time slider playback will end on the latest date in the full
         // time extent.
         if (
+            widget.fullTimeExtent &&
             widget.effectiveStops?.[widget.effectiveStops.length - 1] <
-            widget.fullTimeExtent.end
+                widget.fullTimeExtent.end
         ) {
             widget.effectiveStops.push(widget.fullTimeExtent.end);
         }
