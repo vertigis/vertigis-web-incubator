@@ -44,7 +44,7 @@ export default function LineMeasurement(
             {...props}
             sx={{ background: "white", pb: "1.5rem" }}
         >
-            {widget?.viewModel.state === "measured" && (
+            {widget?.viewModel?.state === "measured" && (
                 <Link
                     sx={{ m: "1.5rem", cursor: "pointer" }}
                     onClick={() => widget.viewModel.clear()}

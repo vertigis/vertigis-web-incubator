@@ -26,6 +26,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useWatchAndRerender(model, ["title", "tiltEnabled"]);
     useWatchAndRerender(widget?.viewModel, "state");
+
     useEffect(() => {
         if (!widget) {
             return;
@@ -79,8 +80,8 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     }
 
     const widgetIsSlicing =
-        widget?.viewModel.state === "sliced" ||
-        widget?.viewModel.state === "slicing";
+        widget?.viewModel?.state === "sliced" ||
+        widget?.viewModel?.state === "slicing";
 
     return (
         <div ref={containerRef} className="gcx-component">

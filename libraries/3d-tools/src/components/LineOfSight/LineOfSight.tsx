@@ -39,8 +39,8 @@ export default function LineOfSight(
     }
 
     const widgetIsActive =
-        widget?.viewModel.state === "creating" ||
-        widget?.viewModel.state === "created";
+        widget?.viewModel?.state === "creating" ||
+        widget?.viewModel?.state === "created";
 
     return (
         <LineOfSightWrapper
