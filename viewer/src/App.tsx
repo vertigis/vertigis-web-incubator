@@ -19,7 +19,8 @@ import SampleViewer from "./SampleViewer";
 const libraries = [
     { id: "mapillary", title: "Mapillary" },
     { id: "timeslider", title: "Esri Time Slider" },
-] as const;
+    { id: "3d-tools", title: "3D Tools" },
+];
 
 async function getSampleData(libraryId: string): Promise<Sample> {
     const [app, layout, library, readme] = await Promise.all([
@@ -114,7 +115,6 @@ const theme = createTheme();
 
 function App() {
     const classes = useStyles();
-
     const location = useLocation();
     const history = useHistory();
     const selectedSampleId = location.pathname.replace(
