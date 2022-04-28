@@ -21,7 +21,7 @@ module.exports = function (app) {
             changeOrigin: true,
             pathRewrite: {
                 // Strip /viewer from path so it isn't forwarded to the target
-                // /viewer/index.html => /index.html => https://apps.geocortex.com/webviewer/index.html
+                // /viewer/index.html => /index.html => https://apps.vertigisstudio.com/web/index.html
                 "^/viewer": "/",
             },
         })
