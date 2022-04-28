@@ -6,9 +6,6 @@
         "build": "vertigis-web-sdk build",
         "start": "vertigis-web-sdk start"
     },
-    "dependencies": {
-        "@vertigis/web": "^5.16.0"
-    },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.4.1",
         "typescript": "~4.3.5"
