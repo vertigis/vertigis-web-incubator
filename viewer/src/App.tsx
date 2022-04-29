@@ -18,6 +18,7 @@ import SampleViewer from "./SampleViewer";
 
 const libraries = [
     { id: "mapillary", title: "Mapillary" },
+    { id: "timeslider", title: "Esri Time Slider" },
     { id: "3d-tools", title: "3D Tools" },
 ];
 

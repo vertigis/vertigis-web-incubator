@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:incubator="vertigis.web.incubator.time-slider">
+    <map id="map-1" config="map-config-1">
+        <incubator:time-slider slot="top-right" grow="0" config="time-slider-config-1"/>
+    </map>
+</layout>
