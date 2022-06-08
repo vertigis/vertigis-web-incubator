@@ -33,8 +33,10 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
         }
 
         widget.label = model.title;
-        widget.viewModel.tiltEnabled = model.tiltEnabled;
-    }, [map, model.tiltEnabled, model.title, widget]);
+        if (widget.viewModel) {
+            widget.viewModel.tiltEnabled = model.tiltEnabled;
+        }
+    }, [map, model.tiltEnabled, model.title, widget, widget?.viewModel]);
 
     useEffect(() => {
         if (!containerRef.current) {

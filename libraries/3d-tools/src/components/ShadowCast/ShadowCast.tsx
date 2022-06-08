@@ -59,9 +59,12 @@ export default function ShadowCast(
             tooltip: model.tooltip,
         };
         widget.label = model.title;
-        widget.viewModel.visualizationType = model.visualizationType;
+        if (widget.viewModel) {
+            widget.viewModel.visualizationType = model.visualizationType;
+        }
     }, [
         widget,
+        widget?.viewModel,
         model,
         model.title,
         model.timeRangeSlider,
