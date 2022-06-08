@@ -23,7 +23,7 @@ const widgetStyle = (theme: Theme) => ({
     "& calcite-select": {
         "--calcite-select-font-size": theme.typography.fontSize,
     },
-    "& calcite-button": {
+    "&": {
         "--calcite-font-size--2": theme.typography.fontSize,
     },
 });
