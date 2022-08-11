@@ -1,4 +1,5 @@
 import { LibraryRegistry } from "@vertigis/web/config";
+import { GetDesignerSettingsSchemaArgs } from "@vertigis/web/designer";
 import TimeSlider, { TimeSliderModel } from "./components/TimeSlider";
 import {
     applySettings,
@@ -12,9 +13,13 @@ export default function (registry: LibraryRegistry): void {
         name: "time-slider",
         namespace: "vertigis.web.incubator.time-slider",
         getComponentType: () => TimeSlider,
-        getDesignerSettings: (args) => getSettings(args),
+        getDesignerSettings: (
+            args: GetDesignerSettingsSchemaArgs<TimeSliderModel, "">
+        ) => getSettings(args),
         applyDesignerSettings: (args) => applySettings(args),
-        getDesignerSettingsSchema: (args) => getSettingsSchema(args),
+        getDesignerSettingsSchema: (
+            args: GetDesignerSettingsSchemaArgs<TimeSliderModel, "">
+        ) => getSettingsSchema(args),
         itemType: "time-slider",
         title: "language-web-incubator-time-slider-title",
         iconId: "range-start",

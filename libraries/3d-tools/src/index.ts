@@ -1,4 +1,9 @@
 import { LibraryRegistry } from "@vertigis/web/config";
+import { GetDesignerSettingsSchemaArgs } from "@vertigis/web/designer";
+import { DaylightModel } from "./components/Daylight";
+import { ElevationProfileModel } from "./components/ElevationProfile";
+import { ShadowCastModel } from "./components/ShadowCast";
+import { SliceModel } from "./components/Slice";
 
 import invLanguage from "./locale/inv.json";
 
@@ -80,12 +85,14 @@ export default function (registry: LibraryRegistry): void {
         name: "daylight-widget-3d",
         namespace: "vertigis.web.incubator",
         getComponentType: async () => (await getDaylight()).default,
-        getDesignerSettings: async (args) =>
-            (await getDaylight()).getSettings(args),
+        getDesignerSettings: async (
+            args: GetDesignerSettingsSchemaArgs<DaylightModel, "">
+        ) => (await getDaylight()).getSettings(args),
         applyDesignerSettings: async (args) =>
             (await getDaylight()).applySettings(args),
-        getDesignerSettingsSchema: async (args) =>
-            (await getDaylight()).getSettingsSchema(args),
+        getDesignerSettingsSchema: async (
+            args: GetDesignerSettingsSchemaArgs<DaylightModel, "">
+        ) => (await getDaylight()).getSettingsSchema(args),
         category: "map",
         itemType: "daylight-widget-3d",
         title: "language-web-incubator-daylight-widget-3d-title",
@@ -96,12 +103,14 @@ export default function (registry: LibraryRegistry): void {
         name: "elevation-profile-3d",
         namespace: "vertigis.web.incubator",
         getComponentType: async () => (await getElevationProfile()).default,
-        getDesignerSettings: async (args) =>
-            (await getElevationProfile()).getSettings(args),
+        getDesignerSettings: async (
+            args: GetDesignerSettingsSchemaArgs<ElevationProfileModel, "">
+        ) => (await getElevationProfile()).getSettings(args),
         applyDesignerSettings: async (args) =>
             (await getElevationProfile()).applySettings(args),
-        getDesignerSettingsSchema: async (args) =>
-            (await getElevationProfile()).getSettingsSchema(args),
+        getDesignerSettingsSchema: async (
+            args: GetDesignerSettingsSchemaArgs<ElevationProfileModel, "">
+        ) => (await getElevationProfile()).getSettingsSchema(args),
         category: "map",
         itemType: "elevation-profile-3d",
         title: "language-web-incubator-elevation-profile-3d-title",
@@ -112,12 +121,14 @@ export default function (registry: LibraryRegistry): void {
         name: "shadow-cast-3d",
         namespace: "vertigis.web.incubator",
         getComponentType: async () => (await getShadowCast()).default,
-        getDesignerSettings: async (args) =>
-            (await getShadowCast()).getSettings(args),
+        getDesignerSettings: async (
+            args: GetDesignerSettingsSchemaArgs<ShadowCastModel, "">
+        ) => (await getShadowCast()).getSettings(args),
         applyDesignerSettings: async (args) =>
             (await getShadowCast()).applySettings(args),
-        getDesignerSettingsSchema: async (args) =>
-            (await getShadowCast()).getSettingsSchema(args),
+        getDesignerSettingsSchema: async (
+            args: GetDesignerSettingsSchemaArgs<ShadowCastModel, "">
+        ) => (await getShadowCast()).getSettingsSchema(args),
         category: "map",
         itemType: "shadow-cast-3d",
         title: "language-web-incubator-shadow-cast-3d-title",
@@ -128,12 +139,14 @@ export default function (registry: LibraryRegistry): void {
         name: "slice-3d",
         namespace: "vertigis.web.incubator",
         getComponentType: async () => (await getSlice()).default,
-        getDesignerSettings: async (args) =>
-            (await getSlice()).getSettings(args),
+        getDesignerSettings: async (
+            args: GetDesignerSettingsSchemaArgs<SliceModel, "">
+        ) => (await getSlice()).getSettings(args),
         applyDesignerSettings: async (args) =>
             (await getSlice()).applySettings(args),
-        getDesignerSettingsSchema: async (args) =>
-            (await getSlice()).getSettingsSchema(args),
+        getDesignerSettingsSchema: async (
+            args: GetDesignerSettingsSchemaArgs<SliceModel, "">
+        ) => (await getSlice()).getSettingsSchema(args),
         category: "map",
         itemType: "slice-3d",
         title: "language-web-incubator-slice-3d-title",

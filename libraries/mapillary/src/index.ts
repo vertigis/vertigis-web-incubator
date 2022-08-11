@@ -1,4 +1,5 @@
 import { LibraryRegistry } from "@vertigis/web/config";
+import { GetDesignerSettingsSchemaArgs } from "@vertigis/web/designer";
 import Mapillary, { MapillaryModel } from "./components/Mapillary";
 import {
     applySettings,
@@ -12,9 +13,13 @@ export default function (registry: LibraryRegistry): void {
         name: "mapillary",
         namespace: "vertigis.web.incubator",
         getComponentType: () => Mapillary,
-        getDesignerSettings: (args) => getSettings(args),
+        getDesignerSettings: (
+            args: GetDesignerSettingsSchemaArgs<MapillaryModel, "">
+        ) => getSettings(args),
         applyDesignerSettings: (args) => applySettings(args),
-        getDesignerSettingsSchema: (args) => getSettingsSchema(args),
+        getDesignerSettingsSchema: (
+            args: GetDesignerSettingsSchemaArgs<MapillaryModel, "">
+        ) => getSettingsSchema(args),
         itemType: "mapillary",
         title: "language-web-incubator-mapillary-title",
         iconId: "map-3rd-party",
