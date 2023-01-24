@@ -20,6 +20,7 @@
         "build:libraries": "yarn workspaces run build",
         "build:viewer": "cd viewer && yarn build",
         "postinstall": "cd viewer && yarn",
+        "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\"",
         "test": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress run --browser chrome\"",
         "test:watch": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress open\"",
         "start": "cd viewer && cross-env BROWSER=none yarn start"
