@@ -7,13 +7,13 @@
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@arcgis/core": "^4.21.2",
-        "@vertigis/arcgis-extensions": "^34.2.2",
-        "@vertigis/viewer-spec": "^45.2.0",
-        "@vertigis/web": "^5.16.0"
+        "@arcgis/core": "^4.24.7",
+        "@vertigis/arcgis-extensions": "^37.5.0",
+        "@vertigis/viewer-spec": "^51.3.0",
+        "@vertigis/web": "^5.21.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.4.0",
-        "typescript": "~4.3.5"
+        "@vertigis/web-sdk": "^1.8.0",
+        "typescript": "~4.9.4"
     }
 }
