@@ -47,7 +47,7 @@ async function getSampleData(libraryId: string): Promise<Sample> {
         id: libraryId,
         parentPage: parentPage && parentPage.default,
         readme: readme.default,
-        repositoryBasePath: `https://github.com/geocortex/vertigis-web-incubator/tree/main/libraries/${libraryId}/`,
+        repositoryBasePath: `https://github.com/vertigis/vertigis-web-incubator/tree/main/libraries/${libraryId}/`,
     };
 }
 

@@ -1,16 +1,16 @@
 # VertiGIS Studio Web Component Incubator
 
-![CI](https://github.com/geocortex/vertigis-web-incubator/workflows/CI/badge.svg)
+![CI](https://github.com/vertigis/vertigis-web-incubator/workflows/CI/badge.svg)
 
 View the component libraries live samples at [https://vertigis-web-incubator.netlify.app](https://vertigis-web-incubator.netlify.app).
 
-This project includes a collection of [VertiGIS Studio Web](https://vertigisstudio.com/products/vertigis-studio-web/) component libraries built using the [VertiGIS Studio Web SDK](https://developers.geocortex.com/docs/web/sdk-overview/). Check out the [live samples](https://vertigis-web-incubator.netlify.app/) for an easy way to preview and download the component libraries in your browser without needing to run the project locally. The source for each library is located within the [libraries](libraries) directory of this project.
+This project includes a collection of [VertiGIS Studio Web](https://vertigisstudio.com/products/vertigis-studio-web/) component libraries built using the [VertiGIS Studio Web SDK](https://developers.vertigisstudio.com/docs/web/sdk-overview/). Check out the [live samples](https://vertigis-web-incubator.netlify.app/) for an easy way to preview and download the component libraries in your browser without needing to run the project locally. The source for each library is located within the [libraries](libraries) directory of this project.
 
 **These component libraries are experimental and provided free of charge without warranty under the [MIT license](LICENSE).** We will do our best to keep them functional and up-to-date. If you need assistance to modify or improve these libraries, feel free to reach out to our [professional services department](https://vertigisstudio.com/support-services/professional-services/).
 
 ## Using the component libraries in your app
 
-The easiest way to use these component libraries in your VertiGIS Studio Web apps, is by using the _Download this library_ link in the [live samples viewer](https://vertigis-web-incubator.netlify.app/). Once the component library you'd like to use has been downloaded, you can [follow the steps](https://developers.geocortex.com/docs/web/sdk-deployment#uploading-custom-code-to-an-app) on the VertiGIS Studio Developer Center to use the _Upload Library_ feature in the VertiGIS Studio Web Designer.
+The easiest way to use these component libraries in your VertiGIS Studio Web apps, is by using the _Download this library_ link in the [live samples viewer](https://vertigis-web-incubator.netlify.app/). Once the component library you'd like to use has been downloaded, you can [follow the steps](https://developers.vertigisstudio.com/docs/web/sdk-deployment#uploading-custom-code-to-an-app) on the VertiGIS Studio Developer Center to use the _Upload Library_ feature in the VertiGIS Studio Web Designer.
 
 ## Running the libraries locally
 
@@ -42,4 +42,4 @@ To run the samples viewer, first build all of the sample projects by running `ya
 
 ## Documentation
 
-Before diving into the VertiGIS Studio Web SDK, be sure to check out our [Developer Center](https://developers.geocortex.com/docs/web/overview/) to learn the various concepts of building and configuring VertiGIS Studio Web applications. There is a surprising amount that can be accomplished through [layout](https://developers.geocortex.com/docs/web/configuration-layout-getting-started/), [app config](https://developers.geocortex.com/docs/web/configuration-app-config-getting-started/), and [VertiGIS Studio Workflow](https://vertigisstudio.com/products/vertigis-studio-workflow/) which can be [configured in the app config](https://developers.geocortex.com/docs/web/tutorial-run-workflow-app-config/) without even needing to use the SDK!
+Before diving into the VertiGIS Studio Web SDK, be sure to check out our [Developer Center](https://developers.vertigisstudio.com/docs/web/overview/) to learn the various concepts of building and configuring VertiGIS Studio Web applications. There is a surprising amount that can be accomplished through [layout](https://developers.vertigisstudio.com/docs/web/configuration-layout-getting-started/), [app config](https://developers.vertigisstudio.com/docs/web/configuration-app-config-getting-started/), and [VertiGIS Studio Workflow](https://vertigisstudio.com/products/vertigis-studio-workflow/) which can be [configured in the app config](https://developers.vertigisstudio.com/docs/web/tutorial-run-workflow-app-config/) without even needing to use the SDK!

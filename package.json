@@ -7,14 +7,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/geocortex/vertigis-web-incubator.git"
+        "url": "git+https://github.com/vertigis/vertigis-web-incubator.git"
     },
     "author": "Eric Parsons <eric.parsons@vertigis.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/geocortex/vertigis-web-incubator/issues"
+        "url": "https://github.com/vertigis/vertigis-web-incubator/issues"
     },
-    "homepage": "https://github.com/geocortex/vertigis-web-incubator#readme",
+    "homepage": "https://github.com/vertigis/vertigis-web-incubator#readme",
     "scripts": {
         "build": "yarn build:libraries && yarn build:viewer",
         "build:libraries": "yarn workspaces run build",
