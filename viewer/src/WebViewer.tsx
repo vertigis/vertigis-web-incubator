@@ -1,4 +1,4 @@
-import { makeStyles } from "@vertigis/react-ui/styles";
+import { styled } from "@vertigis/react-ui/styles";
 import { useEffect, useState } from "react";
 import Sample from "./Sample";
 
@@ -6,12 +6,10 @@ interface WebViewerProps {
     sample: Sample;
 }
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        border: `1px solid ${theme.palette.divider}`,
-        flexGrow: 1,
-        minHeight: 500,
-    },
+const StyledIframe = styled("iframe")(({ theme }) => ({
+    border: `1px solid ${theme.palette.divider}`,
+    flexGrow: 1,
+    minHeight: 500,
 }));
 
 const viewerUrl = `${process.env.PUBLIC_URL}/viewer/index.html#no-bootstrap`;
@@ -98,7 +96,6 @@ function handleSampleFrameLoad(sample: Sample, iframe: HTMLIFrameElement) {
 function WebViewer(props: WebViewerProps) {
     const { sample } = props;
 
-    const styles = useStyles();
     const [sampleHtml, setSampleHtml] = useState<string>();
 
     useEffect(() => {
@@ -143,8 +140,7 @@ function WebViewer(props: WebViewerProps) {
 
     if (sample.parentPage) {
         return (
-            <iframe
-                className={styles.root}
+            <StyledIframe
                 data-cy="viewer-outer-frame"
                 srcDoc={sampleHtml}
                 title="Sample preview"
@@ -157,8 +153,7 @@ function WebViewer(props: WebViewerProps) {
     }
 
     return (
-        <iframe
-            className={styles.root}
+        <StyledIframe
             data-cy={viewerFrameCyId}
             src={viewerUrl}
             title="Sample preview"

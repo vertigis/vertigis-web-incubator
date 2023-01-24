@@ -1,25 +1,21 @@
-import { makeStyles } from "@vertigis/react-ui/styles";
+import Box from "@vertigis/react-ui/Box";
 import Sample from "./Sample";
 import WebViewer from "./WebViewer";
 import ReadmeViewer from "./ReadmeViewer";
-
-const useStyles = makeStyles({
-    root: {
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-    },
-});
 
 interface SampleViewerProps {
     sample: Sample;
 }
 
 export default function SampleViewer({ sample }: SampleViewerProps) {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+            }}
+        >
             <WebViewer sample={sample} />
             <a
                 href={sample.repositoryBasePath}
@@ -32,6 +28,6 @@ export default function SampleViewer({ sample }: SampleViewerProps) {
                 Download this library
             </a>
             <ReadmeViewer sample={sample} />
-        </div>
+        </Box>
     );
 }
