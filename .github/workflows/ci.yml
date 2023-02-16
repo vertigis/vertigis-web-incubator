@@ -10,15 +10,15 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             # Fixes https://github.com/expo/expo-github-action/issues/20
             - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-            - name: Use Node.js 14
-              uses: actions/setup-node@v1
+            - name: Use Node.js 16
+              uses: actions/setup-node@v3
               with:
-                  node-version: 14.x
+                  node-version: 16.x
 
             - run: yarn
 

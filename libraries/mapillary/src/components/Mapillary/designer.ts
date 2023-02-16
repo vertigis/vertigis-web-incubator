@@ -51,9 +51,9 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
     SettingsMap
 > = async (args) => {
     const baseSchema = await getComponentModelDesignerSettingsSchema(args);
-    (baseSchema.settings[0]
-        .settings as Setting<MapillarySettings>[]) = (baseSchema.settings[0]
-        .settings as Setting<MapillarySettings>[]).concat([
+    (baseSchema.settings[0].settings as Setting<MapillarySettings>[]) = (
+        baseSchema.settings[0].settings as Setting<MapillarySettings>[]
+    ).concat([
         {
             id: "mapillaryKey",
             type: "text",

@@ -7,34 +7,38 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/geocortex/vertigis-web-incubator.git"
+        "url": "git+https://github.com/vertigis/vertigis-web-incubator.git"
     },
     "author": "Eric Parsons <eric.parsons@vertigis.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/geocortex/vertigis-web-incubator/issues"
+        "url": "https://github.com/vertigis/vertigis-web-incubator/issues"
     },
-    "homepage": "https://github.com/geocortex/vertigis-web-incubator#readme",
+    "homepage": "https://github.com/vertigis/vertigis-web-incubator#readme",
     "scripts": {
         "build": "yarn build:libraries && yarn build:viewer",
         "build:libraries": "yarn workspaces run build",
         "build:viewer": "cd viewer && yarn build",
         "postinstall": "cd viewer && yarn",
+        "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\"",
         "test": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress run --browser chrome\"",
         "test:watch": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress open\"",
         "start": "cd viewer && cross-env BROWSER=none yarn start"
     },
     "dependencies": {},
     "devDependencies": {
-        "concurrently": "^6.2.0",
+        "concurrently": "^7.6.0",
         "cross-env": "^7.0.3",
-        "cypress": "^7.6.0",
-        "lint-staged": "^11.0.0",
-        "prettier": "^2.3.2",
-        "simple-git-hooks": "^2.3.1",
-        "typescript": "~4.3.5",
-        "postcss-loader": "^4.0.3",
-        "postcss": "^8.1.0"
+        "cypress": "^12.3.0",
+        "lint-staged": "^13.1.0",
+        "prettier": "^2.8.3",
+        "simple-git-hooks": "^2.8.1",
+        "typescript": "~4.9.4",
+        "postcss-loader": "^7.0.2",
+        "postcss": "^8.4.21"
+    },
+    "resolutions": {
+        "@types/react": "^18.0.27"
     },
     "simple-git-hooks": {
         "pre-commit": "npx lint-staged"

@@ -28,15 +28,17 @@ export const applySettings: ApplyDesignerSettingsCallback<
     model.assignProperties(settings);
 };
 
-export const getSettings: GetDesignerSettingsCallback<SliceModel, SettingsMap> =
-    async (args) => {
-        const { model } = args;
-        const { tiltEnabled } = model;
-        return {
-            ...(await getComponentModelDesignerSettings(args)),
-            tiltEnabled,
-        };
+export const getSettings: GetDesignerSettingsCallback<
+    SliceModel,
+    SettingsMap
+> = async (args) => {
+    const { model } = args;
+    const { tiltEnabled } = model;
+    return {
+        ...(await getComponentModelDesignerSettings(args)),
+        tiltEnabled,
     };
+};
 
 export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
     SliceModel,

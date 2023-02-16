@@ -46,7 +46,7 @@ const expectMapAndMarkerCenter = (lat: number, lon: number) =>
 // GitHub agents.
 xdescribe(sampleName, () => {
     it("synchronizes marker position with street view position", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(`http://localhost:3003/${sampleName}`);
 
         // The following test depends on the web scene being used and the current
         // state of the mapillary database.

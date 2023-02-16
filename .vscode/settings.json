@@ -1,13 +1,14 @@
 {
     "cSpell.words": [
-        "Geocortex",
-        "Rerender",
+        "arcgis",
         "closeto",
         "clsx",
+        "Geocortex",
         "locationmarker",
         "mapillary",
         "nodechanged",
         "povchanged",
+        "Rerender",
         "serializable",
         "unsync",
         "unsynced",

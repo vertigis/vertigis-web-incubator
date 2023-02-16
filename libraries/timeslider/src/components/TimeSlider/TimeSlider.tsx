@@ -25,7 +25,7 @@ const TimeSlider: FC<TimeSliderProps> = (props) => {
     useWatch(
         model,
         "map.map",
-        (newMap) => {
+        (newMap: WebMap) => {
             // Only update the model if the web map has changed.
             if (model.widget) {
                 model.widget.stop();

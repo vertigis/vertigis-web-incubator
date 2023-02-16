@@ -1,5 +1,5 @@
-import { makeStyles } from "@vertigis/react-ui/styles";
-import marked from "marked";
+import Box from "@vertigis/react-ui/Box";
+import { marked } from "marked";
 import { useEffect, useState } from "react";
 import Sample from "./Sample";
 
@@ -7,15 +7,7 @@ interface ReadmeViewerProps {
     sample: Sample;
 }
 
-const useStyles = makeStyles({
-    root: {
-        paddingBlockStart: 16,
-    },
-});
-
 export default function ReadmeViewer({ sample }: ReadmeViewerProps) {
-    const classes = useStyles();
-
     const [readmeHtml, setReadmeHtml] = useState<string>();
 
     useEffect(() => {
@@ -44,10 +36,7 @@ export default function ReadmeViewer({ sample }: ReadmeViewerProps) {
     return (
         <>
             {readmeHtml && (
-                <div
-                    className={classes.root}
-                    dangerouslySetInnerHTML={{ __html: readmeHtml }}
-                />
+                <Box dangerouslySetInnerHTML={{ __html: readmeHtml }} />
             )}
         </>
     );
