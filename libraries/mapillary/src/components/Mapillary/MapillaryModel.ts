@@ -191,7 +191,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
             await this._getMapillaryCamera();
 
         const centerPoint = new Point({ latitude, longitude });
-        await Promise.all([
+        await Promise.allSettled([
             this.messages.commands.locationMarker.create.execute({
                 fov,
                 geometry: centerPoint,

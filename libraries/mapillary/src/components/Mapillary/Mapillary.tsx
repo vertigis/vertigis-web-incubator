@@ -32,7 +32,7 @@ export default function Mapillary(
     useEffect(() => {
         const mapillary = new Viewer({
             imageId: "2935399116683438",
-            container: mlyRootEl.current,
+            container: "mapillary-map-container",
             accessToken: model.mapillaryKey,
             component: {
                 // Initialize the view immediately without user interaction.
@@ -89,7 +89,11 @@ export default function Mapillary(
 
     return (
         <LayoutElement {...props} stretch>
-            <div ref={mlyRootEl} className="mapillary-map-container" />
+            <div
+                ref={mlyRootEl}
+                className="mapillary-map-container"
+                id="mapillary-map-container"
+            />
             <div>
                 <ButtonGroup className="third-party-map-controls" size="small">
                     <IconButton
