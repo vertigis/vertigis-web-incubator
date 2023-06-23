@@ -3,6 +3,7 @@ import { useWatchAndRerender } from "@vertigis/web/ui";
 import {
     createEsriMapWidget,
     MapWidgetProps,
+    MapWidgetConstructor,
 } from "@vertigis/web/ui/esriUtils";
 import Link from "@vertigis/web/ui/Link";
 import AreaMeasurement3DWidget from "@arcgis/core/widgets/AreaMeasurement3D";
@@ -16,7 +17,11 @@ export type AreaMeasurementProps = MapWidgetProps<
 const AreaMeasurement3DWrapper = createEsriMapWidget<
     AreaMeasurementModel & Accessor,
     AreaMeasurement3DWidget
->(AreaMeasurement3DWidget, true, true);
+>(
+    AreaMeasurement3DWidget as MapWidgetConstructor<AreaMeasurement3DWidget>,
+    true,
+    true
+);
 
 export default function AreaMeasurement3D(
     props: AreaMeasurementProps

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import {
     createEsriMapWidget,
     MapWidgetProps,
+    MapWidgetConstructor,
 } from "@vertigis/web/ui/esriUtils";
 import ShadowCastModel from "./ShadowCastModel";
 
@@ -17,7 +18,7 @@ export type ShadowCastModelWidgetProps = MapWidgetProps<
 const ShadowCastWrapper = createEsriMapWidget<
     ShadowCastModel & Accessor,
     ShadowCastWidget
->(ShadowCastWidget, true, true);
+>(ShadowCastWidget as MapWidgetConstructor<ShadowCastWidget>, true, true);
 
 const widgetStyle = (theme: Theme) => ({
     "& calcite-select": {

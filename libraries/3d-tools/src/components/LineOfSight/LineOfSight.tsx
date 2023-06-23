@@ -6,6 +6,7 @@ import type Accessor from "@arcgis/core/core/Accessor";
 import {
     createEsriMapWidget,
     MapWidgetProps,
+    MapWidgetConstructor,
 } from "@vertigis/web/ui/esriUtils";
 import LineOfSightModel from "./LineOfSightModel";
 
@@ -16,7 +17,7 @@ export type LineOfSightWidgetProps = MapWidgetProps<
 const LineOfSightWrapper = createEsriMapWidget<
     LineOfSightModel & Accessor,
     LineOfSightWidget
->(LineOfSightWidget, true, true);
+>(LineOfSightWidget as MapWidgetConstructor<LineOfSightWidget>, true, true);
 
 export default function LineOfSight(
     props: LineOfSightWidgetProps

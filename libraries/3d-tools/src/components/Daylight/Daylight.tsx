@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import {
     createEsriMapWidget,
     MapWidgetProps,
+    MapWidgetConstructor,
 } from "@vertigis/web/ui/esriUtils";
 import DaylightWidget from "@arcgis/core/widgets/Daylight";
 import type Accessor from "@arcgis/core/core/Accessor";
@@ -13,7 +14,7 @@ export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 const DaylightWidgetWrapper = createEsriMapWidget<
     DaylightModel & Accessor,
     DaylightWidget
->(DaylightWidget, true, true);
+>(DaylightWidget as MapWidgetConstructor<DaylightWidget>, true, true);
 
 export default function Daylight(props: DaylightWidgetProps): ReactElement {
     const { model } = props;

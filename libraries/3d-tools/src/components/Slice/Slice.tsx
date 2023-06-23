@@ -6,6 +6,7 @@ import type Accessor from "@arcgis/core/core/Accessor";
 import {
     createEsriMapWidget,
     MapWidgetProps,
+    MapWidgetConstructor,
 } from "@vertigis/web/ui/esriUtils";
 
 import SliceModel from "./SliceModel";
@@ -15,7 +16,7 @@ export type SliceWidgetProps = MapWidgetProps<SliceModel & Accessor>;
 const SliceWidgetWrapper = createEsriMapWidget<
     SliceModel & Accessor,
     SliceWidget
->(SliceWidget, true, true);
+>(SliceWidget as MapWidgetConstructor<SliceWidget>, true, true);
 
 export default function Slice(props: SliceWidgetProps): ReactElement {
     const { model } = props;
