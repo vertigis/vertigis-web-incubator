@@ -10,7 +10,7 @@
         "@arcgis/core": "^4.24.7",
         "@vertigis/arcgis-extensions": "^37.5.0",
         "@vertigis/viewer-spec": "^51.3.0",
-        "@vertigis/web": "^5.21.0"
+        "@vertigis/web": "^5.26.0"
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.8.0",

@@ -1,6 +1,7 @@
 import { ReactElement, useState, useEffect } from "react";
 import {
     createEsriMapWidget,
+    MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
 import Link from "@vertigis/web/ui/Link";
@@ -13,10 +14,11 @@ export type AreaMeasurementProps = MapWidgetProps<
     LineMeasurementModel & Accessor
 >;
 
-const DirectLineMeasurement3DWidgetWrapper = createEsriMapWidget<
-    LineMeasurementModel & Accessor,
-    DirectLineMeasurement3DWidget
->(DirectLineMeasurement3DWidget, true, true);
+const DirectLineMeasurement3DWidgetWrapper = createEsriMapWidget(
+    DirectLineMeasurement3DWidget as MapWidgetConstructor<DirectLineMeasurement3DWidget>,
+    true,
+    true
+);
 
 export default function LineMeasurement(
     props: AreaMeasurementProps

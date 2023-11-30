@@ -1,19 +1,27 @@
 import { ReactElement, useEffect, useState } from "react";
 import {
     createEsriMapWidget,
+    MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
 import DaylightWidget from "@arcgis/core/widgets/Daylight";
 import type Accessor from "@arcgis/core/core/Accessor";
-import { useWatchAndRerender } from "@vertigis/web/ui";
+import { useWatchAndRerender, styled } from "@vertigis/web/ui";
 import DaylightModel from "./DaylightModel";
 
 export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 
-const DaylightWidgetWrapper = createEsriMapWidget<
-    DaylightModel & Accessor,
-    DaylightWidget
->(DaylightWidget, true, true);
+const DaylightWidgetWrapper = createEsriMapWidget(
+    DaylightWidget as MapWidgetConstructor<DaylightWidget>,
+    true,
+    true
+);
+
+const StyledDaylightWrapper = styled(DaylightWidgetWrapper)({
+    "& .esri-widget": {
+        width: "100%",
+    },
+});
 
 export default function Daylight(props: DaylightWidgetProps): ReactElement {
     const { model } = props;
@@ -60,9 +68,9 @@ export default function Daylight(props: DaylightWidgetProps): ReactElement {
     }
 
     return (
-        <DaylightWidgetWrapper
+        <StyledDaylightWrapper
             onWidgetCreated={setWidget}
             {...props}
-        ></DaylightWidgetWrapper>
+        ></StyledDaylightWrapper>
     );
 }
