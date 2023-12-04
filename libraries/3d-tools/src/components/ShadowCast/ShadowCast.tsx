@@ -1,11 +1,12 @@
 import { ReactElement } from "react";
 
 import ShadowCastWidget from "@arcgis/core/widgets/ShadowCast";
-import { Theme, useWatchAndRerender } from "@vertigis/web/ui";
+import { useWatchAndRerender, styled } from "@vertigis/web/ui";
 import type Accessor from "@arcgis/core/core/Accessor";
 import { useEffect, useState } from "react";
 import {
     createEsriMapWidget,
+    MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
 import ShadowCastModel from "./ShadowCastModel";
@@ -14,19 +15,24 @@ export type ShadowCastModelWidgetProps = MapWidgetProps<
     ShadowCastModel & Accessor
 >;
 
-const ShadowCastWrapper = createEsriMapWidget<
-    ShadowCastModel & Accessor,
-    ShadowCastWidget
->(ShadowCastWidget, true, true);
+const ShadowCastWrapper = createEsriMapWidget(
+    ShadowCastWidget as MapWidgetConstructor<ShadowCastWidget>,
+    true,
+    true
+);
 
-const widgetStyle = (theme: Theme) => ({
-    "& calcite-select": {
-        "--calcite-select-font-size": theme.typography.fontSize,
-    },
-    "&": {
-        "--calcite-font-size--2": theme.typography.fontSize,
-    },
-});
+const StyledShadowCastWrapper = styled(ShadowCastWrapper)(
+    ({ theme: { typography } }) => ({
+        "--calcite-ui-text-1": "var(--primaryForeground)",
+        "--calcite-font-size--2": typography.fontSize,
+        "& .esri-widget": {
+            width: "100%",
+        },
+        "& .calcite-select": {
+            "--calcite-select-font-size": typography.fontSize,
+        },
+    })
+);
 
 export default function ShadowCast(
     props: ShadowCastModelWidgetProps
@@ -81,10 +87,9 @@ export default function ShadowCast(
     }
 
     return (
-        <ShadowCastWrapper
+        <StyledShadowCastWrapper
             onWidgetCreated={setWidget}
-            sx={widgetStyle}
             {...props}
-        ></ShadowCastWrapper>
+        ></StyledShadowCastWrapper>
     );
 }

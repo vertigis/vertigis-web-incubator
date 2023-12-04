@@ -2,6 +2,7 @@ import { ReactElement, useState, useEffect } from "react";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import {
     createEsriMapWidget,
+    MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
 import Link from "@vertigis/web/ui/Link";
@@ -13,10 +14,11 @@ export type AreaMeasurementProps = MapWidgetProps<
     AreaMeasurementModel & Accessor
 >;
 
-const AreaMeasurement3DWrapper = createEsriMapWidget<
-    AreaMeasurementModel & Accessor,
-    AreaMeasurement3DWidget
->(AreaMeasurement3DWidget, true, true);
+const AreaMeasurement3DWrapper = createEsriMapWidget(
+    AreaMeasurement3DWidget as MapWidgetConstructor<AreaMeasurement3DWidget>,
+    true,
+    true
+);
 
 export default function AreaMeasurement3D(
     props: AreaMeasurementProps
@@ -42,11 +44,11 @@ export default function AreaMeasurement3D(
         <AreaMeasurement3DWrapper
             onWidgetCreated={setWidget}
             {...props}
-            sx={{ background: "white", pb: "1.5rem" }}
+            sx={{ pb: 2 }}
         >
             {widget?.viewModel?.state === "measured" && (
                 <Link
-                    sx={{ m: "1.5rem", cursor: "pointer" }}
+                    sx={{ m: 2, cursor: "pointer" }}
                     onClick={() => widget.viewModel.clear()}
                 >
                     language-web-incubator-common-clear

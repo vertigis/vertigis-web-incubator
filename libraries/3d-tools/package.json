@@ -8,6 +8,7 @@
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.8.0",
+        "@vertigis/web": "^5.26.0",
         "typescript": "~4.9.4"
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns="https://geocortex.com/layout/v1" xmlns:incubator="vertigis.web.incubator">
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:incubator="vertigis.web.incubator" xmlns:web="https://geocortex.com/layout/web/v1">
     <split resizable="true">
         <panel width="25" show-close-button="false" show-back-button="false">
             <tabs xmlns="https://geocortex.com/layout/web/v1">
@@ -10,8 +10,9 @@
                 <incubator:line-of-sight-3d scrollContainerY="true" config="line-of-sight-3d" />
                 <incubator:shadow-cast-3d scrollContainerY="true" config="shadow-cast-3d" />
                 <incubator:slice-3d scrollContainerY="true" config="slice-3d" />
+                <web:user-preferences />
             </tabs>
         </panel>
-        <map id="map-1" config="map-config-1" />
+        <map id="map-1" config="map-config-1"/>
     </split>
 </layout>

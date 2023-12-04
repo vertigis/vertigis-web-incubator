@@ -1,6 +1,7 @@
 import { ReactElement, useState, useEffect } from "react";
 import {
     createEsriMapWidget,
+    MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
 import Link from "@vertigis/web/ui/Link";
@@ -13,10 +14,11 @@ export type AreaMeasurementProps = MapWidgetProps<
     LineMeasurementModel & Accessor
 >;
 
-const DirectLineMeasurement3DWidgetWrapper = createEsriMapWidget<
-    LineMeasurementModel & Accessor,
-    DirectLineMeasurement3DWidget
->(DirectLineMeasurement3DWidget, true, true);
+const DirectLineMeasurement3DWidgetWrapper = createEsriMapWidget(
+    DirectLineMeasurement3DWidget as MapWidgetConstructor<DirectLineMeasurement3DWidget>,
+    true,
+    true
+);
 
 export default function LineMeasurement(
     props: AreaMeasurementProps
@@ -42,11 +44,11 @@ export default function LineMeasurement(
         <DirectLineMeasurement3DWidgetWrapper
             onWidgetCreated={setWidget}
             {...props}
-            sx={{ background: "white", pb: "1.5rem" }}
+            sx={{ pb: 2 }}
         >
             {widget?.viewModel?.state === "measured" && (
                 <Link
-                    sx={{ m: "1.5rem", cursor: "pointer" }}
+                    sx={{ m: 2, cursor: "pointer" }}
                     onClick={() => widget.viewModel.clear()}
                 >
                     language-web-incubator-common-clear
