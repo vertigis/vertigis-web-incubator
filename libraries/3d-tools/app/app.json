@@ -6,6 +6,11 @@
             "id": "map-config-1",
             "initialViewMode": "scene",
             "webScene": "https://www.arcgis.com/home/item.html?id=94e00add11334767afb0abdce49c9a43"
+        },
+        {
+            "$type": "branding",
+            "id": "branding",
+            "activeTheme": "dark"
         }
     ]
 }

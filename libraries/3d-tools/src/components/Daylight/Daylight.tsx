@@ -18,6 +18,7 @@ const DaylightWidgetWrapper = createEsriMapWidget(
 );
 
 const StyledDaylightWrapper = styled(DaylightWidgetWrapper)({
+    "--calcite-ui-text-1": "var(--primaryForeground)",
     "& .esri-widget": {
         width: "100%",
     },

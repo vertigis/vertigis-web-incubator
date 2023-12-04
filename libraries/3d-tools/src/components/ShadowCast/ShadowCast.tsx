@@ -23,14 +23,13 @@ const ShadowCastWrapper = createEsriMapWidget(
 
 const StyledShadowCastWrapper = styled(ShadowCastWrapper)(
     ({ theme: { typography } }) => ({
+        "--calcite-ui-text-1": "var(--primaryForeground)",
+        "--calcite-font-size--2": typography.fontSize,
         "& .esri-widget": {
             width: "100%",
         },
         "& .calcite-select": {
             "--calcite-select-font-size": typography.fontSize,
-        },
-        "&": {
-            "--calcite-font-size--2": typography.fontSize,
         },
     })
 );

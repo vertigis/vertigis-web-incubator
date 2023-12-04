@@ -44,11 +44,11 @@ export default function LineMeasurement(
         <DirectLineMeasurement3DWidgetWrapper
             onWidgetCreated={setWidget}
             {...props}
-            sx={{ background: "white", pb: "1.5rem" }}
+            sx={{ pb: 2 }}
         >
             {widget?.viewModel?.state === "measured" && (
                 <Link
-                    sx={{ m: "1.5rem", cursor: "pointer" }}
+                    sx={{ m: 2, cursor: "pointer" }}
                     onClick={() => widget.viewModel.clear()}
                 >
                     language-web-incubator-common-clear

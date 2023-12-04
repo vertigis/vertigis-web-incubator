@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState, useRef } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import SliceWidget from "@arcgis/core/widgets/Slice";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
@@ -24,7 +24,6 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     const { map } = model;
     const [widget, setWidget] = useState<SliceWidget>();
 
-    const containerRef = useRef<HTMLDivElement>();
     useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
     useWatchAndRerender(model, ["title", "tiltEnabled"]);
     useWatchAndRerender(widget?.viewModel, "state");
@@ -41,7 +40,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     }, [map, model.tiltEnabled, model.title, widget, widget?.viewModel]);
 
     useEffect(() => {
-        if (!containerRef.current) {
+        if (!widget?.container) {
             return;
         }
 
@@ -68,7 +67,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
                 }
             });
         });
-        observer.observe(containerRef.current, {
+        observer.observe(widget.container as HTMLElement, {
             subtree: true,
             childList: true,
         });
@@ -88,21 +87,19 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
         widget?.viewModel?.state === "slicing";
 
     return (
-        <div ref={containerRef} className="gcx-component">
-            <SliceWidgetWrapper
-                onWidgetCreated={setWidget}
-                {...props}
-                sx={{ background: "white", pb: "1.5rem" }}
-            >
-                {widgetIsSlicing && (
-                    <Link
-                        sx={{ m: "1.5rem", cursor: "pointer" }}
-                        onClick={() => widget.viewModel.clear()}
-                    >
-                        language-web-incubator-common-clear
-                    </Link>
-                )}
-            </SliceWidgetWrapper>
-        </div>
+        <SliceWidgetWrapper
+            onWidgetCreated={setWidget}
+            {...props}
+            sx={{ pb: 2 }}
+        >
+            {widgetIsSlicing && (
+                <Link
+                    sx={{ m: 2, cursor: "pointer" }}
+                    onClick={() => widget.viewModel.clear()}
+                >
+                    language-web-incubator-common-clear
+                </Link>
+            )}
+        </SliceWidgetWrapper>
     );
 }
