@@ -1,5 +1,6 @@
 import Box from "@vertigis/react-ui/Box";
 import { marked } from "marked";
+import { baseUrl } from "marked-base-url";
 import { useEffect, useState } from "react";
 import Sample from "./Sample";
 
@@ -21,11 +22,8 @@ export default function ReadmeViewer({ sample }: ReadmeViewerProps) {
                 return;
             }
 
-            setReadmeHtml(
-                marked(text, {
-                    baseUrl: sample.repositoryBasePath,
-                })
-            );
+            marked.use(baseUrl(sample.repositoryBasePath));
+            setReadmeHtml(await marked(text));
         })();
 
         return () => {
