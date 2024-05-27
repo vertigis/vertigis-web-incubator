@@ -7,12 +7,14 @@ import CssBaseline from "@vertigis/react-ui/CssBaseline";
 import Drawer from "@vertigis/react-ui/Drawer";
 import Box from "@vertigis/react-ui/Box";
 import List from "@vertigis/react-ui/List";
-import ListItem from "@vertigis/react-ui/ListItem";
+import ListItemButton from "@vertigis/react-ui/ListItemButton";
 import ListItemText from "@vertigis/react-ui/ListItemText";
 import { forwardRef, useEffect, useMemo, useState } from "react";
 import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import Sample from "./Sample";
 import SampleViewer from "./SampleViewer";
+
+import web from "@vertigis/web";
 
 const libraries = [
     { id: "mapillary", title: "Mapillary" },
@@ -24,9 +26,7 @@ async function getSampleData(libraryId: string): Promise<Sample> {
     const [app, layout, library, readme] = await Promise.all([
         import(`../../libraries/${libraryId}/app/app.json`),
         import(`../../libraries/${libraryId}/app/layout.xml`),
-        import(
-            `!!file-loader?{"name":"static/js/[name].[contenthash:8].[ext]"}!../../libraries/${libraryId}/build/main.js`
-        ),
+        import(`../../libraries/${libraryId}/build/main.js`),
         import(`../../libraries/${libraryId}/README.md`),
     ]);
 
@@ -34,7 +34,7 @@ async function getSampleData(libraryId: string): Promise<Sample> {
 
     try {
         parentPage = await import(
-            `!!file-loader!../../libraries/${libraryId}/app/parent.html`
+            `../../libraries/${libraryId}/app/parent.html`
         );
     } catch {
         // This sample doesn't have a custom page. Continue on.
@@ -64,9 +64,9 @@ function ListItemLink(props) {
 
     return (
         <li>
-            <ListItem button component={renderLink as any} {...other}>
+            <ListItemButton component={renderLink as any} {...other}>
                 {children}
-            </ListItem>
+            </ListItemButton>
         </li>
     );
 }
@@ -85,20 +85,21 @@ const StyledDrawer = styled(Drawer)(() => ({
 }));
 
 const theme = createTheme();
+const viewerBaseUrl = new URL(import.meta.url).pathname.replace(
+    "/src/App.tsx",
+    ""
+);
 
 function App() {
     const location = useLocation();
     const navigate = useNavigate();
-    const selectedSampleId = location.pathname.replace(
-        `${process.env.PUBLIC_URL}/`,
-        ""
-    );
+    const selectedSampleId = location.pathname.replace(`${viewerBaseUrl}/`, "");
     const [selectedSample, setCurrentSample] = useState<Sample>();
 
     useEffect(() => {
         // Set default path if we're at the base path
-        if (location.pathname === `${process.env.PUBLIC_URL}/`) {
-            navigate(`${process.env.PUBLIC_URL}/${libraries[0].id}`, {
+        if (location.pathname === `${viewerBaseUrl}/`) {
+            navigate(`${viewerBaseUrl}/${libraries[0].id}`, {
                 replace: true,
             });
         }

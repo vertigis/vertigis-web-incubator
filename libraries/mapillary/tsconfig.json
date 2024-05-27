@@ -1,4 +1,4 @@
 {
     "extends": "@vertigis/web-sdk/config/tsconfig.json",
-    "include": ["src"]
+    "include": ["src", ".eslintrc.js"]
 }

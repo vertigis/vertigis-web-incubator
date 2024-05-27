@@ -3,32 +3,35 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "start": "craco start",
-        "build": "craco build",
-        "test": "craco test"
+        "start": "vite",
+        "build": "tsc && vite build"
     },
+    "type": "module",
     "dependencies": {
-        "@vertigis/react-ui": "^11.12.1",
-        "marked": "^4.2.12",
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.5",
+        "@vertigis/react-ui": "^15.3.0",
+        "@vertigis/web": "^5.29.0",
+        "marked": "^12.0.2",
         "marked-base-url": "^1.1.3",
-        "react-router-dom": "^6.7.0"
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^6.23.1"
     },
     "devDependencies": {
-        "@craco/craco": "^7.0.0",
+        "@babel/core": "^7.24.5",
+        "@rollup/plugin-dynamic-import-vars": "^2.1.2",
+        "@rollup/plugin-node-resolve": "^15.2.3",
         "@types/react": "^18.3.2",
         "@types/react-dom": "^18.3.0",
         "@types/react-router-dom": "^5.3.3",
-        "http-proxy-middleware": "^2.0.6",
-        "react-scripts": "5.0.1",
-        "typescript": "~4.9.4"
-    },
-    "peerDependencies": {
-        "@esri/arcgis-html-sanitizer": "*",
-        "react": ">= 18 < 19",
-        "react-dom": ">= 18 < 19"
-    },
-    "eslintConfig": {
-        "extends": "react-app"
+        "@vitejs/plugin-react-swc": "^3.6.0",
+        "babel-plugin-transform-amd-to-commonjs": "^1.6.0",
+        "http-proxy-middleware": "^3.0.0",
+        "typescript": "~5.3.3",
+        "vite": "^5.2.11",
+        "vite-plugin-babel": "^1.2.0",
+        "vite-plugin-commonjs": "^0.10.1"
     },
     "browserslist": {
         "production": [
@@ -41,8 +44,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    },
-    "installConfig": {
-        "hoistingLimits": "workspaces"
     }
 }
