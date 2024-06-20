@@ -1,0 +1,29 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "library-viewer-model",
+            "id": "library-viewer-1",
+            "libraries": [
+                {
+                    "id": "mapillary",
+                    "title": "Mapillary"
+                },
+                {
+                    "id": "timeslider",
+                    "title": "ESRI Timeslider"
+                },
+                {
+                    "id": "3d-tools",
+                    "title": "3D Tools"
+                }
+            ]
+        },
+        {
+            "$type": "layout",
+            "id": "default",
+            "title": "Default",
+            "url": "./layout.xml"
+        }
+    ]
+}
