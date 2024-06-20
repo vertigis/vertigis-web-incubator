@@ -1,13 +1,15 @@
-import { ReactElement, useEffect, useState } from "react";
-import {
-    createEsriMapWidget,
+import type Accessor from "@arcgis/core/core/Accessor";
+import DaylightWidget from "@arcgis/core/widgets/Daylight";
+import { useWatchAndRerender, styled } from "@vertigis/web/ui";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import type {
     MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-import DaylightWidget from "@arcgis/core/widgets/Daylight";
-import type Accessor from "@arcgis/core/core/Accessor";
-import { useWatchAndRerender, styled } from "@vertigis/web/ui";
-import DaylightModel from "./DaylightModel";
+import { useEffect, useState } from "react";
+import type { ReactElement } from "react";
+
+import type DaylightModel from "./DaylightModel";
 
 export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 

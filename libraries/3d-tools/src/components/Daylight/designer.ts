@@ -1,17 +1,19 @@
-import {
-    applyComponentModelDesignerSettings,
+import type {
     ApplyDesignerSettingsCallback,
     ComponentModelDesignerSettings,
     DesignerSettings,
-    getComponentModelDesignerSettings,
-    getComponentModelDesignerSettingsSchema,
     GetDesignerSettingsCallback,
     GetDesignerSettingsSchemaCallback,
     Setting,
     SettingsSchema,
 } from "@vertigis/web/designer";
+import {
+    applyComponentModelDesignerSettings,
+    getComponentModelDesignerSettings,
+    getComponentModelDesignerSettingsSchema,
+} from "@vertigis/web/designer";
 
-import DaylightModel from "./DaylightModel";
+import type DaylightModel from "./DaylightModel";
 
 type DateOrSeason = "date" | "season";
 

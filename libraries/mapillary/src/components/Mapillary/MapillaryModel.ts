@@ -1,14 +1,16 @@
-import { MapModel } from "@vertigis/web/mapping";
+import Point from "@arcgis/core/geometry/Point";
+import type { MapModel } from "@vertigis/web/mapping";
+import type {
+    PropertyDefs,
+    ComponentModelProperties,
+} from "@vertigis/web/models";
 import {
     ComponentModelBase,
     serializable,
     importModel,
-    PropertyDefs,
-    ComponentModelProperties,
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
-import Point from "@arcgis/core/geometry/Point";
-import { IViewer, ViewerImageEvent, LngLat } from "mapillary-js";
+import type { IViewer, ViewerImageEvent, LngLat } from "mapillary-js";
 
 interface MapillaryModelProperties extends ComponentModelProperties {
     mapillaryKey?: string;
@@ -56,6 +58,48 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     private _handleMarkerUpdate = true;
     private _synced = false;
 
+    /**
+     * Handles pov changes once the image position is known.
+     */
+    private readonly _onPerspectiveChange = throttle(async () => {
+        if (!this.map || !this.mapillary || this.updating) {
+            return;
+        }
+
+        this.updating = true;
+
+        const { latitude, longitude, heading, tilt, fov } =
+            await this._getMapillaryCamera();
+
+        const centerPoint = new Point({
+            latitude,
+            longitude,
+        });
+
+        this._handleMarkerUpdate = false;
+
+        await Promise.all([
+            this.messages.commands.locationMarker.update.execute({
+                geometry: centerPoint,
+                heading,
+                tilt,
+                fov,
+                id: this.id,
+                maps: this.map,
+            }),
+            this.synchronizePosition
+                ? this.messages.commands.map.zoomToViewpoint.execute({
+                      maps: this.map,
+                      viewpoint: {
+                          rotation: getCameraRotationFromBearing(heading),
+                          targetGeometry: centerPoint,
+                          scale: this.defaultScale,
+                      },
+                  })
+                : undefined,
+        ]).finally(() => (this.updating = false));
+    }, 128);
+
     private _mapillary: IViewer | undefined;
     get mapillary(): IViewer | undefined {
         return this._mapillary;
@@ -77,7 +121,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
             // https://github.com/mapillary/mapillary-js/blob/8b6fc2f36e3011218954d95d601062ff6aa41ad9/src/viewer/ComponentController.ts#L184-L192
             this.mapillary.activateCover();
 
-            void this._unsyncMaps();
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            this._unsyncMaps();
         }
 
         this._mapillary = instance;
@@ -96,7 +141,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
 
         // We may need to sync if the map and initialized view have arrived first.
         if (!this._synced && this.map.view) {
-            void this._syncMaps();
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            this._syncMaps();
         }
     }
 
@@ -112,7 +158,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
 
         // If an instance already exists, clean it up first.
         if (this._map) {
-            void this._unsyncMaps();
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            this._unsyncMaps();
         }
         this._map = instance;
 
@@ -120,7 +167,8 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         this._awaitViewHandle = this.watch("map.view", (view) => {
             if (view) {
                 this._awaitViewHandle.remove();
-                void this._syncMaps();
+                // eslint-disable-next-line @typescript-eslint/no-floating-promises
+                this._syncMaps();
             }
         });
     }
@@ -165,7 +213,43 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     //         this.updating = false;
     //         this._activateCover();
     //     }
-    // }
+
+    protected override async _onDestroy(): Promise<void> {
+        await super._onDestroy();
+        this._viewerUpdateHandle?.remove();
+        this._awaitViewHandle?.remove();
+    }
+
+    protected override _getSerializableProperties(): PropertyDefs<MapillaryModelProperties> {
+        const props = super._getSerializableProperties();
+        return {
+            ...props,
+            mapillaryKey: {
+                serializeModes: ["initial"],
+                default: "",
+            },
+            searchRadius: {
+                serializeModes: ["initial"],
+                default: 500,
+            },
+            defaultScale: {
+                serializeModes: ["initial"],
+                default: 3000,
+            },
+            startSynced: {
+                serializeModes: ["initial"],
+                default: true,
+            },
+            title: {
+                ...this._toPropertyDef(props.title),
+                default: "language-web-incubator-mapillary-title",
+            },
+            icon: {
+                ...this._toPropertyDef(props.icon),
+                default: "map-3rd-party",
+            },
+        };
+    }
 
     /**
      * Setup the initial state of the maps such as the location marker and map
@@ -243,7 +327,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
      * position of the camera. See:
      * https://bl.ocks.org/oscarlorentzon/16946cb9eedfad2a64669cb1121e6c75
      */
-    private _onImageChange = (event: ViewerImageEvent) => {
+    private readonly _onImageChange = (event: ViewerImageEvent) => {
         const { image } = event;
         if (image.merged) {
             this._currentImagePosition = image.lngLat;
@@ -258,49 +342,6 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
             this.mapillary.off("pov", this._onPerspectiveChange);
         }
     };
-
-    /**
-     * Handles pov changes once the image position is known.
-     */
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    private _onPerspectiveChange = throttle(async () => {
-        if (!this.map || !this.mapillary || this.updating) {
-            return;
-        }
-
-        this.updating = true;
-
-        const { latitude, longitude, heading, tilt, fov } =
-            await this._getMapillaryCamera();
-
-        const centerPoint = new Point({
-            latitude,
-            longitude,
-        });
-
-        this._handleMarkerUpdate = false;
-
-        await Promise.all([
-            this.messages.commands.locationMarker.update.execute({
-                geometry: centerPoint,
-                heading,
-                tilt,
-                fov,
-                id: this.id,
-                maps: this.map,
-            }),
-            this.synchronizePosition
-                ? this.messages.commands.map.zoomToViewpoint.execute({
-                      maps: this.map,
-                      viewpoint: {
-                          rotation: getCameraRotationFromBearing(heading),
-                          targetGeometry: centerPoint,
-                          scale: this.defaultScale,
-                      },
-                  })
-                : undefined,
-        ]).finally(() => (this.updating = false));
-    }, 128);
 
     /**
      * Gets the current POV of the mapillary camera
@@ -332,42 +373,5 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
     private _activateCover() {
         this.updating = false;
         this.mapillary.activateCover();
-    }
-
-    protected async _onDestroy(): Promise<void> {
-        await super._onDestroy();
-        this._viewerUpdateHandle?.remove();
-        this._awaitViewHandle?.remove();
-    }
-
-    protected _getSerializableProperties(): PropertyDefs<MapillaryModelProperties> {
-        const props = super._getSerializableProperties();
-        return {
-            ...props,
-            mapillaryKey: {
-                serializeModes: ["initial"],
-                default: "",
-            },
-            searchRadius: {
-                serializeModes: ["initial"],
-                default: 500,
-            },
-            defaultScale: {
-                serializeModes: ["initial"],
-                default: 3000,
-            },
-            startSynced: {
-                serializeModes: ["initial"],
-                default: true,
-            },
-            title: {
-                ...this._toPropertyDef(props.title),
-                default: "language-web-incubator-mapillary-title",
-            },
-            icon: {
-                ...this._toPropertyDef(props.icon),
-                default: "map-3rd-party",
-            },
-        };
     }
 }

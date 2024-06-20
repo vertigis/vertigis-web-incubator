@@ -11,7 +11,7 @@
         "mapillary-js": "^4.1.2"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.9.1",
+        "@vertigis/web-sdk": "^1.10.0",
         "typescript": "~5.3.3"
     }
 }

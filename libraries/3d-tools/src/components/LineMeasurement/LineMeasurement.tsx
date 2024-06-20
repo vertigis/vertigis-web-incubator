@@ -1,14 +1,16 @@
-import { ReactElement, useState, useEffect } from "react";
-import {
-    createEsriMapWidget,
+import type Accessor from "@arcgis/core/core/Accessor";
+import DirectLineMeasurement3DWidget from "@arcgis/core/widgets/DirectLineMeasurement3D";
+import { useWatchAndRerender } from "@vertigis/web/ui";
+import Link from "@vertigis/web/ui/Link";
+import type {
     MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-import Link from "@vertigis/web/ui/Link";
-import DirectLineMeasurement3DWidget from "@arcgis/core/widgets/DirectLineMeasurement3D";
-import type Accessor from "@arcgis/core/core/Accessor";
-import LineMeasurementModel from "./LineMeasurementModel";
-import { useWatchAndRerender } from "@vertigis/web/ui";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import type { ReactElement } from "react";
+import { useState, useEffect } from "react";
+
+import type LineMeasurementModel from "./LineMeasurementModel";
 
 export type AreaMeasurementProps = MapWidgetProps<
     LineMeasurementModel & Accessor

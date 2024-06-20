@@ -13,5 +13,6 @@
         "unsync",
         "unsynced",
         "vertigis"
-    ]
+    ],
+    "eslint.workingDirectories": [{ "pattern": "./libraries/*/" }]
 }

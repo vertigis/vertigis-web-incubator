@@ -1,9 +1,11 @@
-import { MapModel } from "@vertigis/web/mapping";
+import type { MapModel } from "@vertigis/web/mapping";
+import type {
+    PropertyDefs,
+    ComponentModelProperties,
+} from "@vertigis/web/models";
 import {
     ComponentModelBase,
     serializable,
-    PropertyDefs,
-    ComponentModelProperties,
     importModel,
 } from "@vertigis/web/models";
 
@@ -14,7 +16,7 @@ export default class AreaMeasurementModel extends ComponentModelBase<AreaMeasure
     @importModel("map-extension")
     map: MapModel | undefined;
 
-    protected _getSerializableProperties(): PropertyDefs<AreaMeasurementModelProperties> {
+    protected override _getSerializableProperties(): PropertyDefs<AreaMeasurementModelProperties> {
         const props = super._getSerializableProperties();
         return {
             ...props,

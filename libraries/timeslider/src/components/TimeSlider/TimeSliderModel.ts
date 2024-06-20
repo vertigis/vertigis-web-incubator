@@ -1,16 +1,18 @@
+import TimeExtent from "@arcgis/core/TimeExtent";
+import type WebMap from "@arcgis/core/WebMap";
+import type FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import type EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
+import { ItemType } from "@vertigis/arcgis-extensions/ItemType";
+import type { MapModel } from "@vertigis/web/mapping/MapModel";
 import {
     ComponentModelBase,
-    ComponentModelProperties,
     importModel,
-    PropertyDefs,
     serializable,
 } from "@vertigis/web/models";
-import { ItemType } from "@vertigis/arcgis-extensions/ItemType";
-import { MapModel } from "@vertigis/web/mapping/MapModel";
-import EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
-import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
-import TimeExtent from "@arcgis/core/TimeExtent";
-import WebMap from "@arcgis/core/WebMap";
+import type {
+    ComponentModelProperties,
+    PropertyDefs,
+} from "@vertigis/web/models";
 
 export type TimeSliderLayout = EsriTimeSlider["layout"];
 export type TimeSliderMode = EsriTimeSlider["mode"];
@@ -120,7 +122,22 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         this.widget = widget;
     };
 
-    private _updateWidgetFromLayerTimeInfos = async (
+    protected override _getSerializableProperties(): PropertyDefs<TimeSliderModelProperties> {
+        const props = super._getSerializableProperties();
+        return {
+            ...props,
+            title: {
+                ...this._toPropertyDef(props.title),
+                default: "language-web-incubator-time-slider-title",
+            },
+            icon: {
+                ...this._toPropertyDef(props.icon),
+                default: "range-start",
+            },
+        };
+    }
+
+    private readonly _updateWidgetFromLayerTimeInfos = async (
         widget: EsriTimeSlider,
         map: __esri.Map
     ): Promise<void> => {
@@ -128,6 +145,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         let timeVisible: boolean;
         for (const tempLayer of map.allLayers.toArray()) {
             const layer = tempLayer as FeatureLayer;
+            // eslint-disable-next-line no-await-in-loop
             await layer.load();
             if (layer?.timeInfo?.fullTimeExtent) {
                 if (
@@ -162,7 +180,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         this.timeVisible = timeVisible;
     };
 
-    private _updateWidgetFromWebMapTimeSlider = async (
+    private readonly _updateWidgetFromWebMapTimeSlider = async (
         widget: EsriTimeSlider,
         timeSlider: __esri.WebMapTimeSlider,
         map: WebMap
@@ -227,19 +245,4 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
             this.mode = "time-window";
         }
     };
-
-    protected _getSerializableProperties(): PropertyDefs<TimeSliderModelProperties> {
-        const props = super._getSerializableProperties();
-        return {
-            ...props,
-            title: {
-                ...this._toPropertyDef(props.title),
-                default: "language-web-incubator-time-slider-title",
-            },
-            icon: {
-                ...this._toPropertyDef(props.icon),
-                default: "range-start",
-            },
-        };
-    }
 }

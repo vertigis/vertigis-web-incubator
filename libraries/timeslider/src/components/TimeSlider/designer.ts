@@ -1,16 +1,18 @@
-import {
-    applyComponentModelDesignerSettings,
+import type {
     ApplyDesignerSettingsCallback,
     ComponentModelDesignerSettings,
     DesignerSettings,
-    getComponentModelDesignerSettings,
-    getComponentModelDesignerSettingsSchema,
     GetDesignerSettingsCallback,
     GetDesignerSettingsSchemaCallback,
     SettingsSchema,
 } from "@vertigis/web/designer";
+import {
+    applyComponentModelDesignerSettings,
+    getComponentModelDesignerSettings,
+    getComponentModelDesignerSettingsSchema,
+} from "@vertigis/web/designer";
 
-import TimeSliderModel from "./TimeSliderModel";
+import type TimeSliderModel from "./TimeSliderModel";
 
 export type TimeSliderSettings = ComponentModelDesignerSettings;
 
@@ -28,11 +30,9 @@ export const applySettings: ApplyDesignerSettingsCallback<
 export const getSettings: GetDesignerSettingsCallback<
     TimeSliderModel,
     SettingsMap
-> = async (args) => {
-    return {
-        ...(await getComponentModelDesignerSettings(args)),
-    };
-};
+> = async (args) => ({
+    ...(await getComponentModelDesignerSettings(args)),
+});
 
 export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
     TimeSliderModel,

@@ -1,5 +1,6 @@
-import { LibraryRegistry } from "@vertigis/web/config";
-import { GetDesignerSettingsSchemaArgs } from "@vertigis/web/designer";
+import type { LibraryRegistry } from "@vertigis/web/config";
+import type { GetDesignerSettingsSchemaArgs } from "@vertigis/web/designer";
+
 import TimeSlider, { TimeSliderModel } from "./components/TimeSlider";
 import {
     applySettings,

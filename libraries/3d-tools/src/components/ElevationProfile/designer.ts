@@ -1,21 +1,22 @@
-import {
-    applyComponentModelDesignerSettings,
+import type { ColorJson } from "@vertigis/arcgis-extensions/json/SymbolJson";
+import { toColor } from "@vertigis/web/branding";
+import type {
     ApplyDesignerSettingsCallback,
     ComponentModelDesignerSettings,
     DesignerSettings,
-    getComponentModelDesignerSettings,
-    getComponentModelDesignerSettingsSchema,
     GetDesignerSettingsCallback,
     GetDesignerSettingsSchemaCallback,
     Setting,
     SettingsSchema,
 } from "@vertigis/web/designer";
-import type { Color as ColorJson } from "@vertigis/arcgis-extensions/portal/Symbol";
-import { toColor } from "@vertigis/web/branding";
+import {
+    applyComponentModelDesignerSettings,
+    getComponentModelDesignerSettings,
+    getComponentModelDesignerSettingsSchema,
+} from "@vertigis/web/designer";
 
-import ElevationProfileModel, {
-    ElevationProfileModelProperties,
-} from "./ElevationProfileModel";
+import type { ElevationProfileModelProperties } from "./ElevationProfileModel";
+import type ElevationProfileModel from "./ElevationProfileModel";
 
 export interface ElevationProfileSettings
     extends ComponentModelDesignerSettings {

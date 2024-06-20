@@ -1,9 +1,11 @@
-import { MapModel } from "@vertigis/web/mapping";
+import type { MapModel } from "@vertigis/web/mapping";
+import type {
+    PropertyDefs,
+    ComponentModelProperties,
+} from "@vertigis/web/models";
 import {
     ComponentModelBase,
     serializable,
-    PropertyDefs,
-    ComponentModelProperties,
     importModel,
 } from "@vertigis/web/models";
 
@@ -18,7 +20,7 @@ export default class SliceModel extends ComponentModelBase<SliceModelProperties>
 
     tiltEnabled?: boolean;
 
-    protected _getSerializableProperties(): PropertyDefs<SliceModelProperties> {
+    protected override _getSerializableProperties(): PropertyDefs<SliceModelProperties> {
         const props = super._getSerializableProperties();
         return {
             ...props,

@@ -1,14 +1,16 @@
-import { ReactElement, useEffect, useState } from "react";
+import type Accessor from "@arcgis/core/core/Accessor";
 import LineOfSightWidget from "@arcgis/core/widgets/LineOfSight";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
-import type Accessor from "@arcgis/core/core/Accessor";
-import {
-    createEsriMapWidget,
+import type {
     MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-import LineOfSightModel from "./LineOfSightModel";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import { useEffect, useState } from "react";
+import type { ReactElement } from "react";
+
+import type LineOfSightModel from "./LineOfSightModel";
 
 export type LineOfSightWidgetProps = MapWidgetProps<
     LineOfSightModel & Accessor

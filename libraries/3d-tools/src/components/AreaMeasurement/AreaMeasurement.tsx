@@ -1,14 +1,16 @@
-import { ReactElement, useState, useEffect } from "react";
+import type Accessor from "@arcgis/core/core/Accessor";
+import AreaMeasurement3DWidget from "@arcgis/core/widgets/AreaMeasurement3D";
 import { useWatchAndRerender } from "@vertigis/web/ui";
-import {
-    createEsriMapWidget,
+import Link from "@vertigis/web/ui/Link";
+import type {
     MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-import Link from "@vertigis/web/ui/Link";
-import AreaMeasurement3DWidget from "@arcgis/core/widgets/AreaMeasurement3D";
-import type Accessor from "@arcgis/core/core/Accessor";
-import AreaMeasurementModel from "./AreaMeasurementModel";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import type { ReactElement } from "react";
+import { useState, useEffect } from "react";
+
+import type AreaMeasurementModel from "./AreaMeasurementModel";
 
 export type AreaMeasurementProps = MapWidgetProps<
     AreaMeasurementModel & Accessor
