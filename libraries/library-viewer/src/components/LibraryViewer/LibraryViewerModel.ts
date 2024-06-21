@@ -42,8 +42,15 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
     protected override async _onInitialize(): Promise<void> {
         await super._onInitialize();
 
+        // TODO: `parent.location.hash` returns the wrong value in cypress,
+        // failing to find the parent and returning window.location instead.
+        // Need to find a way around this to load non-default samples in the
+        // tests.
         this.selectedLibrary = parent.location.hash.substring(1);
-        if (this.selectedLibrary === "") {
+        if (
+            this.selectedLibrary === "" ||
+            this.selectedLibrary === "no-bootstrap"
+        ) {
             this.selectedLibrary = this.libraries[0].id;
         }
 
