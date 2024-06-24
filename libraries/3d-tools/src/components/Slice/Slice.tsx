@@ -42,7 +42,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
 
     useEffect(() => {
         if (!widget?.container) {
-            return;
+            return undefined;
         }
 
         const observer = new MutationObserver((results) => {
