@@ -22,7 +22,18 @@ const getApplication = () => {
 const getMap = (id?: string) => {
     const selector = id ? `[gcx-id="${id}"]` : ".gcx-map";
     getApplication();
-    return getIframeBody().find(selector).then(cy.wrap);
+    return getIframeBody()
+        .find(selector)
+        .and((el) => {
+            const mapId = el[0].getAttribute("data-layout-id");
+            const win = el[0].ownerDocument?.defaultView as Window & any;
+            const map = win.__maps?.[mapId!] || win.__scenes?.[mapId!];
+
+            // Wait for global map data to be available once initialized
+            expect(!!map, "expect map to be created").to.be.true;
+            expect(map.ready, "expect map to be ready").to.be.true;
+        })
+        .then(cy.wrap);
 };
 
 describe("sample-viewer", () => {
@@ -36,10 +47,15 @@ describe("sample-viewer", () => {
         getApplication();
     });
 
-    // This test works when run manually (npx cypress open) but fails when run
-    // programatically :/
-    xit("loads a map", () => {
-        cy.visit(`http://localhost:3001`);
+    it("loads the correct sample", () => {
+        cy.visit(`http://localhost:3001/#timeslider`);
+        getIframeBody()
+            .find(".gcx-readme")
+            .should("contain.text", "Time Slider");
+    });
+
+    it("loads a map", () => {
+        cy.visit(`http://localhost:3001/#timeslider`);
         getMap();
     });
 });

@@ -29,8 +29,8 @@ Cypress.Commands.add("getViewer", { prevSubject: "optional" }, (subject) =>
         (subject &&
             cy
                 .wrap(subject, { log: false })
-                .find('iframe[data-cy="viewer-frame"]', { log: false })) ||
-        cy.get('iframe[data-cy="viewer-frame"]', { log: false })
+                .find('iframe[name="viewer"]', { log: false })) ||
+        cy.get('iframe[name="viewer"]', { log: false })
     )
         .its("0.contentDocument.body", { log: false })
         .should("not.be.empty")
@@ -54,7 +54,7 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
         .wrap(subject, { log: false })
         .find(selector, { log: false, timeout: 30000 })
         .and((el) => {
-            const mapId = el[0].getAttribute("gcx-id");
+            const mapId = el[0].getAttribute("data-layout-id");
             const win = el[0].ownerDocument?.defaultView;
             const map = win.__maps?.[mapId] || win.__scenes?.[mapId];
 

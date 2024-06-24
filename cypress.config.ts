@@ -3,6 +3,7 @@ import { defineConfig } from "cypress";
 export default defineConfig({
     chromeWebSecurity: false,
     defaultCommandTimeout: 30000,
+    modifyObstructiveCode: false,
     numTestsKeptInMemory: 0,
     video: false,
     viewportWidth: 1280,
