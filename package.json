@@ -17,7 +17,7 @@
     },
     "homepage": "https://github.com/vertigis/vertigis-web-incubator#readme",
     "scripts": {
-        "build": "yarn workspaces foreach -Ap run build && shx cp -r ./libraries/library-viewer/build/* ./viewer/build",
+        "build": "yarn workspaces foreach -Ap run build && shx cp -r ./libraries/library-viewer/{build,app}/* ./viewer/build",
         "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\"",
         "test": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress run --browser chrome\"",
         "test:watch": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress open\"",
