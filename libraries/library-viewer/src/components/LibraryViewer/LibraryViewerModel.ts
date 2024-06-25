@@ -189,14 +189,22 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
     }
 
     private async _displayUI(selectedLibrary: string): Promise<void> {
-        this.libraryUrl =
+        const constructedUrl =
             // This import makes the library download available at the constructed url.
             (
                 await import(
                     /* webpackExclude: /(node_modules|library-viewer)/ */
                     `!!file-loader?{"name": "static/js/[name].[contenthash:8].[ext]"}!../../../../../libraries/${selectedLibrary}/build/main.js`
                 )
-            )?.default;
+            )?.default as string;
+
+        // This happens in the production build for some reason.
+        if (constructedUrl.startsWith(".static")) {
+            this.libraryUrl = constructedUrl.replace(".", "../");
+        } else {
+            this.libraryUrl = constructedUrl;
+        }
+
         await Promise.all([
             this.messages
                 .command<SetLibraryArgs>("library-viewer.set-libraries")

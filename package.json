@@ -22,8 +22,8 @@
         "test": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress run --browser chrome\"",
         "test:watch": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress open\"",
         "start": "yarn workspace library-viewer start",
-        "copy-static-files": "shx cp -r ./libraries/library-viewer/{build,app}/* ./libraries/{mapillary,timeslider,3d-tools} ./viewer/build",
-        "serve-sample-viewer": "node scripts/serve-sample-viewer.js"
+        "copy-static-files": "node scripts/copy-static-files.js",
+        "serve-library-viewer": "node scripts/serve-library-viewer.js"
     },
     "devDependencies": {
         "concurrently": "^7.6.0",

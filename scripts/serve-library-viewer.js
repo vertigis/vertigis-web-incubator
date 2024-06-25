@@ -1,5 +1,5 @@
 /**
- * Serves the sample viewer from a static folder. This ends up being fairly close
+ * Serves the library viewer from a static folder. This ends up being fairly close
  * to how the viewer is run by Netlify.
  */
 const express = require("express");
@@ -27,4 +27,4 @@ app.use(
 );
 
 app.listen(3008);
-console.log("Sample Viewer is being served at http://localhost:3008");
+console.log("Library Viewer is being served at http://localhost:3008");
