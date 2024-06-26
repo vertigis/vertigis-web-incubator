@@ -21,6 +21,49 @@
                 height: 100%;
                 border: none;
             }
+            .vgs-web-library-viewer-loading {
+                color: #919191;
+            }
+            .vgs-web-library-viewer-loading,
+            .vgs-web-library-viewer-loading div {
+                box-sizing: border-box;
+            }
+            .vgs-web-library-viewer-loading {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+            .vgs-web-library-viewer-loading div {
+                box-sizing: border-box;
+                position: absolute;
+                width: 6rem;
+                height: 6rem;
+                margin: 1rem;
+                border: 1rem solid currentColor;
+                border-radius: 50%;
+                animation: vgs-web-library-viewer-loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+                border-color: currentColor transparent transparent transparent;
+            }
+            .vgs-web-library-viewer-loading div:nth-child(1) {
+                animation-delay: -0.45s;
+            }
+            .vgs-web-library-viewer-loading div:nth-child(2) {
+                animation-delay: -0.3s;
+            }
+            .vgs-web-library-viewer-loading div:nth-child(3) {
+                animation-delay: -0.15s;
+            }
+            @keyframes vgs-web-library-viewer-loading {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
         </style>
     </head>
     <body>
@@ -97,6 +140,7 @@
             function injectIframe() {
                 const iframe = document.createElement("iframe");
                 iframe.name = "viewer";
+                iframe.id = "vgs_web_library_viewer_iframe";
 
                 const selfUrl = new URL(location);
                 const iframeSrc = new URL("/viewer/index.html?debug=true#no-bootstrap", selfUrl.origin);
@@ -105,6 +149,7 @@
                     iframeSrc.searchParams.set(key, value);
                 }
                 iframe.src = iframeSrc;
+                iframe.style.display = "none";
 
                 iframe.addEventListener("load", iframeLoaded);
                 document.body.appendChild(iframe);
@@ -127,5 +172,11 @@
 
             injectIframe();
         </script>
+        <div class="vgs-web-library-viewer-loading">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </body>
 </html>

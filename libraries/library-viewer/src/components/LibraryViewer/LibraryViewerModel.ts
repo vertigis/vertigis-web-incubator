@@ -53,6 +53,15 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         const { hostElement } = this.appContext;
         if (hostElement.hasAttribute("library-loaded")) {
             hostElement.style.display = "block";
+
+            // When running in netlify this lets us show a loading spinner, see
+            // `viewer/build/index.html`
+            const iframe = parent.document.getElementById(
+                "vgs_web_library_viewer_iframe"
+            );
+            if (iframe) {
+                iframe.style.display = "block";
+            }
             // setTimeout is necessary here in order to make sure our custom
             // commands have initialized.
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
