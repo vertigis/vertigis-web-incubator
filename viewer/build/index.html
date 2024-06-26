@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <title>VertiGIS Studio Web Library Viewer</title>
+        <style>
+            body,
+            html {
+                height: 100%;
+            }
+            body {
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+            iframe {
+                display: block;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            .vgs-web-library-viewer-loading {
+                color: #919191;
+            }
+            .vgs-web-library-viewer-loading,
+            .vgs-web-library-viewer-loading div {
+                box-sizing: border-box;
+            }
+            .vgs-web-library-viewer-loading {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+            .vgs-web-library-viewer-loading div {
+                box-sizing: border-box;
+                position: absolute;
+                width: 6rem;
+                height: 6rem;
+                margin: 1rem;
+                border: 1rem solid currentColor;
+                border-radius: 50%;
+                animation: vgs-web-library-viewer-loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+                border-color: currentColor transparent transparent transparent;
+            }
+            .vgs-web-library-viewer-loading div:nth-child(1) {
+                animation-delay: -0.45s;
+            }
+            .vgs-web-library-viewer-loading div:nth-child(2) {
+                animation-delay: -0.3s;
+            }
+            .vgs-web-library-viewer-loading div:nth-child(3) {
+                animation-delay: -0.15s;
+            }
+            @keyframes vgs-web-library-viewer-loading {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            function iframeLoaded(event) {
+                const webpackFiles = {"publicPath":"./","js":["../main.js"],"css":[]};
+                const additionalLibs = [];
+                const iframeDocument = event.target.contentDocument;
+                const iframeWindow = event.target.contentWindow;
+
+                if (!iframeWindow.require) {
+                    console.error("VertiGIS Studio Web frame failed to load");
+                    return;
+                }
+
+                // Proxy postMessage events when the SDK preview is embedded in another page.
+                // This is for development purposes only. Using "*" is NOT recommended for production
+                // for security reasons.
+                // See https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage.
+                if (window.parent) {
+                    const handlePostMessage = (event) => {
+                        // Event came from parent. Forward to viewer frame.
+                        if (event.source === window.parent) {
+                            iframeWindow.postMessage(event.data, "*");
+                        }
+                        // Event came from viewer. Forward to parent.
+                        else if (event.source === iframeWindow) {
+                            window.parent.postMessage(event.data, "*")
+                        }
+                    }
+
+                    window.addEventListener("message", handlePostMessage);
+
+                    // If we don't remove the event listener, we can end up with multiple
+                    // listeners attached when the iframe is reloaded, such as when
+                    // triggered via webpack hot module reload.
+                    iframeWindow.addEventListener("unload", () => {
+                        window.removeEventListener("message", handlePostMessage)
+                    });
+                }
+
+                iframeWindow.require(["require", "web"], function(require, webViewer) {
+                    function getAbsoluteUrl(relativePath) {
+                        const a = document.createElement("a");
+                        a.href = relativePath;
+                        return a.href;
+                    }
+
+                    // Fetch the application config
+                    async function getAppConfig() {
+                        return (await fetch(getAbsoluteUrl("app.json"))).json();
+                    }
+
+                    // Load common web libs as well as our custom bundle
+                    require([
+                        "@vertigis/web-libraries!/common",
+                        "@vertigis/web-libraries!/web",
+                        webpackFiles.js[0],
+                        ...additionalLibs
+                    ], (
+                        ...libs
+                    ) => {
+                        getAppConfig().then((appConfig) => {
+                            webViewer.bootstrap({
+                                appConfig,
+                                layout: getAbsoluteUrl("layout.xml"),
+                                libraries: libs.map(lib => lib.default),
+                            });
+                        })
+                    });
+                });
+            }
+
+            function injectIframe() {
+                const iframe = document.createElement("iframe");
+                iframe.name = "viewer";
+                iframe.id = "vgs_web_library_viewer_iframe";
+
+                const selfUrl = new URL(location);
+                const iframeSrc = new URL("/viewer/index.html?debug=true#no-bootstrap", selfUrl.origin);
+                // Forward all query params to viewer
+                for (const [key, value] of selfUrl.searchParams) {
+                    iframeSrc.searchParams.set(key, value);
+                }
+                iframe.src = iframeSrc;
+                iframe.style.display = "none";
+
+                iframe.addEventListener("load", iframeLoaded);
+                document.body.appendChild(iframe);
+
+                iframe.contentWindow.addEventListener("DOMContentLoaded", () => {
+                    // Hook in React Dev Tools support
+                    iframe.contentWindow.__REACT_DEVTOOLS_GLOBAL_HOOK__ =
+                            window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+                });
+
+                // Instead of letting the frame reload via HMR, remove and
+                // inject a new iframe. This allows us to once again inject the
+                // react devtools hook so the devtools continue to work after
+                // reloading the frame.
+                iframe.contentWindow.addEventListener("beforeunload", () => {
+                    document.body.removeChild(iframe);
+                    injectIframe();
+                });
+            }
+
+            injectIframe();
+        </script>
+        <div class="vgs-web-library-viewer-loading">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </body>
+</html>

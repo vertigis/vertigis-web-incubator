@@ -1,17 +1,19 @@
-import {
-    applyComponentModelDesignerSettings,
+import type {
     ApplyDesignerSettingsCallback,
     ComponentModelDesignerSettings,
     DesignerSettings,
-    getComponentModelDesignerSettings,
-    getComponentModelDesignerSettingsSchema,
     GetDesignerSettingsCallback,
     GetDesignerSettingsSchemaCallback,
     Setting,
     SettingsSchema,
 } from "@vertigis/web/designer";
+import {
+    applyComponentModelDesignerSettings,
+    getComponentModelDesignerSettings,
+    getComponentModelDesignerSettingsSchema,
+} from "@vertigis/web/designer";
 
-import ShadowCastModel from "./ShadowCastModel";
+import type ShadowCastModel from "./ShadowCastModel";
 
 export interface ShadowCastSettings extends ComponentModelDesignerSettings {
     timeRangeSlider?: boolean;

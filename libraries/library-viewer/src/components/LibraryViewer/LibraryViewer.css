@@ -1,0 +1,5 @@
+/* Fixing a very odd bug created in the mapillary sample by a "clever" MUI
+   style. */
+.library-viewer > :not(style) ~ :not(style) {
+    margin: 0;
+}

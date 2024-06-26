@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:library="libraryViewer">
+    <split>
+        <library:pick-list width="15"/>
+        <stack>
+            <library:library-viewer config="library-viewer-1" spacing="5" />
+            <library:readme height="20" />
+        </stack>
+    </split>
+</layout>
+ 

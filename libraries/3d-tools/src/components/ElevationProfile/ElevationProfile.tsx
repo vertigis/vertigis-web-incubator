@@ -1,15 +1,15 @@
-import { ReactElement, useEffect, useState } from "react";
+import type Accessor from "@arcgis/core/core/Accessor";
 import ElevationProfileWidget from "@arcgis/core/widgets/ElevationProfile";
 import ElevationProfileLineGround from "@arcgis/core/widgets/ElevationProfile/ElevationProfileLineGround";
 import ElevationProfileLineInput from "@arcgis/core/widgets/ElevationProfile/ElevationProfileLineInput";
 import ElevationProfileLineView from "@arcgis/core/widgets/ElevationProfile/ElevationProfileLineView";
-import type Accessor from "@arcgis/core/core/Accessor";
 import { useWatchAndRerender } from "@vertigis/web/ui";
-import {
-    createEsriMapWidget,
-    MapWidgetProps,
-} from "@vertigis/web/ui/esriUtils";
-import ElevationProfileModel from "./ElevationProfileModel";
+import type { MapWidgetProps } from "@vertigis/web/ui/esriUtils";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import { useEffect, useState } from "react";
+import type { ReactElement } from "react";
+
+import type ElevationProfileModel from "./ElevationProfileModel";
 
 export type ElevationProfileWidgetProps = MapWidgetProps<
     ElevationProfileModel & Accessor

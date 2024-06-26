@@ -1,21 +1,20 @@
-import { ReactElement, useEffect, useRef } from "react";
-import clsx from "clsx";
-import { Viewer, TransitionMode } from "mapillary-js";
-import {
-    LayoutElement,
-    LayoutElementProperties,
-} from "@vertigis/web/components";
-import IconButton from "@vertigis/web/ui/IconButton";
+import type { LayoutElementProperties } from "@vertigis/web/components";
+import { LayoutElement } from "@vertigis/web/components";
 import ButtonGroup from "@vertigis/web/ui/ButtonGroup";
-import MapSyncOn from "@vertigis/web/ui/icons/MapSyncOn";
-import MapSyncOff from "@vertigis/web/ui/icons/MapSyncOff";
-import CenterMap from "@vertigis/web/ui/icons/CenterMap";
-
+import IconButton from "@vertigis/web/ui/IconButton";
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.css";
-import MapillaryModel from "./MapillaryModel";
 import "./Mapillary.css";
 import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
+import CenterMap from "@vertigis/web/ui/icons/CenterMap";
+import MapSyncOff from "@vertigis/web/ui/icons/MapSyncOff";
+import MapSyncOn from "@vertigis/web/ui/icons/MapSyncOn";
+import clsx from "clsx";
+import { Viewer, TransitionMode } from "mapillary-js";
+import type { ReactElement } from "react";
+import { useEffect, useRef } from "react";
+
+import type MapillaryModel from "./MapillaryModel";
 
 export default function Mapillary(
     props: LayoutElementProperties<MapillaryModel>
@@ -25,7 +24,7 @@ export default function Mapillary(
 
     const onSyncToggle = () =>
         (model.synchronizePosition = !model.synchronizePosition);
-    const onRecenter = () => void model.recenter();
+    const onRecenter = () => model.recenter();
 
     useWatchAndRerender(model, "synchronizePosition");
 

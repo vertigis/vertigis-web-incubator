@@ -1,15 +1,16 @@
-import { ReactElement, useEffect, useState } from "react";
+import type Accessor from "@arcgis/core/core/Accessor";
 import SliceWidget from "@arcgis/core/widgets/Slice";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
-import type Accessor from "@arcgis/core/core/Accessor";
-import {
-    createEsriMapWidget,
+import type {
     MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import { useEffect, useState } from "react";
+import type { ReactElement } from "react";
 
-import SliceModel from "./SliceModel";
+import type SliceModel from "./SliceModel";
 
 export type SliceWidgetProps = MapWidgetProps<SliceModel & Accessor>;
 
@@ -41,7 +42,7 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
 
     useEffect(() => {
         if (!widget?.container) {
-            return;
+            return undefined;
         }
 
         const observer = new MutationObserver((results) => {

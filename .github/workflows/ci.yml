@@ -15,10 +15,12 @@ jobs:
             # Fixes https://github.com/expo/expo-github-action/issues/20
             - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-            - name: Use Node.js 16
+            - name: Use Node.js 20
               uses: actions/setup-node@v3
               with:
-                  node-version: 16.x
+                  node-version: 20.x
+
+            - run: corepack enable
 
             - run: yarn
 

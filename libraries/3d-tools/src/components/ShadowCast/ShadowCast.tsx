@@ -1,15 +1,15 @@
-import { ReactElement } from "react";
-
+import type Accessor from "@arcgis/core/core/Accessor";
 import ShadowCastWidget from "@arcgis/core/widgets/ShadowCast";
 import { useWatchAndRerender, styled } from "@vertigis/web/ui";
-import type Accessor from "@arcgis/core/core/Accessor";
-import { useEffect, useState } from "react";
-import {
-    createEsriMapWidget,
+import type {
     MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-import ShadowCastModel from "./ShadowCastModel";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import { useEffect, useState } from "react";
+import type { ReactElement } from "react";
+
+import type ShadowCastModel from "./ShadowCastModel";
 
 export type ShadowCastModelWidgetProps = MapWidgetProps<
     ShadowCastModel & Accessor

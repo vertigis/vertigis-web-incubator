@@ -1,9 +1,11 @@
-import { MapModel } from "@vertigis/web/mapping";
+import type { MapModel } from "@vertigis/web/mapping";
+import type {
+    PropertyDefs,
+    ComponentModelProperties,
+} from "@vertigis/web/models";
 import {
     ComponentModelBase,
     serializable,
-    PropertyDefs,
-    ComponentModelProperties,
     importModel,
 } from "@vertigis/web/models";
 export interface ElevationProfileModelProperties
@@ -42,7 +44,7 @@ export default class ElevationProfileModel extends ComponentModelBase<ElevationP
     profileLineInputColor?: string;
     profileLineViewColor?: string;
 
-    protected _getSerializableProperties(): PropertyDefs<ElevationProfileModelProperties> {
+    protected override _getSerializableProperties(): PropertyDefs<ElevationProfileModelProperties> {
         const props = super._getSerializableProperties();
         return {
             ...props,

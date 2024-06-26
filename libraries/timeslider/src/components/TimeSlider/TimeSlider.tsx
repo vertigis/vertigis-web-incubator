@@ -1,13 +1,14 @@
-import React, { ComponentType, FC, useCallback } from "react";
+import type WebMap from "@arcgis/core/WebMap";
 import EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
-import TimeSliderModel from "./TimeSliderModel";
-import {
-    createEsriMapWidget,
-    MapWidgetProps,
-} from "@vertigis/web/ui/esriUtils";
-import "./TimeSlider.css";
 import { useWatch, useWatchAndRerender } from "@vertigis/web/ui";
-import WebMap from "@arcgis/core/WebMap";
+import type { MapWidgetProps } from "@vertigis/web/ui/esriUtils";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import type { ComponentType, FC } from "react";
+import React, { useCallback } from "react";
+
+import type TimeSliderModel from "./TimeSliderModel";
+
+import "./TimeSlider.css";
 
 export type TimeSliderProps = MapWidgetProps<TimeSliderModel, EsriTimeSlider>;
 const TimeSliderWrapper: ComponentType<TimeSliderProps> = createEsriMapWidget<
@@ -63,7 +64,7 @@ const TimeSlider: FC<TimeSliderProps> = (props) => {
             model={props.model}
             onWidgetCreated={onWidgetCreated}
             onWidgetDestroyed={onWidgetDestroyed}
-            stretch={true}
+            stretch
             {...other}
         />
     );

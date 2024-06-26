@@ -1,10 +1,10 @@
-import { LibraryRegistry } from "@vertigis/web/config";
-import { GetDesignerSettingsSchemaArgs } from "@vertigis/web/designer";
-import { DaylightModel } from "./components/Daylight";
-import { ElevationProfileModel } from "./components/ElevationProfile";
-import { ShadowCastModel } from "./components/ShadowCast";
-import { SliceModel } from "./components/Slice";
+import type { LibraryRegistry } from "@vertigis/web/config";
+import type { GetDesignerSettingsSchemaArgs } from "@vertigis/web/designer";
 
+import type { DaylightModel } from "./components/Daylight";
+import type { ElevationProfileModel } from "./components/ElevationProfile";
+import type { ShadowCastModel } from "./components/ShadowCast";
+import type { SliceModel } from "./components/Slice";
 import invLanguage from "./locale/inv.json";
 
 const getAreaMeasurement = () => import("./components/AreaMeasurement");

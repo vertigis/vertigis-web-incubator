@@ -1,17 +1,19 @@
-import {
-    applyComponentModelDesignerSettings,
+import type {
     ApplyDesignerSettingsCallback,
     ComponentModelDesignerSettings,
     DesignerSettings,
-    getComponentModelDesignerSettings,
-    getComponentModelDesignerSettingsSchema,
     GetDesignerSettingsCallback,
     GetDesignerSettingsSchemaCallback,
     Setting,
     SettingsSchema,
 } from "@vertigis/web/designer";
+import {
+    applyComponentModelDesignerSettings,
+    getComponentModelDesignerSettings,
+    getComponentModelDesignerSettingsSchema,
+} from "@vertigis/web/designer";
 
-import MapillaryModel from "./MapillaryModel";
+import type MapillaryModel from "./MapillaryModel";
 
 export interface MapillarySettings extends ComponentModelDesignerSettings {
     mapillaryKey: string;

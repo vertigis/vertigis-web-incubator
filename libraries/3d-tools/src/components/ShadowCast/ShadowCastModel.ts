@@ -1,9 +1,11 @@
-import { MapModel } from "@vertigis/web/mapping";
+import type { MapModel } from "@vertigis/web/mapping";
+import type {
+    PropertyDefs,
+    ComponentModelProperties,
+} from "@vertigis/web/models";
 import {
     ComponentModelBase,
     serializable,
-    PropertyDefs,
-    ComponentModelProperties,
     importModel,
 } from "@vertigis/web/models";
 
@@ -32,7 +34,7 @@ export default class ShadowCastModel extends ComponentModelBase<ShadowCastModelP
     tooltip?: boolean;
     visualizationType?: VisualizationType;
 
-    protected _getSerializableProperties(): PropertyDefs<ShadowCastModelProperties> {
+    protected override _getSerializableProperties(): PropertyDefs<ShadowCastModelProperties> {
         const props = super._getSerializableProperties();
         return {
             ...props,
