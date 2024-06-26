@@ -52,6 +52,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         // now. Otherwise we'll need to create the config and reload the app.
         const { hostElement } = this.appContext;
         if (hostElement.hasAttribute("library-loaded")) {
+            hostElement.style.display = "block";
             // setTimeout is necessary here in order to make sure our custom
             // commands have initialized.
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -62,6 +63,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
                 }
             }, 100);
         } else {
+            hostElement.style.display = "none";
             parent.location.hash = this.selectedLibrary;
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             setTimeout(() => this._loadLibrary(this.selectedLibrary), 100);
