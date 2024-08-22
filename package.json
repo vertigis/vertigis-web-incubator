@@ -2,8 +2,7 @@
     "private": true,
     "workspaces": {
         "packages": [
-            "libraries/*",
-            "viewer"
+            "libraries/*"
         ]
     },
     "repository": {
@@ -20,6 +19,7 @@
         "build": "yarn build:libraries && yarn build:viewer && yarn copy-static-files",
         "build:libraries": "yarn workspaces foreach -Rpt --from \"libraries/!(library-viewer)\" run build",
         "build:viewer": "yarn workspace library-viewer run build",
+        "lint": "eslint --max-warnings 0 libraries/",
         "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\"",
         "test": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress run --browser chrome\"",
         "test:watch": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress open\"",
@@ -28,14 +28,14 @@
         "serve-library-viewer": "node scripts/serve-library-viewer.js"
     },
     "devDependencies": {
+        "@vertigis/web-sdk": "^1.10.1",
         "concurrently": "^7.6.0",
-        "cross-env": "^7.0.3",
         "cypress": "^12.3.0",
         "eslint": "~8.56.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-import": "~2.29.1",
         "eslint-plugin-only-warn": "^1.1.0",
-        "eslint-plugin-react": "^7.34.3",
+        "eslint-plugin-react": "^7.35.0",
         "eslint-plugin-react-hooks": "~4.6.2",
         "express": "^4.19.2",
         "file-loader": "^6.2.0",
@@ -57,5 +57,5 @@
     "lint-staged": {
         "*.{js,json,ts,tsx,md,css,scss}": "prettier --write"
     },
-    "packageManager": "yarn@4.2.2"
+    "packageManager": "yarn@4.4.0"
 }

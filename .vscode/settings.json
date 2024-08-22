@@ -14,5 +14,6 @@
         "unsynced",
         "vertigis"
     ],
+    "editor.formatOnSave": true,
     "eslint.workingDirectories": [{ "pattern": "./libraries/*/" }]
 }
