@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:incubator="vertigis.web.incubator.chart-webcomponent">
+    <map id="map-1" config="map-config-1">
+        <incubator:chart-webcomponent slot="top-right" grow="0" config="chart-webcomponent-config-1"/>
+    </map>
+</layout>

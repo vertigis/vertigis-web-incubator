@@ -16,6 +16,10 @@
                 {
                     "id": "3d-tools",
                     "title": "3D Tools"
+                },
+                {
+                    "id": "charting-webcomponent",
+                    "title": "Charting WebComponent"
                 }
             ]
         },

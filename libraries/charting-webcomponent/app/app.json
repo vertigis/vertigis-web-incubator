@@ -1,0 +1,15 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "map-extension",
+            "id": "map-config-1",
+            "webMap": "https://latitudegeo.maps.arcgis.com/home/item.html?id=3033d37311d147768ec787d875382965"
+        },
+        {
+            "id": "chart-webcomponent-config-1",
+            "$type": "chart-webcomponent",
+            "title": "Charting WebComponent"
+        }
+    ]
+}
