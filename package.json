@@ -46,7 +46,7 @@
         "simple-git-hooks": "^2.8.1",
         "ts-loader": "^9.5.1",
         "typescript": "~5.3.3",
-        "webpack": "~5.90.2"
+        "webpack": "~5.94.0"
     },
     "resolutions": {
         "@types/react": "^18.3.2"
