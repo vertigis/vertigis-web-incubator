@@ -1,5 +1,5 @@
 {
-    "name": "library-charting-webcomponent",
+    "name": "library-arcade-editor",
     "version": "0.0.0",
     "private": true,
     "scripts": {
@@ -7,9 +7,11 @@
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@vertigis/arcgis-extensions": "^47.1.0"
+        "@arcgis/coding-components-react": "4.30.7",
+        "@esri/calcite-components-react": "2.12.0"
     },
     "devDependencies": {
+        "@vertigis/arcgis-extensions": "47.1.0",
         "@vertigis/web": "^5.31.0",
         "@vertigis/web-sdk": "^1.10.0",
         "typescript": "~5.3.3"

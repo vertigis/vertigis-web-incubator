@@ -20,9 +20,9 @@
             }
         },
         {
-            "id": "piechart-webcomponent-config-1",
-            "$type": "piechart-webcomponent-model",
-            "layer": "AirBnB NYC"
+            "id": "arcade-editor-config-1",
+            "$type": "arcade-editor-model",
+            "layerName": "AirBnB NYC"
         },
         {
             "$type": "layout",
