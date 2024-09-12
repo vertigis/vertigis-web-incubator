@@ -2,6 +2,7 @@ import { ArcgisArcadeEditor } from "@arcgis/coding-components-react";
 import { CalciteScrim } from "@esri/calcite-components-react";
 import type { LayoutElementProperties } from "@vertigis/web/components";
 import { LayoutElement } from "@vertigis/web/components";
+import Paper from "@vertigis/web/ui/Paper";
 import { useEffect, useCallback, useState, type ReactElement } from "react";
 
 import type ArcadeEditorModel from "./ArcadeEditorModel";
@@ -30,7 +31,10 @@ const ArcadeEditor = (
             stretch
             className="arcade-editor-webcomponent"
         >
-            <div className="editor-wrapper">
+            <Paper
+                className="editor-wrapper"
+                sx={{ height: "20rem", width: "30rem" }}
+            >
                 {data ? (
                     <ArcgisArcadeEditor
                         // Set the script on the editor
@@ -74,7 +78,7 @@ const ArcadeEditor = (
                 ) : (
                     <CalciteScrim loading />
                 )}
-            </div>
+            </Paper>
         </LayoutElement>
     );
 };
