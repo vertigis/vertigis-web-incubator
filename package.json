@@ -37,7 +37,7 @@
         "eslint-plugin-only-warn": "^1.1.0",
         "eslint-plugin-react": "^7.34.3",
         "eslint-plugin-react-hooks": "~4.6.2",
-        "express": "^4.19.2",
+        "express": "^4.20.0",
         "file-loader": "^6.2.0",
         "http-proxy-middleware": "^3.0.0",
         "lint-staged": "^13.1.0",
