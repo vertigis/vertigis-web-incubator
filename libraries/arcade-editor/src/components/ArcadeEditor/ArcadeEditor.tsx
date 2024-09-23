@@ -31,10 +31,7 @@ const ArcadeEditor = (
             stretch
             className="arcade-editor-webcomponent"
         >
-            <Paper
-                className="editor-wrapper"
-                sx={{ height: "20rem", width: "30rem" }}
-            >
+            <Paper className="editor-wrapper">
                 {data ? (
                     <ArcgisArcadeEditor
                         // Set the script on the editor

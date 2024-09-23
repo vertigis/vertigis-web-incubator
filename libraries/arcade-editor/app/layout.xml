@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout xmlns="https://geocortex.com/layout/v1" xmlns:incubator="vertigis.web.incubator">
     <map id="map-1" config="map-config-1">
-        <incubator:arcade-editor slot="top-right" config="arcade-editor-config-1"/>
+        <incubator:arcade-editor slot="top-right" config="arcade-editor-config-1" width="50vw" height="70vh"/>
     </map>
 </layout>
