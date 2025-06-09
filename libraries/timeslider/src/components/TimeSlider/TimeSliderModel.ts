@@ -1,4 +1,4 @@
-import TimeExtent from "@arcgis/core/TimeExtent";
+import TimeExtent from "@arcgis/core/time/TimeExtent";
 import type WebMap from "@arcgis/core/WebMap";
 import type FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import type EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
