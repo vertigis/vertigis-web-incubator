@@ -1,6 +1,6 @@
-import TimeExtent from "@arcgis/core/time/TimeExtent";
 import type WebMap from "@arcgis/core/WebMap";
 import type FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import TimeExtent from "@arcgis/core/time/TimeExtent";
 import type EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
 import { ItemType } from "@vertigis/arcgis-extensions/ItemType";
 import type { MapModel } from "@vertigis/web/mapping/MapModel";
