@@ -5,7 +5,7 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@arcgis/core@npm:4.28.10, @arcgis/core@npm:~4.28.6":
+"@arcgis/core@npm:4.28.10":
   version: 4.28.10
   resolution: "@arcgis/core@npm:4.28.10"
   dependencies:
@@ -1893,26 +1893,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertigis/arcgis-extensions@npm:^45.2.0":
-  version: 45.6.0
-  resolution: "@vertigis/arcgis-extensions@npm:45.6.0"
-  dependencies:
-    alasql: "npm:~4.2.3"
-    elasticlunr: "npm:~0.9.5"
-    esri-proj-codes: "npm:~1.0.3"
-    jszip: "npm:~3.10.0"
-    luxon: "npm:~3.4.3"
-    safe-stable-stringify: "npm:^2.4.2"
-    shpjs: "npm:~4.0.2 "
-    ts-essentials: "npm:9.4.1"
-    xlsx: "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
-  peerDependencies:
-    "@arcgis/core": ~4.28.6
-    tslib: ^2.6.2
-  checksum: 10c0/9c26516321eb1793b9dc32fd80d5b107d519c3f106860816954b503bb5b2a04b2c14f853e6bc4e4f3b5075782a03a45d8f44250b56066db7fd233cb389f56717
-  languageName: node
-  linkType: hard
-
 "@vertigis/react-ui@npm:14.4.2":
   version: 14.4.2
   resolution: "@vertigis/react-ui@npm:14.4.2"
@@ -1948,16 +1928,6 @@ __metadata:
     "@arcgis/core": "*"
     "@vertigis/arcgis-extensions": ">= 44.0.0-0 < 45.0.0-0"
   checksum: 10c0/d2bf2cbd591555a5d6a2eb2dc0729d00e9e801ce869e7faaa077534ddd45d413db87e3182a92b5103eaccd13d93a34e4daa53a6d6eddfa5a01db4efe60f051a2
-  languageName: node
-  linkType: hard
-
-"@vertigis/viewer-spec@npm:^57.2.0":
-  version: 57.2.0
-  resolution: "@vertigis/viewer-spec@npm:57.2.0"
-  peerDependencies:
-    "@arcgis/core": "*"
-    "@vertigis/arcgis-extensions": ">= 45.0.0-0 < 46.0.0-0"
-  checksum: 10c0/23db5e3ed83322cac1ed8cc009e79af9d90edcd48502715338fd197297c9de4e46ade2b8f091b4e91b664c45d5c357151780b150d431958bfc780796ce98c4c9
   languageName: node
   linkType: hard
 
@@ -6315,9 +6285,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "library-time-slider@workspace:libraries/timeslider"
   dependencies:
-    "@arcgis/core": "npm:~4.28.6"
-    "@vertigis/arcgis-extensions": "npm:^45.2.0"
-    "@vertigis/viewer-spec": "npm:^57.2.0"
     "@vertigis/web": "npm:^5.29.0"
     "@vertigis/web-sdk": "npm:^1.10.0"
     tslib: "npm:^2.6.2"
@@ -10296,15 +10263,6 @@ __metadata:
   bin:
     xlsx: ./bin/xlsx.njs
   checksum: 10c0/86c0874bb71b14555b566a529dc3f3cf2bf1eb7170a4a058171332739b868e53bfe7f1137a85139ee99c9e5a1d9c85acc60c5c2af19579ad3f2f60ad55f74f7d
-  languageName: node
-  linkType: hard
-
-"xlsx@https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz":
-  version: 0.20.2
-  resolution: "xlsx@https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
-  bin:
-    xlsx: ./bin/xlsx.njs
-  checksum: 10c0/664dff22e5ecd83d595f34e00ac90ee852d16e45b72385ada54291551b808c6848b166fb395f5e35249ca976a5b5d514e793ccbcc0a611b87a600ae4024d605a
   languageName: node
   linkType: hard
 
