@@ -182,7 +182,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
 
     private readonly _updateWidgetFromWebMapTimeSlider = async (
         widget: EsriTimeSlider,
-        timeSlider: __esri.WebMapTimeSlider,
+        timeSlider: __esri.TimeSlider,
         map: WebMap
     ): Promise<void> => {
         let timeExtentOption: string;
