@@ -1,6 +1,6 @@
-import TimeExtent from "@arcgis/core/TimeExtent";
 import type WebMap from "@arcgis/core/WebMap";
 import type FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import TimeExtent from "@arcgis/core/time/TimeExtent";
 import type EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
 import { ItemType } from "@vertigis/arcgis-extensions/ItemType";
 import type { MapModel } from "@vertigis/web/mapping/MapModel";
@@ -182,7 +182,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
 
     private readonly _updateWidgetFromWebMapTimeSlider = async (
         widget: EsriTimeSlider,
-        timeSlider: __esri.WebMapTimeSlider,
+        timeSlider: __esri.TimeSlider,
         map: WebMap
     ): Promise<void> => {
         let timeExtentOption: string;
