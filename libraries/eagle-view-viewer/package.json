@@ -1,0 +1,16 @@
+{
+    "name": "library-eagle-view-viewer",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build": "vertigis-web-sdk build",
+        "start": "vertigis-web-sdk start"
+    },
+    "dependencies": {
+        "@vertigis/web": "^5.36.0"
+    },
+    "devDependencies": {
+        "@vertigis/web-sdk": "^1.10.0",
+        "typescript": "~5.3.3"
+    }
+}

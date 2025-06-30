@@ -1,0 +1,15 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "map-extension",
+            "id": "map-config-1",
+            "webMap": "https://latitudegeo.maps.arcgis.com/home/item.html?id=ce389e2afb7a48e1aa3db85e57949f92"
+        },
+        {
+            "$type": "eagleview",
+            "id": "eagleview-config-1",
+            "apiKey": "e8ac86a1-1b08-40cb-ae64-92d12dfce9a5"
+        }
+    ]
+}

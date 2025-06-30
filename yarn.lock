@@ -7339,6 +7339,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"library-eagle-view-viewer@workspace:libraries/eagle-view-viewer":
+  version: 0.0.0-use.local
+  resolution: "library-eagle-view-viewer@workspace:libraries/eagle-view-viewer"
+  dependencies:
+    "@vertigis/web": "npm:^5.36.0"
+    "@vertigis/web-sdk": "npm:^1.10.0"
+    typescript: "npm:~5.3.3"
+  languageName: unknown
+  linkType: soft
+
 "library-mapillary@workspace:libraries/mapillary":
   version: 0.0.0-use.local
   resolution: "library-mapillary@workspace:libraries/mapillary"
