@@ -1,4 +1,4 @@
-# Time Slider Component
+# Eagle View Embedded Explorer
 
 The `Eagle View` component in this library renders an [Embedded Explorer](https://embedded-explorer.eagleview.com/static/docs/) control.
 
