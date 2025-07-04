@@ -31,7 +31,6 @@ export default function EagleView(
                 (style) => !previousStyle.includes(style)
             );
             newStyles.forEach((style) => {
-                // Remove inline styles that are not from the EagleView library.
                 const rules = [...style.cssRules];
                 for (let index = rules.length - 1; index >= 0; index--) {
                     const rule = rules[index];
