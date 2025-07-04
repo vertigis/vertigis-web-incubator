@@ -41,9 +41,6 @@ export default function EagleView(
                             (selector) => rule.selectorText === selector
                         )
                     ) {
-                        console.error(
-                            `Removing inline style rule: ${rule.selectorText}`
-                        );
                         style.deleteRule(index);
                     }
                 }
