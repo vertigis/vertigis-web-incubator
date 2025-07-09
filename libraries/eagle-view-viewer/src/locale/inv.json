@@ -1,0 +1,9 @@
+{
+    "language-designer-eagleview-title": "EagleView Embedded Explorer",
+    "language-designer-eagleview-api-key-description": "Add your EagleView API Key here to enable this component.",
+    "language-designer-eagleview-api-key-title": "API Key",
+    "language-designer-eagleview-default-scale-description": "Scale to zoom to after adding the location marker to the map component. Enter 0 to remain at the current scale.",
+    "language-designer-eagleview-default-scale-title": "Default Scale",
+    "language-eagleview-recenter-title": "Recenter the map",
+    "language-eagleview-close-title": "Close Eagleview"
+}

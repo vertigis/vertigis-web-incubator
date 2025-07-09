@@ -1,5 +1,6 @@
 import type Accessor from "@arcgis/core/core/Accessor";
 import DirectLineMeasurement3DWidget from "@arcgis/core/widgets/DirectLineMeasurement3D";
+import type { AccessorLike } from "@vertigis/web/support/esri";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
 import type {
@@ -30,7 +31,7 @@ export default function LineMeasurement(
     const [widget, setWidget] = useState<DirectLineMeasurement3DWidget>();
 
     useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
-    useWatchAndRerender(widget?.viewModel, "state");
+    useWatchAndRerender(widget?.viewModel as unknown as AccessorLike, "state");
     useEffect(() => {
         if (!widget) {
             return;
