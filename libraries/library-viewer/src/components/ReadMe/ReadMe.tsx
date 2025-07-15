@@ -23,7 +23,7 @@ const ReadMe: FC<ReadMeProps> = ({ model, ...layoutProps }) => {
             {readmeText && (
                 <Markdown
                     text={readmeText}
-                    sx={{ marginLeft: 4, marginRight: 4 }}
+                    sx={{ marginLeft: 2, marginRight: 2 }}
                 />
             )}
         </LayoutElement>

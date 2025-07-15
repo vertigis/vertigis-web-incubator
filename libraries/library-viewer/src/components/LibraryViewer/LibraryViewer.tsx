@@ -24,7 +24,7 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
 
     return (
         <LayoutElement {...layoutProps} stretch className="library-viewer">
-            <Stack sx={{ margin: 4 }}>
+            <Stack sx={{ margin: 2 }}>
                 <LayoutElementContainer sx={{ border: "1px solid lightgrey" }}>
                     {children}
                 </LayoutElementContainer>

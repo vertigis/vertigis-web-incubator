@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns="https://geocortex.com/layout/v1" xmlns:incubator="vertigis.web.incubator.eagleview">
-    <map id="map-1" config="map-config-1" />
-    <panel show-close-button="false" >
-        <incubator:eagleview grow="100" config="eagleview-config-1"/>
-    </panel>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="vertigis.web.incubator.eagleview">
+    <split>
+        <map id="map-1" config="map-config-1" />
+        <custom:eagleview config="eagleview-config-1"/>
+    </split>
 </layout>

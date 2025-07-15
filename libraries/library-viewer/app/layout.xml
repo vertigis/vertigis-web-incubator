@@ -3,8 +3,8 @@
     <split>
         <library:pick-list width="15"/>
         <stack>
-            <library:library-viewer config="library-viewer-1" spacing="5" />
-            <library:readme height="20" />
+            <library:library-viewer config="library-viewer-1" grow="90" spacing="5" />
+            <library:readme grow="10" />
         </stack>
     </split>
 </layout>
