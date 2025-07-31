@@ -20,7 +20,7 @@ export default function EagleView(
 
             model.e3 = explorer.mount("eagle-view-map", {
                 apiKey: model.apiKey,
-                view: model.getPointForEagleView(),
+                view: model.getPointForEagleView(true),
             });
 
             /**
@@ -63,7 +63,7 @@ export default function EagleView(
 
             document.body.appendChild(embedded_explorer_script);
         } else {
-            mountEmbeddedExplorer();
+            requestAnimationFrame(() => mountEmbeddedExplorer());
         }
 
         return () => {
