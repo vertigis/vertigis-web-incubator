@@ -27,7 +27,7 @@ export default function ElevationProfile(
     const { map } = model;
     const [widget, setWidget] = useState<ElevationProfileWidget>();
 
-    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
+    useWatchAndRerender(map, ["map", "viewMode"]);
     useWatchAndRerender(model, [
         "title",
         "legend",

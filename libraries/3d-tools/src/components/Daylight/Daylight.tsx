@@ -31,7 +31,7 @@ export default function Daylight(props: DaylightWidgetProps): ReactElement {
     const { map } = model;
     const [widget, setWidget] = useState<DaylightWidget>();
 
-    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
+    useWatchAndRerender(map, ["map", "viewMode"]);
     useWatchAndRerender(model, [
         "title",
         "datePicker",

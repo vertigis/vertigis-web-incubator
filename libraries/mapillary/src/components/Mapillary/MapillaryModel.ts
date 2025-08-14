@@ -1,4 +1,5 @@
 import Point from "@arcgis/core/geometry/Point";
+import { watch } from "@vertigis/arcgis-extensions/support/observableUtils";
 import type { MapModel } from "@vertigis/web/mapping";
 import type {
     PropertyDefs,
@@ -164,7 +165,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         this._map = instance;
 
         // We may need to wait for the view to arrive before proceeding.
-        this._awaitViewHandle = this.watch("map.view", (view) => {
+        this._awaitViewHandle = watch(this.map, "view", (view) => {
             if (view) {
                 this._awaitViewHandle.remove();
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
