@@ -1,6 +1,5 @@
 import type Accessor from "@arcgis/core/core/Accessor";
 import SliceWidget from "@arcgis/core/widgets/Slice";
-import type { AccessorLike } from "@vertigis/web/support/esri";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
 import type {
@@ -26,9 +25,9 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
     const { map } = model;
     const [widget, setWidget] = useState<SliceWidget>();
 
-    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
+    useWatchAndRerender(map, ["map", "viewMode"]);
     useWatchAndRerender(model, ["title", "tiltEnabled"]);
-    useWatchAndRerender(widget?.viewModel as unknown as AccessorLike, "state");
+    useWatchAndRerender(widget?.viewModel, "state");
 
     useEffect(() => {
         if (!widget) {
