@@ -41,7 +41,7 @@ export default function ShadowCast(
     const { map } = model;
     const [widget, setWidget] = useState<ShadowCastWidget>();
 
-    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
+    useWatchAndRerender(map, ["map", "viewMode"]);
     useWatchAndRerender(model, [
         "title",
         "timeRangeSlider",

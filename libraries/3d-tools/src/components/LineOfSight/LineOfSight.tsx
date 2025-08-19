@@ -1,6 +1,5 @@
 import type Accessor from "@arcgis/core/core/Accessor";
 import LineOfSightWidget from "@arcgis/core/widgets/LineOfSight";
-import type { AccessorLike } from "@vertigis/web/support/esri";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
 import type {
@@ -30,8 +29,8 @@ export default function LineOfSight(
     const { map } = model;
     const [widget, setWidget] = useState<LineOfSightWidget>();
 
-    useWatchAndRerender(map, ["map", "isSwitchingViewMode"]);
-    useWatchAndRerender(widget?.viewModel as unknown as AccessorLike, "state");
+    useWatchAndRerender(map, ["map", "viewMode"]);
+    useWatchAndRerender(widget?.viewModel, "state");
     useEffect(() => {
         if (!widget) {
             return;

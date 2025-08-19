@@ -106,15 +106,11 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
 
         // Attempt to avoid unnecessary updates to the EagleView view.
         if (
-            force ||
-            (this._lastEagleViewPoint?.lonLat?.lat === position.latitude &&
-                this._lastEagleViewPoint.lonLat.lon === position.longitude &&
-                isWithinTolerance(
-                    this._lastEagleViewPoint.rotation,
-                    rotation,
-                    1
-                ) &&
-                isWithinTolerance(this._lastEagleViewPoint.zoom, zoom, 1))
+            !force &&
+            this._lastEagleViewPoint?.lonLat?.lat === position.latitude &&
+            this._lastEagleViewPoint.lonLat.lon === position.longitude &&
+            isWithinTolerance(this._lastEagleViewPoint.rotation, rotation, 1) &&
+            isWithinTolerance(this._lastEagleViewPoint.zoom, zoom, 1)
         ) {
             return undefined;
         }

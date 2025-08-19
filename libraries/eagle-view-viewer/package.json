@@ -7,7 +7,7 @@
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@vertigis/web": "^5.36.0"
+        "@vertigis/web": "^5.37.0"
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.10.0",
