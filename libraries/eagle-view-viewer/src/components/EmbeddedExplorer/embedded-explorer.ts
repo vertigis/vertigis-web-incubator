@@ -38,7 +38,7 @@ export interface EmbeddedExplorerInstance {
             | "onMapReady"
             | "onLayersDataLoad"
     ): void;
-    destroy(): void;
+    destroy(containerId: string): void;
     mount(
         containerId: string,
         options?: EmbeddedExplorerOptions

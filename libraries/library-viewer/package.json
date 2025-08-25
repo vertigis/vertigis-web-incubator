@@ -16,7 +16,7 @@
     },
     "devDependencies": {
         "@types/xml2js": "^0.4.14",
-        "@vertigis/web": "^5.29.0",
+        "@vertigis/web": "^5.37.0",
         "@vertigis/web-sdk": "^1.10.0",
         "typescript": "~5.3.3"
     },

@@ -93,7 +93,7 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
      * @param position
      * @returns position, in Web Mercator
      */
-    getPointForEagleView(): EagleViewView {
+    getPointForEagleView(force: boolean): EagleViewView {
         let position = this.map.view.center;
         if (!position.spatialReference.isWebMercator) {
             position = projectOperator.execute(
@@ -108,6 +108,7 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
 
         // Attempt to avoid unnecessary updates to the EagleView view.
         if (
+            !force &&
             this._lastEagleViewPoint?.lonLat?.lat === position.latitude &&
             this._lastEagleViewPoint.lonLat.lon === position.longitude &&
             isWithinTolerance(this._lastEagleViewPoint.rotation, rotation, 1) &&
@@ -161,7 +162,7 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
 
             try {
                 this.mapUpdateEventSource = ViewUpdatedEventSource.VSW;
-                const viewpoint = this.getPointForEagleView();
+                const viewpoint = this.getPointForEagleView(false);
                 if (viewpoint) {
                     this.e3.off("onViewUpdate");
                     this.e3.setView(viewpoint, debounce( () => {
