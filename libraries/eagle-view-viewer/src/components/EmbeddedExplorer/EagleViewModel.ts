@@ -104,7 +104,7 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
 
         // EagleView uses a different rotation direction, so we need to negate it
         const rotation = 360 - this.map.view.viewpoint.rotation;
-        const zoom = ScaleLevels.GetLevelForScale(this.map.view.scale); // this.map.view.zoom - 1;
+        const zoom = ScaleLevels.GetLevelForScale(this.map.view.scale) -1; // this.map.view.zoom - 1;
 
         // Attempt to avoid unnecessary updates to the EagleView view.
         if (
