@@ -10,6 +10,10 @@
             "$type": "eagleview",
             "id": "eagleview-config-1",
             "apiKey": "e8ac86a1-1b08-40cb-ae64-92d12dfce9a5"
+        },
+        {
+        "id": "scale-input-config-1",
+        "$type": "scale-input"
         }
     ]
 }

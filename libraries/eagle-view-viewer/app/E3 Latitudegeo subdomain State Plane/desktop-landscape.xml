@@ -1,0 +1,52 @@
+<layout xmlns="https://geocortex.com/layout/v1" id="layout-c73f519a">
+    <split id="split-c2567987" resizable="true" config="root">
+        <panel id="panel-ef7eab9f" show-close-button="false" width="26" config="panel-config-1">
+            <tabs xmlns="https://geocortex.com/layout/web/v1" id="tabs-a79ea1d6" config="tabs-config-1">
+                <stack xmlns="https://geocortex.com/layout/v1" id="stack-8cc8ab0f" config="stack-config-1">
+                    <text id="text-f1ac9fc6" config="text-config-1"/>
+                </stack>
+                <stack xmlns="https://geocortex.com/layout/v1" id="stack-a13fcbb2" config="layer-stack" halign="center">
+                    <layer-list id="layer-list-934c62b2" models="#map-primary" config="layer-list-config-1" grow="50"/>
+                    <layer-presets id="layer-presets-0d33d20a" config="layer-presets-config-1" models="#map-primary" grow="50"/>
+                </stack>
+                <legend xmlns="https://geocortex.com/layout/v1" id="legend-35a13c58" models="#map-primary" config="legend-config-1"/>
+            </tabs>
+            <query-builder xmlns="https://geocortex.com/layout/web/v1" id="query-builder" config="query-builder-config-1" models="#map-primary" show-cancel-button="true"/>
+            <filter-builder xmlns="https://geocortex.com/layout/web/v1" id="filter-builder" config="filter-builder-config-1" models="#map-primary" show-cancel-button="true"/>
+            <results-list id="results-list-65faface" active="false" config="results-config-1" show-star-controls="true"/>
+            <feature-details id="feature-details-efab5d16" active="false" config="feature-details-config-1" show-star-controls="true"/>
+            <workflow id="workflow-98bef8cc" active="false" config="workflow-config-1"/>
+            <print-form xmlns="https://geocortex.com/layout/web/v1" id="print-form" models="#map-primary" active="false" config="printing"/>
+        </panel>
+        <stack id="stack-6c7df4ee" config="root-right">
+            <toolbar id="toolbar-c8c56b4c" config="toolbar-config-1"/>
+            <stack id="stack-5a50e044" resizable="true" config="root-right-bottom">
+                <map id="map-primary" config="default" grow="45">
+                    <feature-summary xmlns="https://geocortex.com/layout/web/v1" id="feature-summary-a12252e2" config="feature-summary-config-1" slot="popup" width="20" active="false" show-star-controls="true"/>
+                    <iwtm id="iwtm-de8e4ed3" config="iwtm-config-1" slot="top-start"/>
+                    <search id="search-0874e500" config="search-config-1" slot="top-end"/>
+                    <search-new-extent id="search-new-extent-ff8b7039" config="search-config-1" slot="top-center"/>
+                    <user id="user-c537997f" slot="top-end" config="user-config-1">
+                        <user-preferences xmlns="https://geocortex.com/layout/web/v1" id="user-preferences-21b45097" config="user-preference-settings-config-1"/>
+                    </user>
+                    <map-3d-toggle xmlns="https://geocortex.com/layout/web/v1" id="map-3d-toggle-2c9fb702" config="map-3d-toggle-config-1" slot="top-end"/>
+                    <compass id="compass-b23800cf" slot="top-end" config="compass-config-1"/>
+                    <expand id="expand-d922579e" config="expand-config-1" slot="bottom-end">
+                        <basemap-picker id="basemap-picker-328881fa" config="basemap-config-1"/>
+                    </expand>
+                    <expand id="expand-b9abbc0b" config="expand-config-2" slot="bottom-end">
+                        <bookmarks id="bookmarks-7c0da87e" config="bookmarks-config-1"/>
+                    </expand>
+                    <scale-input xmlns="https://geocortex.com/layout/web/v1" id="scale-input-3213602c" slot="bottom-start" config="scale-input-config-1"/>
+                    <scalebar id="scalebar-5dab9219" slot="bottom-start" config="scalebar-config-1"/>
+                    <map-coordinates id="map-coordinates-5b0db081" slot="context-menu" config="map-coordinates-config-1"/>
+                    <address xmlns="https://geocortex.com/layout/web/v1" id="address-aba5b896" slot="context-menu" config="address-config-1"/>
+                    <geometry-toolbar xmlns="https://geocortex.com/layout/web/v1" id="geometry-toolbar" config="geometry-toolbar-config" slot="panel" active="false" size="medium"/>
+                </map>
+                <panel id="panel-9a2461af" show-close-button="true" show-minimize-button="false" show-maximize-button="false" config="panel-config-2" active="false" visual-state="normal" show-popout-button="true" grow="30">
+                    <results-table xmlns="https://geocortex.com/layout/web/v1" id="results-table-45a7836c" config="results-config-1" active="false" models="#map-primary" show-star-controls="true"/>
+                </panel>
+            </stack>
+        </stack>
+    </split>
+</layout>
