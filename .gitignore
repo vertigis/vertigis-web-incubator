@@ -6,3 +6,6 @@ package-lock.json
 !viewer/build/index.html
 !viewer/build/_*
 .yarn
+libraries/eagle-view-viewer/localhost+2-key.pem
+libraries/eagle-view-viewer/localhost+2.pem
+libraries/eagle-view-viewer/app/WebMapUrls.txt
