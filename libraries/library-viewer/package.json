@@ -5,7 +5,7 @@
     "description": "",
     "license": "UNLICENSED",
     "author": "",
-    "type": "commonjs",
+    "type": "module",
     "scripts": {
         "build": "vertigis-web-sdk build",
         "start": "vertigis-web-sdk start",
@@ -16,9 +16,9 @@
     },
     "devDependencies": {
         "@types/xml2js": "^0.4.14",
-        "@vertigis/web": "^5.37.0",
-        "@vertigis/web-sdk": "^1.10.0",
-        "typescript": "~5.3.3"
+        "@vertigis/web": "^5.39.0",
+        "@vertigis/web-sdk": "^3.0.0",
+        "typescript": "~5.6.3"
     },
     "overrides": {
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
