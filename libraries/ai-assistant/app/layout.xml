@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="custom.a1ccba60">
+    <split config="split-1">
+        <panel config="panel-2" show-close-button="false" grow="20" visual-state="minimized">
+            <results-list config="results-list-1" />
+        </panel>
+        <map id="primary-map" config="map-1" grow="80">
+            <panel config="panel-1" show-close-button="false" show-maximize-button="false" show-minimize-button="false">
+                <custom:arcgis-assistant config="arcgis-assistant-1"/>
+            </panel>
+        </map>
+    </split>
+</layout>

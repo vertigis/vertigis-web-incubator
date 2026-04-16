@@ -14,5 +14,10 @@
         "unsynced",
         "vertigis"
     ],
-    "eslint.workingDirectories": [{ "pattern": "./libraries/*/" }]
+    "eslint.workingDirectories": [
+        {
+            "pattern": "./libraries/*/"
+        }
+    ],
+    "js/ts.tsdk.path": "node_modules/typescript/lib"
 }

@@ -1,0 +1,31 @@
+{
+    "name": "library-ai-assistant",
+    "private": true,
+    "version": "1.0.0",
+    "description": "",
+    "license": "UNLICENSED",
+    "author": "",
+    "type": "module",
+    "installConfig": {
+        "hoistingLimits": "workspaces"
+    },
+    "scripts": {
+        "build": "vertigis-web-sdk build",
+        "start": "VIEWER_URL=http://localhost:8082 vertigis-web-sdk start",
+        "lint": "eslint --ext .ts,.tsx",
+        "prettier": "prettier --write \"**/*.json\" \"**/*.js\" \"**/*.ts\" \"**/*.tsx\""
+    },
+    "dependencies": {
+        "@arcgis/ai-components": "^5.0.14",
+        "@arcgis/map-components": "^5.0.14"
+    },
+    "devDependencies": {
+        "@vertigis/web": "file:./vertigis-web-5.42.0-dev.319168.tgz",
+        "@vertigis/web-sdk": "3.0.1",
+        "prettier": "~3.5.3",
+        "typescript": "^5.4.0"
+    },
+    "overrides": {
+        "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
+    }
+}

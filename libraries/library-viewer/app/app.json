@@ -6,6 +6,10 @@
             "id": "library-viewer-1",
             "libraries": [
                 {
+                    "id": "ai-assistant",
+                    "title": "AI Assistant"
+                },
+                {
                     "id": "mapillary",
                     "title": "Mapillary"
                 },
