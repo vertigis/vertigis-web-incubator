@@ -8,7 +8,6 @@
             "description": "Explore wheat production in the U.S. from 2017 to 2022",
             "entryMessage": "Hello! I'm here to help you explore changes in wheat production over the years.",
             "suggestedPrompts": [
-                "What is the total change in wheat production from 2017 to 2022?",
                 "Go to the country that produced the most wheat in 2022.",
                 "How does that compare to the average county that produced wheat?",
                 "How many counties produced less wheat in 2022 than in 2017?"
@@ -22,6 +21,10 @@
         {
             "$type": "panel",
             "id": "panel-2"
+        },
+        {
+            "$type": "tabs",
+            "id": "tabs-1"
         },
         {
             "id": "results",

@@ -115,16 +115,19 @@ const EsriComponentWrapper: FC<EsriComponentWrapperProps> = ({
     const setRef = useCallback(
         (element: HTMLElement) => {
             if (element) {
-                if (element !== componentElement) {
+                if (componentElement && element !== componentElement) {
                     cleanup();
                 }
-                componentRef.current = element as EsriComponentElement;
-                setComponentElement(element as EsriComponentElement);
                 syncProps();
             } else {
                 cleanup();
             }
+            setComponentElement(element as EsriComponentElement);
             innerRef?.(element);
+
+            if (componentRef) {
+                componentRef.current = element as EsriComponentElement;
+            }
         },
         [cleanup, componentElement, componentRef, innerRef, syncProps]
     );
@@ -167,8 +170,9 @@ const EsriComponentWrapper: FC<EsriComponentWrapperProps> = ({
 };
 
 export const wrapComponent = <T extends EsriComponentProps>(tag: string) =>
-    forwardRef<HTMLElement>(({ containerProps, ...props }: T, ref) => (
+    forwardRef<HTMLElement>(({ containerProps, componentRef, ...props }: T, ref) => (
         <EsriComponentWrapper
+            componentRef={componentRef}
             containerProps={containerProps}
             tag={tag}
             innerRef={ref as (instance: HTMLElement) => void}
