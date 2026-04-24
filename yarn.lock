@@ -4526,9 +4526,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertigis/arcgis-extensions@npm:53.2.1":
-  version: 53.2.1
-  resolution: "@vertigis/arcgis-extensions@npm:53.2.1"
+"@vertigis/arcgis-extensions@npm:53.4.0":
+  version: 53.4.0
+  resolution: "@vertigis/arcgis-extensions@npm:53.4.0"
   dependencies:
     alasql: "npm:~4.5.2"
     dxf-parser: "npm:^1.1.2"
@@ -4543,7 +4543,7 @@ __metadata:
   peerDependencies:
     "@arcgis/core": ^5.0.10
     tslib: ^2.6.2
-  checksum: 10c0/4003d87103a260becda0b7f2387ff30c38c26de86fea29bc802d1c64d487c25f462bd634552c02d443fa56b6f8f102ac17f3e7d9ff2018aae2c1ec2595e18793
+  checksum: 10c0/867dd16f22cc8fbea857740cdacc699f4ca07fb5a11fe4ff90576d072272dc2694ca2db0523c87c9ff84741cda9e5a852516442ffedc39b459ae57312112d440
   languageName: node
   linkType: hard
 
@@ -4623,14 +4623,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertigis/viewer-spec@npm:61.2.0":
-  version: 61.2.0
-  resolution: "@vertigis/viewer-spec@npm:61.2.0"
+"@vertigis/viewer-spec@npm:61.2.3":
+  version: 61.2.3
+  resolution: "@vertigis/viewer-spec@npm:61.2.3"
   peerDependencies:
     "@arcgis/core": "*"
     "@vertigis/arcgis-extensions": ">= 53.0.0-0 < 54.0.0-0"
     highcharts: "*"
-  checksum: 10c0/ce49ec4ba598d28922d86756587bf08a398e00030de7de82635e3a0768ac0582958f8972462f69c417fb5c6a541ea383c784fb86b7de399dabc808f9fd5b3791
+  checksum: 10c0/0a3353f41c9677daf436e8baa56b1b7927e04fbc6fefd7dbe30e94953fd79fbaf474d448a553463b20bdecc9dc5924582d10afad76c2cf0526a8247b9a54d163
   languageName: node
   linkType: hard
 
@@ -4680,24 +4680,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertigis/web@file:./vertigis-web-5.42.0-dev.319168.tgz::locator=library-ai-assistant%40workspace%3Alibraries%2Fai-assistant":
-  version: 5.42.0-dev.319168
-  resolution: "@vertigis/web@file:./vertigis-web-5.42.0-dev.319168.tgz#./vertigis-web-5.42.0-dev.319168.tgz::hash=1c65ce&locator=library-ai-assistant%40workspace%3Alibraries%2Fai-assistant"
-  dependencies:
-    "@arcgis/core": "npm:5.0.12"
-    "@types/react": "npm:18.2.46"
-    "@types/react-dom": "npm:18.2.18"
-    "@types/react-window": "npm:1.8.8"
-    "@vertigis/arcgis-extensions": "npm:53.2.1"
-    "@vertigis/react-ui": "npm:21.4.1"
-    "@vertigis/viewer-spec": "npm:61.2.0"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
-    react-is: "npm:18.2.0"
-  checksum: 10c0/25e06d3cd876964e5a42b7ad16de84f8e6bc3fe25c9c58617d35d84e76370140fb571f5eeb87a3fb871832462fe55e8be7606a6ecea04393a9171eb11d721c98
-  languageName: node
-  linkType: hard
-
 "@vertigis/web@npm:^5.37.0":
   version: 5.40.0
   resolution: "@vertigis/web@npm:5.40.0"
@@ -4713,6 +4695,24 @@ __metadata:
     react-dom: "npm:18.2.0"
     react-is: "npm:18.2.0"
   checksum: 10c0/4fc5cb19e2244e4baa0336387218fde7fd25587dff7b78ce7efb9fcb31c72d254cbf5769e016aa1afda4a94df65f97002b7a7ea9282bc1097ea6361ca434eb56
+  languageName: node
+  linkType: hard
+
+"@vertigis/web@npm:^5.41.1":
+  version: 5.41.1
+  resolution: "@vertigis/web@npm:5.41.1"
+  dependencies:
+    "@arcgis/core": "npm:5.0.12"
+    "@types/react": "npm:18.2.46"
+    "@types/react-dom": "npm:18.2.18"
+    "@types/react-window": "npm:1.8.8"
+    "@vertigis/arcgis-extensions": "npm:53.4.0"
+    "@vertigis/react-ui": "npm:21.4.1"
+    "@vertigis/viewer-spec": "npm:61.2.3"
+    react: "npm:18.2.0"
+    react-dom: "npm:18.2.0"
+    react-is: "npm:18.2.0"
+  checksum: 10c0/3c6e963bddbb40815a50e39a57ae22cf081fb61ffca8c92e3310238efebd37042a402ce91c58385b2dfedf2cfa6f4405fdfd95db22ffb4000854f12f7a910912
   languageName: node
   linkType: hard
 
@@ -6331,7 +6331,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^7.1.2, css-loader@npm:~7.1.0":
+"css-loader@npm:^7.1.2, css-loader@npm:^7.1.4, css-loader@npm:~7.1.0":
   version: 7.1.4
   resolution: "css-loader@npm:7.1.4"
   dependencies:
@@ -10198,7 +10198,7 @@ __metadata:
   dependencies:
     "@arcgis/ai-components": "npm:^5.0.14"
     "@arcgis/map-components": "npm:^5.0.14"
-    "@vertigis/web": "file:./vertigis-web-5.42.0-dev.319168.tgz"
+    "@vertigis/web": "npm:^5.41.1"
     "@vertigis/web-sdk": "npm:3.0.1"
     prettier: "npm:~3.5.3"
     typescript: "npm:^5.4.0"
@@ -13191,6 +13191,7 @@ __metadata:
   dependencies:
     concurrently: "npm:^7.6.0"
     cross-env: "npm:^7.0.3"
+    css-loader: "npm:^7.1.4"
     cypress: "npm:^12.3.0"
     eslint: "npm:~8.56.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -13205,6 +13206,7 @@ __metadata:
     prettier: "npm:^2.8.3"
     shx: "npm:^0.3.4"
     simple-git-hooks: "npm:^2.8.1"
+    style-loader: "npm:^4.0.0"
     ts-loader: "npm:^9.5.1"
     typescript: "npm:^5.4.0"
     webpack: "npm:~5.90.2"

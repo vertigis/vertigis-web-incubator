@@ -11,7 +11,7 @@
     },
     "scripts": {
         "build": "vertigis-web-sdk build",
-        "start": "VIEWER_URL=http://localhost:8082 vertigis-web-sdk start",
+        "start": "vertigis-web-sdk start",
         "lint": "eslint --ext .ts,.tsx",
         "prettier": "prettier --write \"**/*.json\" \"**/*.js\" \"**/*.ts\" \"**/*.tsx\""
     },
@@ -20,7 +20,7 @@
         "@arcgis/map-components": "^5.0.14"
     },
     "devDependencies": {
-        "@vertigis/web": "file:./vertigis-web-5.42.0-dev.319168.tgz",
+        "@vertigis/web": "^5.41.1",
         "@vertigis/web-sdk": "3.0.1",
         "prettier": "~3.5.3",
         "typescript": "^5.4.0"

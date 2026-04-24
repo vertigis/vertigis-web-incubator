@@ -56,7 +56,7 @@ export default class ArcGISAssistantModel extends ComponentModelBase<ArcGISAssis
                         });
                         await this.messages.commands.results.clear.execute();
                         await this.messages.commands.results.add.execute(results);
-                        layerView.featureEffect = null;
+                        requestAnimationFrame(() => (layerView.featureEffect = null));
                     })
                 );
             })
