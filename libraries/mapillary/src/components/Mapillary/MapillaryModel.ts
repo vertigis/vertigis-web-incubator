@@ -165,7 +165,7 @@ export default class MapillaryModel extends ComponentModelBase<MapillaryModelPro
         this._map = instance;
 
         // We may need to wait for the view to arrive before proceeding.
-        this._awaitViewHandle = watch(this.map, "view", (view) => {
+        this._awaitViewHandle = watch(this.map as any, "view", (view) => {
             if (view) {
                 this._awaitViewHandle.remove();
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises

@@ -18,35 +18,35 @@
     "homepage": "https://github.com/vertigis/vertigis-web-incubator#readme",
     "scripts": {
         "build": "yarn build:libraries && yarn build:viewer && yarn copy-static-files",
-        "build:libraries": "yarn workspaces foreach -Rpt --from \"libraries/!(library-viewer)\" run build",
+        "build:libraries": "yarn workspaces foreach -Rt --from \"libraries/!(library-viewer)\" run build",
         "build:viewer": "yarn workspace library-viewer run build",
         "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\"",
         "test": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress run --browser chrome\"",
         "test:watch": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress open\"",
         "start": "yarn workspace library-viewer start",
         "copy-static-files": "node scripts/copy-static-files.js",
-        "serve-library-viewer": "node scripts/serve-library-viewer.js"
+        "preview": "node scripts/serve-library-viewer.js"
     },
     "devDependencies": {
         "concurrently": "^7.6.0",
         "cross-env": "^7.0.3",
-        "cypress": "^12.3.0",
-        "eslint": "~8.56.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-import": "~2.29.1",
+        "cypress": "^15.9.0",
+        "eslint": "^9.31.0",
+        "eslint-config-prettier": "~10.1.1",
+        "eslint-plugin-import": "~2.31.0",
         "eslint-plugin-only-warn": "^1.1.0",
-        "eslint-plugin-react": "^7.34.3",
-        "eslint-plugin-react-hooks": "~4.6.2",
-        "express": "^4.19.2",
+        "eslint-plugin-react": "^7.34.4",
+        "eslint-plugin-react-hooks": "~5.2.0",
+        "express": "^4.20.0",
         "file-loader": "^6.2.0",
-        "http-proxy-middleware": "^3.0.0",
-        "lint-staged": "^13.1.0",
-        "prettier": "^2.8.3",
+        "http-proxy-middleware": "^3.0.3",
+        "lint-staged": "^16.2.7",
+        "prettier": "^2.8.4",
         "shx": "^0.3.4",
         "simple-git-hooks": "^2.8.1",
         "ts-loader": "^9.5.1",
-        "typescript": "~5.3.3",
-        "webpack": "~5.90.2"
+        "typescript": "~5.6.3",
+        "webpack": "^5.104.1"
     },
     "resolutions": {
         "@types/react": "^18.3.2"
@@ -57,5 +57,5 @@
     "lint-staged": {
         "*.{js,json,ts,tsx,md,css,scss}": "prettier --write"
     },
-    "packageManager": "yarn@4.2.2"
+    "packageManager": "yarn@4.12.0"
 }
