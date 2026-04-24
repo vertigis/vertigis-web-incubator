@@ -10,7 +10,7 @@
         "@vertigis/web": "^5.37.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.10.0",
-        "typescript": "~5.3.3"
+        "@vertigis/web-sdk": "^3.0.0",
+        "typescript": "~5.6.3"
     }
 }

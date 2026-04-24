@@ -3,5 +3,5 @@
     "compilerOptions": {
         "baseUrl": "."
     },
-    "include": [".eslintrc.js", "src"]
+    "include": ["eslint.config.js", "src"]
 }
