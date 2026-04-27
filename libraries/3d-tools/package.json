@@ -7,7 +7,7 @@
         "start": "vertigis-web-sdk start"
     },
     "devDependencies": {
-        "@vertigis/web": "^5.39.0",
+        "@vertigis/web": "^5.41.1",
         "@vertigis/web-sdk": "^3.0.0",
         "typescript": "~5.6.3"
     }
