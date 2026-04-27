@@ -38,30 +38,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@arcgis/ai-agents@npm:5.0.18":
-  version: 5.0.18
-  resolution: "@arcgis/ai-agents@npm:5.0.18"
+"@arcgis/ai-agents@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@arcgis/ai-agents@npm:5.0.12"
   dependencies:
-    "@arcgis/ai-orchestrator": "npm:5.0.18"
+    "@arcgis/ai-orchestrator": "npm:5.0.12"
     "@langchain/core": "npm:^1.1.17"
     "@langchain/langgraph": "npm:^1.1.2"
     tslib: "npm:^2.8.1"
     zod: "npm:^3.25.76"
   peerDependencies:
     "@arcgis/core": ^5.0.0
-  checksum: 10c0/4809d52c297ff63ca1e4e6ed0cf7c4534c35f27d6fbc50cc6d2561dfa3a9e3b5f63123d7cd48792690b1edea43d343ec000aea711029ea3bb2e7bd2ccffecac5
+  checksum: 10c0/4b0aed840b3e9ab23008c12ec0c7470878750aa8f269b170facf37c1e8d3a7e8b9d56c32f08bfc94782248f8973126fd9adde56beaa8cf285464240d1ef47c35
   languageName: node
   linkType: hard
 
-"@arcgis/ai-components@npm:^5.0.14":
-  version: 5.0.18
-  resolution: "@arcgis/ai-components@npm:5.0.18"
+"@arcgis/ai-components@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@arcgis/ai-components@npm:5.0.12"
   dependencies:
-    "@arcgis/ai-agents": "npm:5.0.18"
-    "@arcgis/ai-orchestrator": "npm:5.0.18"
-    "@arcgis/lumina": "npm:5.0.18"
-    "@arcgis/map-components": "npm:5.0.18"
-    "@arcgis/toolkit": "npm:5.0.18"
+    "@arcgis/ai-agents": "npm:5.0.12"
+    "@arcgis/ai-orchestrator": "npm:5.0.12"
+    "@arcgis/lumina": "npm:5.0.12"
+    "@arcgis/map-components": "npm:5.0.12"
+    "@arcgis/toolkit": "npm:5.0.12"
     "@esri/arcgis-html-sanitizer": "npm:~4.1.0"
     "@langchain/core": "npm:^1.1.17"
     "@langchain/langgraph": "npm:^1.1.2"
@@ -72,13 +72,13 @@ __metadata:
   peerDependencies:
     "@arcgis/core": ^5.0.0
     "@esri/calcite-components": ^5.0.2
-  checksum: 10c0/cd15dd38a47257e3bebbef565849a4dc21f09da790ebfe5da6664cb2d53ee938e32bf3161c1e6412b8877ebce65b8ba5de7ab5a8fe0a6c7252e7da9e1e1eb924
+  checksum: 10c0/bb0f3597f49a9390fd904ee512413297318fbd390c539a654487150a288f7a95896d204445313a1a7139d6426cb7f324b42445ba7e319fdbf8dcb0f5228c1d4e
   languageName: node
   linkType: hard
 
-"@arcgis/ai-orchestrator@npm:5.0.18":
-  version: 5.0.18
-  resolution: "@arcgis/ai-orchestrator@npm:5.0.18"
+"@arcgis/ai-orchestrator@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@arcgis/ai-orchestrator@npm:5.0.12"
   dependencies:
     "@langchain/core": "npm:^1.1.17"
     "@langchain/langgraph": "npm:^1.1.2"
@@ -87,16 +87,16 @@ __metadata:
     zod: "npm:^3.25.76"
   peerDependencies:
     "@arcgis/core": ^5.0.0
-  checksum: 10c0/7aa22bf22952fe044de84b3b0647c7d2445cf8b0ee84d5091b11306f114297bbfd6f41cf90e733af2cf1dab1a97864fa38b43713c98f47ebf15a6ce66bcdf660
+  checksum: 10c0/bf2d90ceae74b01c3e21f8ba3c696a3601dc89462ed7246e40620e47c541df590c28430a7df2251084b64ed9d499694a04fe8824dcda34be004e357b116e75c7
   languageName: node
   linkType: hard
 
-"@arcgis/common-components@npm:5.0.18":
-  version: 5.0.18
-  resolution: "@arcgis/common-components@npm:5.0.18"
+"@arcgis/common-components@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@arcgis/common-components@npm:5.0.12"
   dependencies:
-    "@arcgis/lumina": "npm:5.0.18"
-    "@arcgis/toolkit": "npm:5.0.18"
+    "@arcgis/lumina": "npm:5.0.12"
+    "@arcgis/toolkit": "npm:5.0.12"
     "@esri/arcgis-html-sanitizer": "npm:~4.1.0"
     "@lit/task": "npm:^1.0.3"
     lit: "npm:^3.3.0"
@@ -105,7 +105,7 @@ __metadata:
   peerDependencies:
     "@arcgis/core": ^5.0.0
     "@esri/calcite-components": ^5.0.2
-  checksum: 10c0/7f1b9f239d4fa34bf653cd84b85082c49cb429aac947febbe7cb4e259aaf44a3dabe5bc0bd45765d3761b6f819b429597f71dbf89aab24c1650ea2d762d43186
+  checksum: 10c0/6253d830526f6a3c848af17211fcdd07079377ebded7ce79317d8f84038f29089856886ebb9bbf20053d68170bcecd846a2969aa2858b31fa8b3dadadcc5244b
   languageName: node
   linkType: hard
 
@@ -126,7 +126,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@arcgis/lumina@npm:5.0.18, @arcgis/lumina@npm:>=5.0.0-next.144 <6.0.0":
+"@arcgis/lumina@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@arcgis/lumina@npm:5.0.12"
+  dependencies:
+    "@arcgis/toolkit": "npm:~5.0.12"
+    csstype: "npm:^3.1.3"
+    tslib: "npm:^2.8.1"
+  peerDependencies:
+    "@lit/context": ^1.1.6
+    lit: ^3.3.0
+  peerDependenciesMeta:
+    "@lit/context":
+      optional: true
+  checksum: 10c0/2fea4ee0a9af8dfe2ede764ab2a17285fcb89944ac89fd52aa57910c2a740529bc69a7d5c238f59917c4f6264209b30d530ca6950fd81302159df43a73c745bd
+  languageName: node
+  linkType: hard
+
+"@arcgis/lumina@npm:>=5.0.0-next.144 <6.0.0":
   version: 5.0.18
   resolution: "@arcgis/lumina@npm:5.0.18"
   dependencies:
@@ -143,25 +160,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@arcgis/map-components@npm:5.0.18, @arcgis/map-components@npm:^5.0.14":
-  version: 5.0.18
-  resolution: "@arcgis/map-components@npm:5.0.18"
+"@arcgis/map-components@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@arcgis/map-components@npm:5.0.12"
   dependencies:
     "@amcharts/amcharts5": "npm:~5.15.5"
-    "@arcgis/common-components": "npm:5.0.18"
-    "@arcgis/lumina": "npm:5.0.18"
-    "@arcgis/toolkit": "npm:5.0.18"
+    "@arcgis/common-components": "npm:5.0.12"
+    "@arcgis/lumina": "npm:5.0.12"
+    "@arcgis/toolkit": "npm:5.0.12"
     lit: "npm:^3.3.0"
     lodash-es: "npm:^4.17.23"
     tslib: "npm:^2.8.1"
   peerDependencies:
     "@arcgis/core": ^5.0.0
     "@esri/calcite-components": ^5.0.2
-  checksum: 10c0/5d715ce3b75635cf1be9555096fc91d122656b28dc63adcb65937c9abe5ac8af6f864dffd8a3ff1f367e2acb48e65da4e15af666086405613a61e6b9a572bc66
+  checksum: 10c0/73261c10161f698149d578d03198257956dc2153ce88a5f94698d9fde09fd318ca1bbed3f7329e96b96523737796cf08d150d94d788547e6e3e8867ec3e0337a
   languageName: node
   linkType: hard
 
-"@arcgis/toolkit@npm:5.0.18, @arcgis/toolkit@npm:>=5.0.0-next.144 <6.0.0, @arcgis/toolkit@npm:^5.0.0, @arcgis/toolkit@npm:~5.0.18":
+"@arcgis/toolkit@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@arcgis/toolkit@npm:5.0.12"
+  dependencies:
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/cf2942101ba8903e55ab20b9ed0a25ff501cd2fd5178dfb899a220fb011f1b899de5c43b63a3e7b2b822da225b81a142188564184d9f7636798c866d55c8e11d
+  languageName: node
+  linkType: hard
+
+"@arcgis/toolkit@npm:>=5.0.0-next.144 <6.0.0, @arcgis/toolkit@npm:^5.0.0, @arcgis/toolkit@npm:~5.0.12, @arcgis/toolkit@npm:~5.0.18":
   version: 5.0.18
   resolution: "@arcgis/toolkit@npm:5.0.18"
   dependencies:
@@ -8517,8 +8543,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "library-ai-assistant@workspace:libraries/ai-assistant"
   dependencies:
-    "@arcgis/ai-components": "npm:^5.0.14"
-    "@arcgis/map-components": "npm:^5.0.14"
+    "@arcgis/ai-components": "npm:5.0.12"
+    "@arcgis/map-components": "npm:5.0.12"
     "@vertigis/web": "npm:^5.41.1"
     "@vertigis/web-sdk": "npm:^3.0.1"
     prettier: "npm:~3.5.3"
