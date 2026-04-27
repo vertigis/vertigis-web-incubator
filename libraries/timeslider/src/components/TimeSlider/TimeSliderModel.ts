@@ -1,6 +1,8 @@
+import type Map from "@arcgis/core/Map";
 import type WebMap from "@arcgis/core/WebMap";
 import type FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import TimeExtent from "@arcgis/core/time/TimeExtent";
+import type TimeSlider from "@arcgis/core/webdoc/widgets/TimeSlider";
 import type EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
 import { ItemType } from "@vertigis/arcgis-extensions/ItemType";
 import type { MapModel } from "@vertigis/web/mapping/MapModel";
@@ -139,7 +141,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
 
     private readonly _updateWidgetFromLayerTimeInfos = async (
         widget: EsriTimeSlider,
-        map: __esri.Map
+        map: Map
     ): Promise<void> => {
         let start, end: Date;
         let timeVisible: boolean;
@@ -182,7 +184,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
 
     private readonly _updateWidgetFromWebMapTimeSlider = async (
         widget: EsriTimeSlider,
-        timeSlider: __esri.TimeSlider,
+        timeSlider: TimeSlider,
         map: WebMap
     ): Promise<void> => {
         let timeExtentOption: string;
