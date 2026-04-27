@@ -2,6 +2,7 @@ import Viewpoint from "@arcgis/core/Viewpoint";
 import Point from "@arcgis/core/geometry/Point";
 import SpatialReference from "@arcgis/core/geometry/SpatialReference";
 import * as projectOperator from "@arcgis/core/geometry/operators/projectOperator";
+import { IHandle } from "@vertigis/arcgis-extensions/support/observableUtils";
 import type { MapModel } from "@vertigis/web/mapping";
 import type {
     ComponentModelProperties,
