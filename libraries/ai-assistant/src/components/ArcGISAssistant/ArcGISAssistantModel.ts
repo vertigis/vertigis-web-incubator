@@ -50,13 +50,20 @@ export default class ArcGISAssistantModel extends ComponentModelBase<ArcGISAssis
                 const layerView = (await this.map.view.whenLayerView(layerX.layer)) as FeatureLayerView;
                 this._handles.push(
                     watch(layerView, "featureEffect", async (newValue: FeatureEffect) => {
+                        if (!newValue?.filter?.where) {
+                            return;
+                        }
                         const results = await this.messages.operations.tasks.query.execute({
                             source: layerX,
                             where: newValue.filter.where,
+                            maxResults: 1000,
                         });
                         await this.messages.commands.results.clear.execute();
                         await this.messages.commands.results.add.execute(results);
-                        requestAnimationFrame(() => (layerView.featureEffect = null));
+                        await this.messages.commands.ui.setVisualState.execute({
+                            id: "results-panel",
+                            visualState: "normal",
+                        });
                     })
                 );
             })

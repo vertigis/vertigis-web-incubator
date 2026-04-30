@@ -8,41 +8,19 @@
             "description": "Explore wheat production in the U.S. from 2017 to 2022",
             "entryMessage": "Hello! I'm here to help you explore changes in wheat production over the years.",
             "suggestedPrompts": [
-                "Go to the country that produced the most wheat in 2022.",
+                "Go to the county that produced the most wheat in 2022.",
                 "How does that compare to the average county that produced wheat?",
-                "How many counties produced less wheat in 2022 than in 2017?"
+                "Select all the counties that produced at least two times less wheat in 2022 than in 2017."
             ],
-            "keepSuggestedPrompts": "true"
+            "keepSuggestedPrompts": "true",
+            "title": "AI Assistant",
+            "icon": "tips-and-tricks"
         },
         {
-            "$type": "panel",
-            "id": "panel-1"
-        },
-        {
-            "$type": "panel",
-            "id": "panel-2"
-        },
-        {
-            "$type": "tabs",
-            "id": "tabs-1"
-        },
-        {
-            "id": "results",
-            "$type": "results-service"
-        },
-        {
-            "id": "results-list-1",
+            "id": "results-table-1",
             "icon": "clipboard-list",
             "featureActions": "item://menu/feature-actions",
             "$type": "results"
-        },
-        {
-            "id": "feature-actions",
-            "$type": "menu"
-        },
-        {
-            "id": "split-1",
-            "$type": "split"
         },
         {
             "$type": "map-extension",
@@ -54,6 +32,26 @@
             "id": "default",
             "title": "Default",
             "url": "./layout.xml"
+        },
+        {
+            "id": "feature-actions",
+            "$type": "menu"
+        },
+        {
+            "id": "split-1",
+            "$type": "split"
+        },
+        {
+            "$type": "panel",
+            "id": "panel-1"
+        },
+        {
+            "$type": "panel",
+            "id": "panel-2"
+        },
+        {
+            "id": "results",
+            "$type": "results-service"
         }
     ]
 }
