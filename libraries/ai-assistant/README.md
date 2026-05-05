@@ -7,3 +7,5 @@ The Assistant component allows users to interact with a web map using natural la
 -   [Navigation agent](https://developers.arcgis.com/javascript/latest/references/ai-components/components/arcgis-assistant-navigation-agent/)
 -   [Data exploration agent](https://developers.arcgis.com/javascript/latest/references/ai-components/components/arcgis-assistant-data-exploration-agent/)
 -   [Help agent](https://developers.arcgis.com/javascript/latest/references/ai-components/components/arcgis-assistant-help-agent/)
+
+Prepare your data for analysis by the AI Assistant by following the instructions [here](https://developers.arcgis.com/javascript/latest/agentic-apps/ai-webmap-setup/).
