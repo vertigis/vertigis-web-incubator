@@ -96,7 +96,7 @@ const ArcGISAssistant = (props: LayoutElementProperties<ArcGISAssistantModel>): 
         <LayoutElement {...props}>
             <AssistantComponent
                 /** arcgisSubmit={(event: CustomEvent<string>) => alert(event.detail)} */
-                containerProps={{ sx: { flex: "1 1" } }}
+                containerProps={{ sx: { flex: "1 1", width: "100%" } }}
                 copyEnabled={copyEnabled}
                 description={description}
                 entryMessage={entryMessage}

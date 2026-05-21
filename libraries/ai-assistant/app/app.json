@@ -4,13 +4,13 @@
         {
             "$type": "arcgis-assistant",
             "id": "arcgis-assistant-1",
-            "heading": "Change in Wheat Production 2017-2022",
-            "description": "Explore wheat production in the U.S. from 2017 to 2022",
-            "entryMessage": "Hello! I'm here to help you explore changes in wheat production over the years.",
+            "heading": "Capital City Infrastructure",
+            "description": "Explore buildings, water mains, and fire hydrants in Capital City.",
+            "entryMessage": "Hello! Ask me questions and give me directions regarding the Capital City infrastructure seen on the map.",
             "suggestedPrompts": [
-                "Go to the county that produced the most wheat in 2022.",
-                "How does that compare to the average county that produced wheat?",
-                "Select all the counties that produced at least two times less wheat in 2022 than in 2017."
+                "Go to the tallest building in Downtown.",
+                "Select the water main associated with this building by Water Line ID.",
+                "Report on any fire hydrants associated with this line."
             ],
             "keepSuggestedPrompts": "true",
             "title": "AI Assistant",
@@ -25,7 +25,7 @@
         {
             "$type": "map-extension",
             "id": "map-1",
-            "webMap": "https://www.arcgis.com/home/item.html?id=c13bffcad4a244a99062e915e9bc1dc3"
+            "webMap": "https://www.arcgis.com/home/item.html?id=0a96fdb24ee4429397da362ee3a81cba"
         },
         {
             "$type": "layout",
