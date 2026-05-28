@@ -8,9 +8,10 @@
             "description": "Explore buildings, water mains, and fire hydrants in Capital City.",
             "entryMessage": "Hello! Ask me questions and give me directions regarding the Capital City infrastructure seen on the map.",
             "suggestedPrompts": [
+                "What are the neighborhoods in Capital City?",
                 "Go to the tallest building in Downtown.",
-                "Select the water main associated with this building by Water Line ID.",
-                "Report on any fire hydrants associated with this line."
+                "Select the oldest water main in North Park.",
+                "Report on any fire hydrants connected to this line."
             ],
             "keepSuggestedPrompts": "true",
             "title": "AI Assistant",
