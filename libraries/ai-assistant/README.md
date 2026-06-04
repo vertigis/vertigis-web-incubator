@@ -1,4 +1,7 @@
-# ArcGIS AI Assistant (beta)
+# ArcGIS AI Assistant (BETA)
+
+> WARNING:
+> This component is in beta and will likely require breaking changes before it is production-ready.
 
 This sample renders an ArcGIS [AI Assistant](https://developers.arcgis.com/javascript/latest/references/ai-components/components/arcgis-assistant/) component.
 

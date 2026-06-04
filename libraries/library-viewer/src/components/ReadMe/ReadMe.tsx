@@ -23,7 +23,18 @@ const ReadMe: FC<ReadMeProps> = ({ model, ...layoutProps }) => {
             {readmeText && (
                 <Markdown
                     text={readmeText}
-                    sx={{ marginLeft: 2, marginRight: 2 }}
+                    sx={{
+                        marginLeft: 2,
+                        marginRight: 2,
+                        blockquote: {
+                            backgroundColor: "var(--alertAmberBackground)",
+                            color: "var(--alertAmberForeground)",
+                            padding: "1rem",
+                            borderRadius: "1rem",
+                            marginLeft: 0,
+                            width: "fit-content",
+                        },
+                    }}
                 />
             )}
         </LayoutElement>

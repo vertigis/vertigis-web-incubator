@@ -1,0 +1,12 @@
+{
+    "language-designer-ai-assistant-description-description": "The description text displayed below the heading in the assistant. This text provides additional context about the assistant's capabilities and how users can interact with it.",
+    "language-designer-ai-assistant-description-title": "Description",
+    "language-designer-ai-assistant-entry-message-description": "The instructions to display when the assistant is first loaded. This is intended to be a welcome or entry message that provides guidance to users on how to interact with the assistant.",
+    "language-designer-ai-assistant-entry-message-title": "Entry Message",
+    "language-designer-ai-assistant-heading-description": "The heading text displayed at the top of the assistant. This name should be concise and descriptive of the assistant's purpose.",
+    "language-designer-ai-assistant-heading-title": "Heading",
+    "language-designer-ai-assistant-suggested-prompt": "Suggested Prompt",
+    "language-designer-ai-assistant-suggested-prompt-title": "Enter a sample question or directive",
+    "language-designer-ai-assistant-suggested-prompts-description": "Prompts to suggest to the end user on load. These are intended to help users understand which questions they can ask.",
+    "language-designer-ai-assistant-suggested-prompts-title": "Suggested Prompts"
+}

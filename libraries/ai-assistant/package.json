@@ -20,7 +20,7 @@
     },
     "devDependencies": {
         "@vertigis/web": "^5.41.1",
-        "@vertigis/web-sdk": "^3.0.1",
+        "@vertigis/web-sdk": "^3.0.2",
         "prettier": "~3.5.3",
         "typescript": "^5.4.0"
     },

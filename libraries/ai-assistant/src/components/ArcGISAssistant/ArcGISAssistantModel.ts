@@ -7,7 +7,7 @@ import type { ComponentModelProperties, PropertyDefs } from "@vertigis/web/model
 import { ComponentModelBase, importModel, serializable } from "@vertigis/web/models";
 import React from "react";
 
-import { ArcGISAssistantElement, ArcGISAssistantProps } from "./ArcGISAssistant";
+import type { ArcGISAssistantElement, ArcGISAssistantProps } from "./ArcGISAssistant";
 
 export interface ArcGISAssistantModelProperties extends ArcGISAssistantProps, ComponentModelProperties {}
 
@@ -25,14 +25,16 @@ export default class ArcGISAssistantModel extends ComponentModelBase<ArcGISAssis
     heading?: string;
     keepSuggestedPrompts?: boolean;
     logEnabled?: boolean;
-    suggestedPrompts?: string[];
+    suggestedPrompts: string[] = [];
 
     _handles: IHandle[] = [];
 
     // Listen for layer changes triggered by the AI Assistant
     protected override async _onInitialize(): Promise<void> {
         when(this as ArcGISAssistantModel, "map", async () => {
-            await this._watchFeatureEffects();
+            when(this.map, "view", async () => {
+                await this._watchFeatureEffects();
+            });
         });
     }
 
@@ -115,7 +117,6 @@ export default class ArcGISAssistantModel extends ComponentModelBase<ArcGISAssis
             },
             suggestedPrompts: {
                 serializeModes: ["initial"],
-                default: [],
             },
         };
     }

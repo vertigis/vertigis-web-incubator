@@ -1,6 +1,13 @@
 import type { LibraryRegistry } from "@vertigis/web/config";
+import type { GetDesignerSettingsSchemaArgs } from "@vertigis/web/designer";
 
-import ArcGISAssistant, { ArcGISAssistantModel } from "./components/ArcGISAssistant";
+import ArcGISAssistant, {
+    applySettings,
+    ArcGISAssistantModel,
+    getSettings,
+    getSettingsSchema,
+} from "./components/ArcGISAssistant";
+import invLanguage from "./locale/inv.json";
 
 const LAYOUT_NAMESPACE = "custom.a1ccba60";
 
@@ -11,6 +18,10 @@ export default function (registry: LibraryRegistry): void {
         name: "arcgis-assistant",
         namespace: LAYOUT_NAMESPACE,
         getComponentType: () => ArcGISAssistant,
+        getDesignerSettings: async (args: GetDesignerSettingsSchemaArgs<ArcGISAssistantModel>) => getSettings(args),
+        applyDesignerSettings: async args => applySettings(args),
+        getDesignerSettingsSchema: async (args: GetDesignerSettingsSchemaArgs<ArcGISAssistantModel>) =>
+            getSettingsSchema(args),
         itemType: "arcgis-assistant",
         title: "ArcGIS Assistant",
     });
@@ -25,5 +36,13 @@ export default function (registry: LibraryRegistry): void {
     registry.registerCommand({
         name: "arcgis-assistant.submit-message",
         itemType: "arcgis-assistant",
+    });
+    registry.registerLanguageResources({
+        locale: "inv",
+        values: invLanguage as { [key: string]: string },
+    });
+    registry.registerLanguageResources({
+        locale: "en",
+        values: invLanguage as { [key: string]: string },
     });
 }
