@@ -20,7 +20,7 @@
         {
             "id": "results-table-1",
             "icon": "clipboard-list",
-            "featureActions": "item://menu/feature-actions",
+            "onFeatureClick": ["map.zoom-to-features"],
             "$type": "results"
         },
         {
@@ -33,10 +33,6 @@
             "id": "default",
             "title": "Default",
             "url": "./layout.xml"
-        },
-        {
-            "id": "feature-actions",
-            "$type": "menu"
         },
         {
             "id": "split-1",
