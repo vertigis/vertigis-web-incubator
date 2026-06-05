@@ -131,6 +131,11 @@
                                 appConfig,
                                 layout: getAbsoluteUrl("layout.xml"),
                                 libraries: libs.map(lib => lib.default),
+                            }).then(() => {
+                                const loader = document.querySelector(".vgs-web-library-viewer-loading");
+                                if (loader) {
+                                    loader.style.display = "none";
+                                }
                             });
                         })
                     });
@@ -138,6 +143,10 @@
             }
 
             function injectIframe() {
+                const loader = document.querySelector(".vgs-web-library-viewer-loading");
+                if (loader) {
+                    loader.style.display = "flex";
+                }
                 const iframe = document.createElement("iframe");
                 iframe.name = "viewer";
                 iframe.id = "vgs_web_library_viewer_iframe";
