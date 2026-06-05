@@ -1,5 +1,8 @@
 import Point from "@arcgis/core/geometry/Point";
-import { watch } from "@vertigis/arcgis-extensions/support/observableUtils";
+import {
+    IHandle,
+    watch,
+} from "@vertigis/arcgis-extensions/support/observableUtils";
 import type { MapModel } from "@vertigis/web/mapping";
 import type {
     PropertyDefs,

@@ -8,7 +8,7 @@
     "type": "module",
     "scripts": {
         "build": "vertigis-web-sdk build",
-        "start": "vertigis-web-sdk start",
+        "start": "VIEWER_URL=https://apps-staging.vertigisstudio.com/web/ vertigis-web-sdk start",
         "upgrade": "vertigis-web-sdk upgrade"
     },
     "dependencies": {
@@ -16,8 +16,8 @@
     },
     "devDependencies": {
         "@types/xml2js": "^0.4.14",
-        "@vertigis/web": "^5.39.0",
-        "@vertigis/web-sdk": "^3.0.0",
+        "@vertigis/web": "^5.41.1",
+        "@vertigis/web-sdk": "^3.0.2",
         "typescript": "~5.6.3"
     },
     "overrides": {

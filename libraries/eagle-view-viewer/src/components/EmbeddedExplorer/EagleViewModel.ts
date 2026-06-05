@@ -2,6 +2,7 @@ import Viewpoint from "@arcgis/core/Viewpoint";
 import Point from "@arcgis/core/geometry/Point";
 import SpatialReference from "@arcgis/core/geometry/SpatialReference";
 import * as projectOperator from "@arcgis/core/geometry/operators/projectOperator";
+import { IHandle } from "@vertigis/arcgis-extensions/support/observableUtils";
 import type { MapModel } from "@vertigis/web/mapping";
 import type {
     ComponentModelProperties,
@@ -14,12 +15,11 @@ import {
 } from "@vertigis/web/models";
 import { debounce } from "@vertigis/web/ui/debounce";
 
-import ScaleLevels,{ TileType } from "./ScaleLevels";
+import ScaleLevels, { TileType } from "./ScaleLevels";
 import type {
     EagleViewView,
-    EmbeddedExplorerInstance
+    EmbeddedExplorerInstance,
 } from "./embedded-explorer";
-
 
 interface EagleViewProperties extends ComponentModelProperties {
     apiKey?: string;
@@ -104,7 +104,10 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
 
         // EagleView uses a different rotation direction, so we need to negate it
         const rotation = 360 - this.map.view.viewpoint.rotation;
-        const zoom = ScaleLevels.GetLevelForScale(this.map.view.scale, TileType.Raster);
+        const zoom = ScaleLevels.GetLevelForScale(
+            this.map.view.scale,
+            TileType.Raster
+        );
 
         // Attempt to avoid unnecessary updates to the EagleView view.
         if (
@@ -167,11 +170,13 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
                     this.e3.off("onViewUpdate");
                     this.e3.setView(viewpoint, () => {
                         setTimeout(() => {
-                            this.mapUpdateEventSource = ViewUpdatedEventSource.None;
+                            this.mapUpdateEventSource =
+                                ViewUpdatedEventSource.None;
                             this.e3.on("onViewUpdate", (args: EagleViewView) =>
                                 this._onE3ViewUpdated(args)
                             );
-                        }, 500)});
+                        }, 500);
+                    });
                 } else {
                     this.mapUpdateEventSource = ViewUpdatedEventSource.None;
                 }
@@ -200,8 +205,11 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
 
             // Need to convert the zoom level to map scale Eagleview appears to
             // use MapBox tile schema, so we need to add 1 to the zoom level
-           // const zoom = Math.round(updatedView.zoom + 1);
-            const vswScale = ScaleLevels.GetScaleForLevel(updatedView.zoom, TileType.Raster); // (<any>this.map).scaleLevels.items[zoom];
+            // const zoom = Math.round(updatedView.zoom + 1);
+            const vswScale = ScaleLevels.GetScaleForLevel(
+                updatedView.zoom,
+                TileType.Raster
+            ); // (<any>this.map).scaleLevels.items[zoom];
 
             const viewpoint = new Viewpoint({
                 targetGeometry: point,

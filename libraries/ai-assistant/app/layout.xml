@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="custom.a1ccba60">
+    <split config="split-1" resizable="true">
+        <panel config="panel-3" show-close-button="false" grow="25" visual-state="normal">
+            <tabs xmlns="https://geocortex.com/layout/web/v1" config="tabs-2" show-icon="true">
+                <custom:arcgis-assistant config="arcgis-assistant-1" />
+            </tabs>
+        </panel>
+        <stack resizable="true" config="stack-1" grow="75">
+            <map id="primary-map" config="map-1" grow="75"/>
+            <panel id="results-panel" config="panel-2" show-close-button="false" visual-state="minimized" grow="25">
+                <results-table xmlns="https://geocortex.com/layout/web/v1" config="results-table-1" show-close-button="false"/>
+            </panel>
+        </stack>
+    </split>
+</layout>

@@ -20,6 +20,10 @@
                 {
                     "id": "eagle-view-viewer",
                     "title": "Eagle View Embedded Explorer"
+                },
+                {
+                    "id": "ai-assistant",
+                    "title": "AI Assistant"
                 }
             ]
         },

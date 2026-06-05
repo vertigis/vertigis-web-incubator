@@ -1,0 +1,54 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "arcgis-assistant",
+            "id": "arcgis-assistant-1",
+            "heading": "Capital City Infrastructure",
+            "description": "Explore buildings, water mains, and fire hydrants in Capital City.",
+            "entryMessage": "Hello! Ask me questions and give me directions regarding the Capital City infrastructure seen on the map.",
+            "suggestedPrompts": [
+                "What are the neighborhoods in Capital City?",
+                "Go to the tallest building in Downtown.",
+                "Select the oldest water main in North Park.",
+                "Report on any fire hydrants connected to this line."
+            ],
+            "keepSuggestedPrompts": "true",
+            "title": "AI Assistant",
+            "icon": "tips-and-tricks"
+        },
+        {
+            "id": "results-table-1",
+            "icon": "clipboard-list",
+            "onFeatureClick": ["map.zoom-to-features"],
+            "$type": "results"
+        },
+        {
+            "$type": "map-extension",
+            "id": "map-1",
+            "webMap": "https://www.arcgis.com/home/item.html?id=0a96fdb24ee4429397da362ee3a81cba"
+        },
+        {
+            "$type": "layout",
+            "id": "default",
+            "title": "Default",
+            "url": "./layout.xml"
+        },
+        {
+            "id": "split-1",
+            "$type": "split"
+        },
+        {
+            "$type": "panel",
+            "id": "panel-1"
+        },
+        {
+            "$type": "panel",
+            "id": "panel-2"
+        },
+        {
+            "id": "results",
+            "$type": "results-service"
+        }
+    ]
+}
