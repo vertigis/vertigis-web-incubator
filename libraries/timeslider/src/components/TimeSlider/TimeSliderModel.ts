@@ -34,7 +34,7 @@ interface TimeSliderModelProperties extends ComponentModelProperties {
 }
 
 @serializable
-export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelProperties> {
+export default class TimeSliderModel extends ComponentModelBase {
     @importModel(ItemType.MAP_EXTENSION)
     map: MapModel | undefined;
     widget: EsriTimeSlider;
@@ -147,8 +147,26 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         let timeVisible: boolean;
         for (const tempLayer of map.allLayers.toArray()) {
             const layer = tempLayer as FeatureLayer;
-            // eslint-disable-next-line no-await-in-loop
-            await layer.load();
+            // Williams patch: skip non-time-aware layers early, before paying
+            // the cost of layer.load() on every layer in the map.
+            if (!layer.timeInfo) {
+                continue;
+            }
+            try {
+                // eslint-disable-next-line no-await-in-loop
+                await layer.load();
+            } catch (err) {
+                // Williams patch: gracefully skip layers that fail to load
+                // (external weather/storm/wildfire services can be flaky).
+                // Without this, a single bad layer crashes the whole time slider.
+                // eslint-disable-next-line no-console
+                console.warn(
+                    "TimeSlider: skipping layer that failed to load",
+                    layer.id || layer.title,
+                    err
+                );
+                continue;
+            }
             if (layer?.timeInfo?.fullTimeExtent) {
                 if (
                     start === undefined ||
