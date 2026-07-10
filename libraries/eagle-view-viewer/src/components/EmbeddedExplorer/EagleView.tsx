@@ -21,8 +21,10 @@ export default function EagleView(
             model.e3 = explorer.mount("eagle-view-map", {
                 apiKey: model.apiKey,
                 view: model.getPointForEagleView(true),
+                preferences: { imageDisplay: {mainPane: 'oblique'}},
             });
 
+            
             /**
              * EagleView pollutes the page with inline styles that override
              * global styles. This is a workaround to remove those styles.

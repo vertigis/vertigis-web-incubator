@@ -8,10 +8,17 @@ export interface EagleViewView {
     zoom: number;
 }
 
+interface E3Preferences {
+    imageDisplay?: {
+        mainPane?: "oblique" | "ortho";
+    };
+}
+
 interface EmbeddedExplorerOptions {
     containerId?: string;
     apiKey?: string;
     theme?: "light" | "dark";
+    preferences: E3Preferences;
     view?: EagleViewView;
 }
 
