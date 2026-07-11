@@ -147,8 +147,21 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         let timeVisible: boolean;
         for (const tempLayer of map.allLayers.toArray()) {
             const layer = tempLayer as FeatureLayer;
-            // eslint-disable-next-line no-await-in-loop
-            await layer.load();
+            if (!layer.timeInfo) {
+                continue;
+            }
+            try {
+                // eslint-disable-next-line no-await-in-loop
+                await layer.load();
+            } catch (err) {
+                // eslint-disable-next-line no-console
+                console.warn(
+                    "TimeSlider: skipping layer that failed to load",
+                    layer.id || layer.title,
+                    err
+                );
+                continue;
+            }
             if (layer?.timeInfo?.fullTimeExtent) {
                 if (
                     start === undefined ||
