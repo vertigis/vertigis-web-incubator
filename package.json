@@ -17,6 +17,7 @@
     },
     "homepage": "https://github.com/vertigis/vertigis-web-incubator#readme",
     "scripts": {
+        "audit": "yarn npm audit --all --recursive --no-deprecations",
         "build": "yarn build:libraries && yarn build:viewer && yarn copy-static-files",
         "build:libraries": "yarn workspaces foreach -Rt --from \"libraries/!(library-viewer)\" run build",
         "build:viewer": "yarn workspace library-viewer run build",
@@ -37,7 +38,7 @@
         "eslint-plugin-only-warn": "^1.1.0",
         "eslint-plugin-react": "^7.34.4",
         "eslint-plugin-react-hooks": "~5.2.0",
-        "express": "^4.20.0",
+        "express": "^5.2.1",
         "file-loader": "^6.2.0",
         "http-proxy-middleware": "^3.0.3",
         "lint-staged": "^16.2.7",
