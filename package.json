@@ -39,7 +39,7 @@
         "eslint-plugin-react-hooks": "~5.2.0",
         "express": "^4.20.0",
         "file-loader": "^6.2.0",
-        "http-proxy-middleware": "^3.0.3",
+        "http-proxy-middleware": "^3.0.7",
         "lint-staged": "^16.2.7",
         "prettier": "^2.8.4",
         "shx": "^0.3.4",
