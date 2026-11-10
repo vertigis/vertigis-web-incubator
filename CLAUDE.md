@@ -65,7 +65,9 @@ Run all commands from the root of the repository. The `yarn` version comes from 
 -   Write TypeScript and React function components.
 -   Import Web APIs from `@vertigis/web/*`. Import UI components from `@vertigis/web/ui/<Name>`. Import ArcGIS APIs from
     `@arcgis/core/*`. Do not import from MUI or `@vertigis/react-ui` directly.
+
 -   The rules for writing code in Web also apply to these samples, eg:
+
     -   A model extends `ComponentModelBase` and has the `@serializable` decorator. Add each config property to the
         `<Name>ModelProperties` interface and to `_getSerializableProperties()`.
     -   A service extends `ServiceBase`. Register it with `registerService`. Register its commands and operations with
@@ -81,10 +83,11 @@ Run all commands from the root of the repository. The `yarn` version comes from 
         first.
     -   The `namespace` in `registerComponent` must be the same as the `xmlns` of the custom prefix in `app/layout.xml`.
         Use `your.custom.namespace` in new samples.
+
 -   Attempt to keep the versions of `@vertigis/web`, `@vertigis/web-sdk`, and `typescript` the same in all libraries.
 
 -   If a sample has dependencies that would bring in a separate version of ESRI's JSAPI than used in the others OR
-    requires local packages for some other reason
+    requires local packages for some other reason:
 
     -   add `"installConfig": { "hoistingLimits": "workspaces" }` to that sample's `package.json`.
     -   This prevents the extra version of ESRI's JSAPI from affecting other samples and preventing builds from

@@ -20,7 +20,7 @@
         "build": "yarn build:libraries && yarn build:viewer && yarn copy-static-files",
         "build:libraries": "yarn workspaces foreach -Rt --from \"libraries/!(library-viewer)\" run build",
         "build:viewer": "yarn workspace library-viewer run build",
-        "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\"",
+        "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\" \"**/*.md\"",
         "test": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress run --browser chromium\"",
         "test:watch": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress open\"",
         "start": "yarn workspace library-viewer start",
@@ -52,13 +52,13 @@
     "resolutions": {
         "@types/react": "^19.2.5"
     },
-    "allowScripts": {
-        "@mui/x-telemetry": false,
-        "@vaadin/vaadin-usage-statistics": false,
-        "cypress": true,
-        "simple-git-hooks": true,
-        "unrs-resolver": true,
-        "playwright-chromium": true
+    "dependenciesmeta": {
+        "cypress": {
+            "built": true
+        },
+        "simple-git-hooks": {
+            "built": true
+        }
     },
     "simple-git-hooks": {
         "pre-commit": "npx lint-staged"

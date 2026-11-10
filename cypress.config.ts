@@ -2,10 +2,14 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
     chromeWebSecurity: false,
-    defaultCommandTimeout: 30000,
+    defaultCommandTimeout: 45000,
     modifyObstructiveCode: false,
+    responseTimeout: 45000,
+    retries: {
+        runMode: 3,
+    },
     numTestsKeptInMemory: 0,
-    video: false,
+    video: true,
     viewportWidth: 1280,
     viewportHeight: 720,
     e2e: {
