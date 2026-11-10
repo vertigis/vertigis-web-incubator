@@ -1,7 +1,4 @@
-import {
-    LayoutElement,
-    type LayoutElementProperties,
-} from "@vertigis/web/components";
+import { LayoutElement, type LayoutElementProperties } from "@vertigis/web/components";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import ListItemButton from "@vertigis/web/ui/ListItemButton";
 import MenuList from "@vertigis/web/ui/MenuList";
@@ -40,9 +37,7 @@ const PickList: FC<PickListProps> = ({ model, title, ...layoutProps }) => {
                             selected={selectedLibrary.includes(library.id)}
                             onClick={() => onClick(library)}
                         >
-                            <Typography variant="h4">
-                                {library.title}
-                            </Typography>
+                            <Typography variant="h4">{library.title}</Typography>
                         </ListItemButton>
                     ))}
                 </MenuList>

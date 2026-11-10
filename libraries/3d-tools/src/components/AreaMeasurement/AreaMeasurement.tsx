@@ -2,19 +2,14 @@ import type Accessor from "@arcgis/core/core/Accessor";
 import AreaMeasurement3DWidget from "@arcgis/core/widgets/AreaMeasurement3D";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
-import type {
-    MapWidgetConstructor,
-    MapWidgetProps,
-} from "@vertigis/web/ui/esriUtils";
+import type { MapWidgetConstructor, MapWidgetProps } from "@vertigis/web/ui/esriUtils";
 import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
 import type { ReactElement } from "react";
 import { useState, useEffect } from "react";
 
 import type AreaMeasurementModel from "./AreaMeasurementModel";
 
-export type AreaMeasurementProps = MapWidgetProps<
-    AreaMeasurementModel & Accessor
->;
+export type AreaMeasurementProps = MapWidgetProps<AreaMeasurementModel & Accessor>;
 
 const AreaMeasurement3DWrapper = createEsriMapWidget(
     AreaMeasurement3DWidget as MapWidgetConstructor<AreaMeasurement3DWidget>,
@@ -22,9 +17,7 @@ const AreaMeasurement3DWrapper = createEsriMapWidget(
     true
 );
 
-export default function AreaMeasurement3D(
-    props: AreaMeasurementProps
-): ReactElement {
+export default function AreaMeasurement3D(props: AreaMeasurementProps): ReactElement {
     const { model } = props;
     const { map } = model;
     const [widget, setWidget] = useState<AreaMeasurement3DWidget>();
@@ -43,16 +36,9 @@ export default function AreaMeasurement3D(
     }
 
     return (
-        <AreaMeasurement3DWrapper
-            onWidgetCreated={setWidget}
-            {...props}
-            sx={{ pb: 2 }}
-        >
+        <AreaMeasurement3DWrapper onWidgetCreated={setWidget} {...props} sx={{ pb: 2 }}>
             {widget?.viewModel?.state === "measured" && (
-                <Link
-                    sx={{ m: 2, cursor: "pointer" }}
-                    onClick={() => widget.viewModel.clear()}
-                >
+                <Link sx={{ m: 2, cursor: "pointer" }} onClick={() => widget.viewModel.clear()}>
                     language-web-incubator-common-clear
                 </Link>
             )}

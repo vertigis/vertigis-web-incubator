@@ -1,6 +1,4 @@
-import defaultWebpackConfig, {
-    merge,
-} from "@vertigis/web-sdk/config/webpack.config.js";
+import defaultWebpackConfig, { merge } from "@vertigis/web-sdk/config/webpack.config.js";
 
 export default merge(defaultWebpackConfig, {
     module: {

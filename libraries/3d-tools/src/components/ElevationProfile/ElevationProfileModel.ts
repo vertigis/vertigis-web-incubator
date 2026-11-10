@@ -1,15 +1,7 @@
 import type { MapModel } from "@vertigis/web/mapping";
-import type {
-    PropertyDefs,
-    ComponentModelProperties,
-} from "@vertigis/web/models";
-import {
-    ComponentModelBase,
-    serializable,
-    importModel,
-} from "@vertigis/web/models";
-export interface ElevationProfileModelProperties
-    extends ComponentModelProperties {
+import type { PropertyDefs, ComponentModelProperties } from "@vertigis/web/models";
+import { ComponentModelBase, serializable, importModel } from "@vertigis/web/models";
+export interface ElevationProfileModelProperties extends ComponentModelProperties {
     legend?: boolean;
     chart?: boolean;
     clearButton?: boolean;

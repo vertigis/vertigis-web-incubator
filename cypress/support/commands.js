@@ -26,10 +26,7 @@
 
 Cypress.Commands.add("getViewer", { prevSubject: "optional" }, (subject) =>
     (
-        (subject &&
-            cy
-                .wrap(subject, { log: false })
-                .find('iframe[name="viewer"]', { log: false })) ||
+        (subject && cy.wrap(subject, { log: false }).find('iframe[name="viewer"]', { log: false })) ||
         cy.get('iframe[name="viewer"]', { log: false })
     )
         .its("0.contentDocument.body", { log: false })

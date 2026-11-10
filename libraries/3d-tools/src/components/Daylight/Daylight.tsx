@@ -2,10 +2,7 @@ import type Accessor from "@arcgis/core/core/Accessor";
 import DaylightWidget from "@arcgis/core/widgets/Daylight";
 import { useWatchAndRerender, styled } from "@vertigis/web/ui";
 import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
-import type {
-    MapWidgetConstructor,
-    MapWidgetProps,
-} from "@vertigis/web/ui/esriUtils";
+import type { MapWidgetConstructor, MapWidgetProps } from "@vertigis/web/ui/esriUtils";
 import { useEffect, useState } from "react";
 import type { ReactElement } from "react";
 
@@ -13,11 +10,7 @@ import type DaylightModel from "./DaylightModel";
 
 export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 
-const DaylightWidgetWrapper = createEsriMapWidget(
-    DaylightWidget as MapWidgetConstructor<DaylightWidget>,
-    true,
-    true
-);
+const DaylightWidgetWrapper = createEsriMapWidget(DaylightWidget as MapWidgetConstructor<DaylightWidget>, true, true);
 
 const StyledDaylightWrapper = styled(DaylightWidgetWrapper)({
     "--calcite-ui-text-1": "var(--primaryForeground)",
@@ -70,10 +63,5 @@ export default function Daylight(props: DaylightWidgetProps): ReactElement {
         return null;
     }
 
-    return (
-        <StyledDaylightWrapper
-            onWidgetCreated={setWidget}
-            {...props}
-        ></StyledDaylightWrapper>
-    );
+    return <StyledDaylightWrapper onWidgetCreated={setWidget} {...props}></StyledDaylightWrapper>;
 }

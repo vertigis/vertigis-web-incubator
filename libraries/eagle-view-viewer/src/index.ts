@@ -1,11 +1,7 @@
 import type { LibraryRegistry } from "@vertigis/web/config";
 
 import EagleView, { EagleViewModel } from "./components/EmbeddedExplorer";
-import {
-    applyEVSettings,
-    getEVSettings,
-    getPictSettingsSchema,
-} from "./components/EmbeddedExplorer/designer";
+import { applyEVSettings, getEVSettings, getPictSettingsSchema } from "./components/EmbeddedExplorer/designer";
 import invLanguage from "./locale/inv.json";
 
 const LAYOUT_NAMESPACE = "vertigis.web.incubator.eagleview";

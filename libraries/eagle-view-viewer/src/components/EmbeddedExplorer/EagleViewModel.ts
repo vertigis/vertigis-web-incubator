@@ -4,22 +4,12 @@ import SpatialReference from "@arcgis/core/geometry/SpatialReference";
 import * as projectOperator from "@arcgis/core/geometry/operators/projectOperator";
 import { IHandle } from "@vertigis/arcgis-extensions/support/observableUtils";
 import type { MapModel } from "@vertigis/web/mapping";
-import type {
-    ComponentModelProperties,
-    PropertyDefs,
-} from "@vertigis/web/models";
-import {
-    serializable,
-    ComponentModelBase,
-    importModel,
-} from "@vertigis/web/models";
+import type { ComponentModelProperties, PropertyDefs } from "@vertigis/web/models";
+import { serializable, ComponentModelBase, importModel } from "@vertigis/web/models";
 import { debounce } from "@vertigis/web/ui/debounce";
 
 import ScaleLevels, { TileType } from "./ScaleLevels";
-import type {
-    EagleViewView,
-    EmbeddedExplorerInstance,
-} from "./embedded-explorer";
+import type { EagleViewView, EmbeddedExplorerInstance } from "./embedded-explorer";
 
 interface EagleViewProperties extends ComponentModelProperties {
     apiKey?: string;
@@ -55,10 +45,9 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
         }
         this._viewpointChangeHandle?.remove();
         this._map = map;
-        this._viewpointChangeHandle =
-            this.messages.events.map.viewpointChanged.subscribe(
-                debounce(() => this._onVSWMapExtentUpdated(), 100)
-            );
+        this._viewpointChangeHandle = this.messages.events.map.viewpointChanged.subscribe(
+            debounce(() => this._onVSWMapExtentUpdated(), 100)
+        );
     }
 
     /**
@@ -82,9 +71,7 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
 
         this._e3 = instance;
         this._e3?.on("onMapReady", () => {
-            this._e3.on("onViewUpdate", (args: EagleViewView) =>
-                this._onE3ViewUpdated(args)
-            );
+            this._e3.on("onViewUpdate", (args: EagleViewView) => this._onE3ViewUpdated(args));
         });
     }
 
@@ -96,18 +83,12 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
     getPointForEagleView(force: boolean): EagleViewView {
         let position = this.map.view.center;
         if (!position.spatialReference.isWebMercator) {
-            position = projectOperator.execute(
-                position,
-                new SpatialReference({ wkid: 3857 })
-            ) as Point;
+            position = projectOperator.execute(position, new SpatialReference({ wkid: 3857 })) as Point;
         }
 
         // EagleView uses a different rotation direction, so we need to negate it
         const rotation = 360 - this.map.view.viewpoint.rotation;
-        const zoom = ScaleLevels.GetLevelForScale(
-            this.map.view.scale,
-            TileType.Raster
-        );
+        const zoom = ScaleLevels.GetLevelForScale(this.map.view.scale, TileType.Raster);
 
         // Attempt to avoid unnecessary updates to the EagleView view.
         if (
@@ -170,11 +151,8 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
                     this.e3.off("onViewUpdate");
                     this.e3.setView(viewpoint, () => {
                         setTimeout(() => {
-                            this.mapUpdateEventSource =
-                                ViewUpdatedEventSource.None;
-                            this.e3.on("onViewUpdate", (args: EagleViewView) =>
-                                this._onE3ViewUpdated(args)
-                            );
+                            this.mapUpdateEventSource = ViewUpdatedEventSource.None;
+                            this.e3.on("onViewUpdate", (args: EagleViewView) => this._onE3ViewUpdated(args));
                         }, 500);
                     });
                 } else {
@@ -206,10 +184,7 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
             // Need to convert the zoom level to map scale Eagleview appears to
             // use MapBox tile schema, so we need to add 1 to the zoom level
             // const zoom = Math.round(updatedView.zoom + 1);
-            const vswScale = ScaleLevels.GetScaleForLevel(
-                updatedView.zoom,
-                TileType.Raster
-            ); // (<any>this.map).scaleLevels.items[zoom];
+            const vswScale = ScaleLevels.GetScaleForLevel(updatedView.zoom, TileType.Raster); // (<any>this.map).scaleLevels.items[zoom];
 
             const viewpoint = new Viewpoint({
                 targetGeometry: point,
@@ -219,23 +194,14 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
 
             // Check to see if the point is in the same SR as the map. If not,
             // we need to re-project it
-            if (
-                point.spatialReference.wkid !== this.map.spatialReference.wkid
-            ) {
-                viewpoint.targetGeometry = projectOperator.execute(
-                    point,
-                    this.map.spatialReference
-                ) as Point;
+            if (point.spatialReference.wkid !== this.map.spatialReference.wkid) {
+                viewpoint.targetGeometry = projectOperator.execute(point, this.map.spatialReference) as Point;
             }
 
             // Attempt to avoid unnecessary updates to the VSW map.
             if (
                 (this._lastWebPoint?.targetGeometry as Point)?.equals(point) &&
-                isWithinTolerance(
-                    this._lastWebPoint.rotation,
-                    viewpoint.rotation,
-                    1
-                ) &&
+                isWithinTolerance(this._lastWebPoint.rotation, viewpoint.rotation, 1) &&
                 isWithinTolerance(this._lastWebPoint.scale, viewpoint.scale, 1)
             ) {
                 return;
@@ -249,14 +215,12 @@ export default class EagleViewModel extends ComponentModelBase<EagleViewProperti
         } finally {
             requestAnimationFrame(() => {
                 this.mapUpdateEventSource = ViewUpdatedEventSource.None;
-                this._viewpointChangeHandle =
-                    this.messages.events.map.viewpointChanged.subscribe(
-                        debounce(() => this._onVSWMapExtentUpdated(), 500)
-                    );
+                this._viewpointChangeHandle = this.messages.events.map.viewpointChanged.subscribe(
+                    debounce(() => this._onVSWMapExtentUpdated(), 500)
+                );
             });
         }
     }
 }
 
-const isWithinTolerance = (a: number, b: number, tolerance: number): boolean =>
-    Math.abs(a - b) <= tolerance;
+const isWithinTolerance = (a: number, b: number, tolerance: number): boolean => Math.abs(a - b) <= tolerance;

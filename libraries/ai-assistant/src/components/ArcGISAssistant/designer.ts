@@ -28,14 +28,14 @@ interface ArcGISAssistantSettings extends ComponentModelDesignerSettings {
 export const applySettings: ApplyDesignerSettingsCallback<
     ArcGISAssistantModel,
     DesignerSettings<ArcGISAssistantSettings>
-> = async args => {
+> = async (args) => {
     const { model, settings } = args;
 
     await applyComponentModelDesignerSettings(args);
     const { suggestedPrompts, ...properties } = settings as ArcGISAssistantSettings;
 
     if (suggestedPrompts) {
-        model.suggestedPrompts = suggestedPrompts.map(item => item.data?.suggestedPrompt);
+        model.suggestedPrompts = suggestedPrompts.map((item) => item.data?.suggestedPrompt);
     }
 
     model.assignProperties(properties);
@@ -44,7 +44,7 @@ export const applySettings: ApplyDesignerSettingsCallback<
 export const getSettings: GetDesignerSettingsCallback<
     ArcGISAssistantModel,
     DesignerSettings<ArcGISAssistantSettings>
-> = async args => {
+> = async (args) => {
     const { model } = args;
     const { description, entryMessage, heading, suggestedPrompts } = model;
 
@@ -65,7 +65,7 @@ export const getSettings: GetDesignerSettingsCallback<
 type SettingsMap = DesignerSettings<ArcGISAssistantSettings> &
     DesignerSettings<SuggestedPromptSettings, "suggested-prompt">;
 
-export const getSettingsSchema: GetDesignerSettingsSchemaCallback<ArcGISAssistantModel, SettingsMap> = async args => {
+export const getSettingsSchema: GetDesignerSettingsSchemaCallback<ArcGISAssistantModel, SettingsMap> = async (args) => {
     if (args.subsettingsType === "suggested-prompt") {
         return {
             settings: [

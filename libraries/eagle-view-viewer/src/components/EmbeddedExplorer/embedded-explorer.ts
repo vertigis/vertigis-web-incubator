@@ -20,29 +20,12 @@ export interface EmbeddedExplorerInstance {
     loadContent(contentId: string): Promise<void>;
     setTheme(theme: "light" | "dark"): void;
     on(
-        event:
-            | "onViewUpdate"
-            | "featureClick"
-            | "layerSearch"
-            | "Errors"
-            | "onMapReady"
-            | "onLayersDataLoad",
+        event: "onViewUpdate" | "featureClick" | "layerSearch" | "Errors" | "onMapReady" | "onLayersDataLoad",
         callback: (...args: any[]) => void
     ): void;
-    off(
-        event:
-            | "onViewUpdate"
-            | "featureClick"
-            | "layerSearch"
-            | "Errors"
-            | "onMapReady"
-            | "onLayersDataLoad"
-    ): void;
+    off(event: "onViewUpdate" | "featureClick" | "layerSearch" | "Errors" | "onMapReady" | "onLayersDataLoad"): void;
     destroy(containerId: string): void;
-    mount(
-        containerId: string,
-        options?: EmbeddedExplorerOptions
-    ): EmbeddedExplorerInstance;
+    mount(containerId: string, options?: EmbeddedExplorerOptions): EmbeddedExplorerInstance;
     setView(view: EagleViewView, done?: () => void): void;
 }
 
@@ -67,8 +50,7 @@ export interface WindowWithEv extends Window {
 export const createEagleViewScript = (): HTMLScriptElement => {
     const script = document.createElement("script");
     script.id = "embedded-explorer-widget";
-    script.src =
-        "https://embedded-explorer.eagleview.com/static/embedded-explorer-widget.js";
+    script.src = "https://embedded-explorer.eagleview.com/static/embedded-explorer-widget.js";
     script.type = "application/javascript";
     script.crossOrigin = "anonymous|use-credentials";
     script.async = false;

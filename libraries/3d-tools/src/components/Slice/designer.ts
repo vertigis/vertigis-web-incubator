@@ -21,19 +21,13 @@ export interface SliceSettings extends ComponentModelDesignerSettings {
 
 export type SettingsMap = DesignerSettings<SliceSettings>;
 
-export const applySettings: ApplyDesignerSettingsCallback<
-    SliceModel,
-    SettingsMap
-> = async (args) => {
+export const applySettings: ApplyDesignerSettingsCallback<SliceModel, SettingsMap> = async (args) => {
     const { model, settings } = args;
     await applyComponentModelDesignerSettings(args);
     model.assignProperties(settings);
 };
 
-export const getSettings: GetDesignerSettingsCallback<
-    SliceModel,
-    SettingsMap
-> = async (args) => {
+export const getSettings: GetDesignerSettingsCallback<SliceModel, SettingsMap> = async (args) => {
     const { model } = args;
     const { tiltEnabled } = model;
     return {
@@ -42,10 +36,7 @@ export const getSettings: GetDesignerSettingsCallback<
     };
 };
 
-export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
-    SliceModel,
-    SettingsMap
-> = async (args) => {
+export const getSettingsSchema: GetDesignerSettingsSchemaCallback<SliceModel, SettingsMap> = async (args) => {
     const baseSchema = await getComponentModelDesignerSettingsSchema(args);
     (baseSchema.settings[0].settings as Setting<SliceSettings>[]) = (
         baseSchema.settings[0].settings as Setting<SliceSettings>[]
@@ -53,8 +44,7 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
         {
             id: "tiltEnabled",
             type: "checkbox",
-            description:
-                "language-designer-3d-tools-slice-tilt-enabled-description",
+            description: "language-designer-3d-tools-slice-tilt-enabled-description",
             displayName: "language-designer-3d-tools-slice-tilt-enabled-title",
         },
     ]);
