@@ -12112,6 +12112,11 @@ __metadata:
     ts-loader: "npm:^9.5.1"
     typescript: "npm:^6.0.3"
     webpack: "npm:^5.104.1"
+  dependenciesMeta:
+    cypress:
+      built: true
+    simple-git-hooks:
+      built: true
   languageName: unknown
   linkType: soft
 
