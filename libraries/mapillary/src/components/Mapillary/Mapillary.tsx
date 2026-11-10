@@ -16,14 +16,11 @@ import { useEffect, useRef } from "react";
 
 import type MapillaryModel from "./MapillaryModel";
 
-export default function Mapillary(
-    props: LayoutElementProperties<MapillaryModel>
-): ReactElement {
+export default function Mapillary(props: LayoutElementProperties<MapillaryModel>): ReactElement {
     const { model } = props;
-    const mlyRootEl = useRef<HTMLDivElement>();
+    const mlyRootEl = useRef<HTMLDivElement>(null);
 
-    const onSyncToggle = () =>
-        (model.synchronizePosition = !model.synchronizePosition);
+    const onSyncToggle = () => (model.synchronizePosition = !model.synchronizePosition);
     const onRecenter = () => model.recenter();
 
     useWatchAndRerender(model, "synchronizePosition");
@@ -53,14 +50,9 @@ export default function Mapillary(
         // These handlers are necessary as Mapillary cannot handle the many
         // update events caused by dragging the location marker. We'll only
         // handle the last one fired when the mouse button is released.
-        const mouseDownHandler = (): void =>
-            (model.currentMarkerPosition = undefined);
+        const mouseDownHandler = (): void => (model.currentMarkerPosition = undefined);
         const mouseUpHandler = (): void => {
-            if (
-                model.mapillary?.isNavigable &&
-                !model.updating &&
-                model.currentMarkerPosition
-            ) {
+            if (model.mapillary?.isNavigable && !model.updating && model.currentMarkerPosition) {
                 model.updating = true;
 
                 // const { latitude, longitude } = model.currentMarkerPosition;
@@ -102,18 +94,9 @@ export default function Mapillary(
                                 : "language-web-incubator-mapillary-enable-sync-title"
                         }
                     >
-                        {model.synchronizePosition ? (
-                            <MapSyncOn />
-                        ) : (
-                            <MapSyncOff />
-                        )}
+                        {model.synchronizePosition ? <MapSyncOn /> : <MapSyncOff />}
                     </IconButton>
-                    <IconButton
-                        onClick={onRecenter}
-                        title={
-                            "language-web-incubator-mapillary-recenter-title"
-                        }
-                    >
+                    <IconButton onClick={onRecenter} title={"language-web-incubator-mapillary-recenter-title"}>
                         <CenterMap />
                     </IconButton>
                 </ButtonGroup>

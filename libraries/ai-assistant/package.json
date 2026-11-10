@@ -12,17 +12,17 @@
         "build": "vertigis-web-sdk build",
         "start": "vertigis-web-sdk start",
         "lint": "eslint --ext .ts,.tsx",
-        "prettier": "prettier --write \"**/*.json\" \"**/*.js\" \"**/*.ts\" \"**/*.tsx\""
+        "prettier": "prettier --write \"**/*.json\" \"**/*.js\" \"**/*.ts\" \"**/*.tsx\" \"**/*.md\""
     },
     "dependencies": {
         "@arcgis/ai-components": "5.0.12",
         "@arcgis/map-components": "5.0.12"
     },
     "devDependencies": {
-        "@vertigis/web": "^5.41.1",
-        "@vertigis/web-sdk": "^3.0.2",
+        "@vertigis/web": "^5.43.1",
+        "@vertigis/web-sdk": "^3.1.0",
         "prettier": "~3.5.3",
-        "typescript": "^5.4.0"
+        "typescript": "^6.0.3"
     },
     "overrides": {
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"

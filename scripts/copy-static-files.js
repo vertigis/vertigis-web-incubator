@@ -1,12 +1,17 @@
-const { exec } = require("child_process");
+const { execSync } = require("child_process");
+const viewerAppConfig = require("../libraries/library-viewer/app/app.json");
 
-const libraries = ["mapillary", "timeslider", "3d-tools"];
+// Use the same list of libraries as the library viewer.
+const libraries = viewerAppConfig.items
+    .filter((item) => item.$type === "library-viewer-model")
+    .flatMap((item) => item.libraries.map((library) => library.id));
 
-exec("shx cp -r ./libraries/library-viewer/{app,build}/* ./viewer/build");
+// Run each command in sequence, and stop the build if a command fails.
+const run = (command) => execSync(command, { stdio: "inherit" });
 
-libraries.forEach((library) => {
-    exec(`shx mkdir -p ./viewer/build/${library}`);
-    exec(
-        `shx cp -r ./libraries/${library}/{app,build,README.md} ./viewer/build/${library}`
-    );
-});
+run("shx cp -r ./libraries/library-viewer/{app,build}/* ./viewer/build");
+
+for (const library of libraries) {
+    run(`shx mkdir -p ./viewer/build/${library}`);
+    run(`shx cp -r ./libraries/${library}/{app,build,README.md} ./viewer/build/${library}`);
+}

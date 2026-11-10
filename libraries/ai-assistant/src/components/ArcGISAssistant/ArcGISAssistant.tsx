@@ -5,7 +5,7 @@ import "@arcgis/ai-components/components/arcgis-assistant-help-agent";
 import type Collection from "@arcgis/core/core/Collection";
 import { LayoutElement, type LayoutElementProperties } from "@vertigis/web/components";
 import { useWatchAndRerender } from "@vertigis/web/ui";
-import { useRef, type ReactElement } from "react";
+import { ReactNode, useRef, type ReactElement } from "react";
 
 import type ArcGISAssistantModel from "./ArcGISAssistantModel";
 // TODO: This should be fixed when ESRI fixes their packaging.
@@ -53,7 +53,7 @@ export interface ArcGISAssistantEvents {
  * ArcGIS Assistant webcomponent element, in addition to all of the assignable props.
  * https://developers.arcgis.com/javascript/latest/references/ai-components/components/arcgis-assistant/#methods
  */
-export interface ArcGISAssistantElement extends ArcGISAssistantProps, EsriComponentElement {
+export interface ArcGISAssistantElement extends Omit<ArcGISAssistantProps, "children">, EsriComponentElement {
     clearChatHistory: () => Promise<void>;
     componentOnReady: () => Promise<ArcGISAssistantElement>;
     submitMessage: (message: string) => Promise<void>;
@@ -78,7 +78,7 @@ const ArcGISAssistant = (props: LayoutElementProperties<ArcGISAssistantModel>): 
         "suggestedPrompts",
     ]);
 
-    model.componentRef = useRef<ArcGISAssistantElement>();
+    model.componentRef = useRef<ArcGISAssistantElement>(null);
 
     const {
         componentRef,

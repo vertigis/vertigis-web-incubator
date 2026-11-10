@@ -1,6 +1,6 @@
 import FeatureEffect from "@arcgis/core/layers/support/FeatureEffect";
 import FeatureLayerView from "@arcgis/core/views/layers/FeatureLayerView";
-import { IHandle, watch, when } from "@vertigis/arcgis-extensions/support/observableUtils";
+import { watch, when } from "@vertigis/arcgis-extensions/support/observableUtils";
 import type { MapModel } from "@vertigis/web/mapping/MapModel";
 import { command } from "@vertigis/web/messaging";
 import type { ComponentModelProperties, PropertyDefs } from "@vertigis/web/models";
@@ -27,8 +27,6 @@ export default class ArcGISAssistantModel extends ComponentModelBase<ArcGISAssis
     logEnabled?: boolean;
     suggestedPrompts: string[] = [];
 
-    _handles: IHandle[] = [];
-
     // Listen for layer changes triggered by the AI Assistant
     protected override async _onInitialize(): Promise<void> {
         when(this as ArcGISAssistantModel, "map", async () => {
@@ -38,19 +36,14 @@ export default class ArcGISAssistantModel extends ComponentModelBase<ArcGISAssis
         });
     }
 
-    protected override async _onDestroy(): Promise<void> {
-        await super._onDestroy();
-        this._handles.forEach(handle => handle.remove());
-    }
-
     protected async _watchFeatureEffects(): Promise<void> {
         await Promise.all(
-            this.map.allLayerExtensions.map(async layerX => {
+            this.map.allLayerExtensions.map(async (layerX) => {
                 if (layerX.layer?.type !== "feature") {
                     return;
                 }
                 const layerView = (await this.map.view.whenLayerView(layerX.layer)) as FeatureLayerView;
-                this._handles.push(
+                this._handles.add(
                     watch(layerView, "featureEffect", async (newValue: FeatureEffect) => {
                         if (!newValue?.filter?.where) {
                             return;
