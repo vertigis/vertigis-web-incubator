@@ -1,7 +1,4 @@
 {
     "extends": "@vertigis/web-sdk/config/tsconfig.json",
-    "compilerOptions": {
-        "baseUrl": "."
-    },
     "include": ["eslint.config.js", "src"]
 }

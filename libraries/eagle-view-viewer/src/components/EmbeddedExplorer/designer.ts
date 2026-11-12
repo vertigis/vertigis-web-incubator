@@ -18,10 +18,7 @@ export interface EagleViewSettings extends ComponentModelDesignerSettings {
 
 export type SettingsMap = DesignerSettings<EagleViewSettings>;
 
-export const applyEVSettings: ApplyDesignerSettingsCallback<
-    EagleViewModel,
-    SettingsMap
-> = async (args) => {
+export const applyEVSettings: ApplyDesignerSettingsCallback<EagleViewModel, SettingsMap> = async (args) => {
     const { model, settings } = args;
 
     await applyComponentModelDesignerSettings(args);
@@ -29,10 +26,7 @@ export const applyEVSettings: ApplyDesignerSettingsCallback<
     model.assignProperties(settings);
 };
 
-export const getEVSettings: GetDesignerSettingsCallback<
-    EagleViewModel,
-    SettingsMap
-> = async (args) => {
+export const getEVSettings: GetDesignerSettingsCallback<EagleViewModel, SettingsMap> = async (args) => {
     const { model } = args;
     const { apiKey } = model;
     return {
@@ -41,10 +35,7 @@ export const getEVSettings: GetDesignerSettingsCallback<
     };
 };
 
-export const getPictSettingsSchema: GetDesignerSettingsSchemaCallback<
-    EagleViewModel,
-    SettingsMap
-> = async (args) => {
+export const getPictSettingsSchema: GetDesignerSettingsSchemaCallback<EagleViewModel, SettingsMap> = async (args) => {
     const baseSchema = await getComponentModelDesignerSettingsSchema(args);
     const schema: SettingsSchema<EagleViewSettings> = {
         ...baseSchema,

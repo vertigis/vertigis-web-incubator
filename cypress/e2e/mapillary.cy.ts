@@ -16,27 +16,15 @@ const expectMapAndMarkerCenter = (lat: number, lon: number) =>
             const mapView = getMapOrSceneView(mapEl);
 
             // Check map center
-            expect(mapView.center.latitude).to.be.closeTo(
-                lat,
-                mapCenterPrecision
-            );
-            expect(mapView.center.longitude).to.be.closeTo(
-                lon,
-                mapCenterPrecision
-            );
+            expect(mapView.center.latitude).to.be.closeTo(lat, mapCenterPrecision);
+            expect(mapView.center.longitude).to.be.closeTo(lon, mapCenterPrecision);
 
             // Check location marker center
             const locationMarker = mapView.map.allLayers
                 .find((layer: any) => layer.id === "__GCX_MARKUP_1")
                 .graphics.getItemAt(0);
-            expect(locationMarker.geometry.latitude).to.be.closeTo(
-                lat,
-                markerCenterPrecision
-            );
-            expect(locationMarker.geometry.longitude).to.be.closeTo(
-                lon,
-                markerCenterPrecision
-            );
+            expect(locationMarker.geometry.latitude).to.be.closeTo(lat, markerCenterPrecision);
+            expect(locationMarker.geometry.longitude).to.be.closeTo(lon, markerCenterPrecision);
         });
 
 // This sample currently does not run on GitHub due to needing to load a 3d

@@ -136,18 +136,12 @@ export default class ScaleLevels {
      * @param other The second array of LevelInfo objects. Defaults to ScaleLevels.Levels.
      * @returns True if the arrays are equal, false otherwise.
      */
-    static equals(
-        scaleLevels: LevelInfo[],
-        other: LevelInfo[] = ScaleLevels.RasterTileLevels
-    ): boolean {
+    static equals(scaleLevels: LevelInfo[], other: LevelInfo[] = ScaleLevels.RasterTileLevels): boolean {
         if (scaleLevels.length !== other.length) {
             return false;
         }
         for (let i = 0; i < scaleLevels.length; i++) {
-            if (
-                scaleLevels[i].level !== other[i].level ||
-                scaleLevels[i].scale !== other[i].scale
-            ) {
+            if (scaleLevels[i].level !== other[i].level || scaleLevels[i].scale !== other[i].scale) {
                 return false;
             }
         }
@@ -158,21 +152,13 @@ export default class ScaleLevels {
      * Returns the tiling scheme zoom level associated with the provided scale.
      * Note: whole number levels only.
      */
-    static GetLevelForScale(
-        scale: number,
-        tileType: TileType = TileType.Raster
-    ): number | undefined {
-        const levels =
-            tileType === TileType.Raster
-                ? ScaleLevels.RasterTileLevels
-                : ScaleLevels.VectorTileLevels;
+    static GetLevelForScale(scale: number, tileType: TileType = TileType.Raster): number | undefined {
+        const levels = tileType === TileType.Raster ? ScaleLevels.RasterTileLevels : ScaleLevels.VectorTileLevels;
 
         let closest = levels[0];
 
         for (const level of levels) {
-            if (
-                Math.abs(level.scale - scale) < Math.abs(closest.scale - scale)
-            ) {
+            if (Math.abs(level.scale - scale) < Math.abs(closest.scale - scale)) {
                 closest = level;
             }
         }
@@ -183,14 +169,9 @@ export default class ScaleLevels {
      * Returns the scale associated with the provided ESRI/Google web mapping tiling scheme zoom level.
      * Note: the level will be rounded to the nearest whole number.
      */
-    static GetScaleForLevel(
-        level: number,
-        tileType: TileType = TileType.Raster
-    ): number | undefined {
+    static GetScaleForLevel(level: number, tileType: TileType = TileType.Raster): number | undefined {
         const levelInfo = (
-            tileType === TileType.Raster
-                ? ScaleLevels.RasterTileLevels
-                : ScaleLevels.VectorTileLevels
+            tileType === TileType.Raster ? ScaleLevels.RasterTileLevels : ScaleLevels.VectorTileLevels
         ).find((l) => l.level === Math.round(level));
         return levelInfo?.scale;
     }

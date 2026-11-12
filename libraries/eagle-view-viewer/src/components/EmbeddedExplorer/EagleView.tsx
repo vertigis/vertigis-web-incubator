@@ -8,9 +8,7 @@ import { createEagleViewScript, type WindowWithEv } from "./embedded-explorer";
 
 const selectorsToTrim = ["h1", "h2", "h3", "h4", "h5", "h6", "body", "label"];
 
-export default function EagleView(
-    props: LayoutElementProperties<EagleViewModel>
-): React.ReactElement {
+export default function EagleView(props: LayoutElementProperties<EagleViewModel>): React.ReactElement {
     const { model } = props;
 
     useEffect(() => {
@@ -27,18 +25,14 @@ export default function EagleView(
              * EagleView pollutes the page with inline styles that override
              * global styles. This is a workaround to remove those styles.
              */
-            const newStyles = [...document.styleSheets].filter(
-                (style) => !previousStyle.includes(style)
-            );
+            const newStyles = [...document.styleSheets].filter((style) => !previousStyle.includes(style));
             newStyles.forEach((style) => {
                 const rules = [...style.cssRules];
                 for (let index = rules.length - 1; index >= 0; index--) {
                     const rule = rules[index];
                     if (
                         rule instanceof CSSStyleRule &&
-                        selectorsToTrim.some(
-                            (selector) => rule.selectorText === selector
-                        )
+                        selectorsToTrim.some((selector) => rule.selectorText === selector)
                     ) {
                         style.deleteRule(index);
                     }

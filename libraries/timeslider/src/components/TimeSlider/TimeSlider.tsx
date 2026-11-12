@@ -11,10 +11,11 @@ import type TimeSliderModel from "./TimeSliderModel";
 import "./TimeSlider.css";
 
 export type TimeSliderProps = MapWidgetProps<TimeSliderModel, EsriTimeSlider>;
-const TimeSliderWrapper: ComponentType<TimeSliderProps> = createEsriMapWidget<
-    TimeSliderModel,
-    EsriTimeSlider
->(EsriTimeSlider, undefined, true);
+const TimeSliderWrapper: ComponentType<TimeSliderProps> = createEsriMapWidget<TimeSliderModel, EsriTimeSlider>(
+    EsriTimeSlider,
+    undefined,
+    true
+);
 
 const TimeSlider: FC<TimeSliderProps> = (props) => {
     const { model, ...other } = props;

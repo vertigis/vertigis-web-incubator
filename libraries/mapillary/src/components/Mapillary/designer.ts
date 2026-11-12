@@ -24,19 +24,13 @@ export interface MapillarySettings extends ComponentModelDesignerSettings {
 
 export type SettingsMap = DesignerSettings<MapillarySettings>;
 
-export const applySettings: ApplyDesignerSettingsCallback<
-    MapillaryModel,
-    SettingsMap
-> = async (args) => {
+export const applySettings: ApplyDesignerSettingsCallback<MapillaryModel, SettingsMap> = async (args) => {
     const { model, settings } = args;
     await applyComponentModelDesignerSettings(args);
     model.assignProperties(settings);
 };
 
-export const getSettings: GetDesignerSettingsCallback<
-    MapillaryModel,
-    SettingsMap
-> = async (args) => {
+export const getSettings: GetDesignerSettingsCallback<MapillaryModel, SettingsMap> = async (args) => {
     const { model } = args;
     const { mapillaryKey, searchRadius, defaultScale, startSynced } = model;
     return {
@@ -48,10 +42,7 @@ export const getSettings: GetDesignerSettingsCallback<
     };
 };
 
-export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
-    MapillaryModel,
-    SettingsMap
-> = async (args) => {
+export const getSettingsSchema: GetDesignerSettingsSchemaCallback<MapillaryModel, SettingsMap> = async (args) => {
     const baseSchema = await getComponentModelDesignerSettingsSchema(args);
     (baseSchema.settings[0].settings as Setting<MapillarySettings>[]) = (
         baseSchema.settings[0].settings as Setting<MapillarySettings>[]
@@ -65,15 +56,13 @@ export const getSettingsSchema: GetDesignerSettingsSchemaCallback<
         {
             id: "searchRadius",
             type: "number",
-            description:
-                "language-designer-mapillary-search-radius-description",
+            description: "language-designer-mapillary-search-radius-description",
             displayName: "language-designer-mapillary-search-radius-title",
         },
         {
             id: "defaultScale",
             type: "number",
-            description:
-                "language-designer-mapillary-default-scale-description",
+            description: "language-designer-mapillary-default-scale-description",
             displayName: "language-designer-mapillary-default-scale-title",
         },
         {

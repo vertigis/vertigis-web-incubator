@@ -19,14 +19,14 @@ export default function (registry: LibraryRegistry): void {
         namespace: LAYOUT_NAMESPACE,
         getComponentType: () => ArcGISAssistant,
         getDesignerSettings: async (args: GetDesignerSettingsSchemaArgs<ArcGISAssistantModel>) => getSettings(args),
-        applyDesignerSettings: async args => applySettings(args),
+        applyDesignerSettings: async (args) => applySettings(args),
         getDesignerSettingsSchema: async (args: GetDesignerSettingsSchemaArgs<ArcGISAssistantModel>) =>
             getSettingsSchema(args),
         itemType: "arcgis-assistant",
         title: "ArcGIS Assistant",
     });
     registry.registerModel({
-        getModel: config => new ArcGISAssistantModel(config),
+        getModel: (config) => new ArcGISAssistantModel(config),
         itemType: "arcgis-assistant",
     });
     registry.registerCommand({

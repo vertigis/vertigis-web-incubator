@@ -56,9 +56,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
 
             // When running in netlify this lets us show a loading spinner, see
             // `viewer/build/index.html`
-            const iframe = parent.document.getElementById(
-                "vgs_web_library_viewer_iframe"
-            );
+            const iframe = parent.document.getElementById("vgs_web_library_viewer_iframe");
             if (iframe) {
                 iframe.style.display = "block";
             }
@@ -101,28 +99,14 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         const viewerId = "library-viewer";
 
         // Gather the materials needed for the library to load.
-        const [
-            sampleAppConfig,
-            sampleLayout,
-            customLibrary,
-            viewerAppConfig,
-            viewerLayout,
-        ] = await Promise.all([
-            import(
-                /* webpackExclude: /node_modules/ */ `../../../../../libraries/${libraryId}/app/app.json`
-            ),
-            import(
-                /* webpackExclude: /node_modules/ */ `../../../../../libraries/${libraryId}/app/layout.xml`
-            ),
+        const [sampleAppConfig, sampleLayout, customLibrary, viewerAppConfig, viewerLayout] = await Promise.all([
+            import(/* webpackExclude: /node_modules/ */ `../../../../../libraries/${libraryId}/app/app.json`),
+            import(/* webpackExclude: /node_modules/ */ `../../../../../libraries/${libraryId}/app/layout.xml`),
             import(
                 /* webpackExclude: /(node_modules|library-viewer)/ */ `../../../../../libraries/${libraryId}/build/main.js`
             ),
-            import(
-                /* webpackExclude: /node_modules/ */ `../../../../../libraries/${viewerId}/app/app.json`
-            ),
-            import(
-                /* webpackExclude: /node_modules/ */ `../../../../../libraries/${viewerId}/app/layout.xml`
-            ),
+            import(/* webpackExclude: /node_modules/ */ `../../../../../libraries/${viewerId}/app/app.json`),
+            import(/* webpackExclude: /node_modules/ */ `../../../../../libraries/${viewerId}/app/layout.xml`),
         ]);
 
         // Parse the currently loaded layout and the library sample layout into
@@ -136,11 +120,8 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         baseXml.layout.$ = { ...baseXml.layout.$, ...libraryXml.layout.$ };
 
         // Add the sample layout items as children of the library-viewer component.
-        const mergeRoot =
-            baseXml.layout.split[0].stack[0]["library:library-viewer"][0];
-        this._getChildElementNames(
-            libraryXml.layout as Record<string, unknown>
-        ).forEach(
+        const mergeRoot = baseXml.layout.split[0].stack[0]["library:library-viewer"][0];
+        this._getChildElementNames(libraryXml.layout as Record<string, unknown>).forEach(
             (element) => (mergeRoot[element] = libraryXml.layout[element])
         );
 
@@ -158,15 +139,9 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             if (!mergedItems.some((appItem) => appItem.id === item.id)) {
                 mergedItems.push(item);
             } else {
-                const existingItem = mergedItems.find(
-                    (appItem) => appItem.id === item.id
-                );
+                const existingItem = mergedItems.find((appItem) => appItem.id === item.id);
                 const mergedItem = { ...existingItem, ...item };
-                mergedItems.splice(
-                    mergedItems.indexOf(existingItem),
-                    1,
-                    mergedItem
-                );
+                mergedItems.splice(mergedItems.indexOf(existingItem), 1, mergedItem);
             }
         });
 
@@ -176,23 +151,14 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         // Bootstrap a new viewer application in the current iframe with the
         // merged layout and config.
         (window.require as any)(["require", "web"], (require, webViewer) => {
-            require([
-                "@vertigis/web-libraries!/common",
-                "@vertigis/web-libraries!/web",
-                "/main.js",
-            ], (...libs) => {
+            require(["@vertigis/web-libraries!/common", "@vertigis/web-libraries!/web", "/main.js"], (...libs) => {
                 const options = {
                     appConfig: mergedAppConfig,
                     debugMode: true,
                     hostElement,
                     layout: mergedLayout,
-                    libraries: [
-                        ...libs.map((lib) => lib.default),
-                        customLibrary.default,
-                    ],
-                    applicationParams: [
-                        ["includeFunctionalTestHelpers", "true"],
-                    ],
+                    libraries: [...libs.map((lib) => lib.default), customLibrary.default],
+                    applicationParams: [["includeFunctionalTestHelpers", "true"]],
                 };
                 webViewer.bootstrap(options);
             });
@@ -220,22 +186,16 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             this.messages
                 .command<SetLibraryArgs>("library-viewer.set-libraries")
                 .execute({ libraries: this.libraries, selectedLibrary }),
-            this.messages
-                .command<string>("library-viewer.display-readme")
-                .execute(selectedLibrary),
+            this.messages.command<string>("library-viewer.display-readme").execute(selectedLibrary),
         ]);
     }
 
     private async _loadLibrary(selectedLibrary: string): Promise<void> {
         const { hostElement } = this.appContext;
-        const library = this.libraries.find(
-            (library) => library.id === selectedLibrary
-        );
+        const library = this.libraries.find((library) => library.id === selectedLibrary);
         if (library) {
             hostElement.setAttribute("library-loaded", selectedLibrary);
-            await this.messages
-                .command<Library>("library-viewer.load-library")
-                .execute(library);
+            await this.messages.command<Library>("library-viewer.load-library").execute(library);
         }
     }
 

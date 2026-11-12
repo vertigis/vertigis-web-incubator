@@ -1,9 +1,5 @@
 import { command } from "@vertigis/web/messaging";
-import {
-    ComponentModelBase,
-    serializable,
-    type ComponentModelProperties,
-} from "@vertigis/web/models";
+import { ComponentModelBase, serializable, type ComponentModelProperties } from "@vertigis/web/models";
 
 import type { Library } from "../LibraryViewer/LibraryViewerModel";
 

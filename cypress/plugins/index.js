@@ -21,9 +21,7 @@ module.exports = (on, config) => {
     on("before:browser:launch", (browser = {}, launchOptions) => {
         if (browser.family === "chromium" && browser.name !== "electron") {
             // Remove default `disable-gpu` flag.
-            launchOptions.args = launchOptions.args.filter(
-                (arg) => arg !== "--disable-gpu"
-            );
+            launchOptions.args = launchOptions.args.filter((arg) => arg !== "--disable-gpu");
             // Coerce Chrome into enabling GPU accel as it often will default to
             // software only on Linux systems.
             launchOptions.args.push("--ignore-gpu-blacklist");

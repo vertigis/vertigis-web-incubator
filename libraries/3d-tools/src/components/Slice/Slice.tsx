@@ -2,10 +2,7 @@ import type Accessor from "@arcgis/core/core/Accessor";
 import SliceWidget from "@arcgis/core/widgets/Slice";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
-import type {
-    MapWidgetConstructor,
-    MapWidgetProps,
-} from "@vertigis/web/ui/esriUtils";
+import type { MapWidgetConstructor, MapWidgetProps } from "@vertigis/web/ui/esriUtils";
 import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
 import { useEffect, useState } from "react";
 import type { ReactElement } from "react";
@@ -14,11 +11,7 @@ import type SliceModel from "./SliceModel";
 
 export type SliceWidgetProps = MapWidgetProps<SliceModel & Accessor>;
 
-const SliceWidgetWrapper = createEsriMapWidget(
-    SliceWidget as MapWidgetConstructor<SliceWidget>,
-    true,
-    true
-);
+const SliceWidgetWrapper = createEsriMapWidget(SliceWidget as MapWidgetConstructor<SliceWidget>, true, true);
 
 export default function Slice(props: SliceWidgetProps): ReactElement {
     const { model } = props;
@@ -47,19 +40,15 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
 
         const observer = new MutationObserver((results) => {
             results.forEach((mutation) => {
-                const buttonAdded = !![...mutation.addedNodes.values()].find(
-                    (node) => {
-                        const className: string = node["className"] ?? "";
-                        return className.includes("esri-slice__cancel-button");
-                    }
-                );
+                const buttonAdded = !![...mutation.addedNodes.values()].find((node) => {
+                    const className: string = node["className"] ?? "";
+                    return className.includes("esri-slice__cancel-button");
+                });
                 if (buttonAdded) {
                     map["_suppressMapClick"] = true;
                 }
 
-                const buttonRemoved = !![
-                    ...mutation.removedNodes.values(),
-                ].find((node) => {
+                const buttonRemoved = !![...mutation.removedNodes.values()].find((node) => {
                     const className: string = node["className"] ?? "";
                     return className.includes("esri-slice__cancel-button");
                 });
@@ -83,21 +72,12 @@ export default function Slice(props: SliceWidgetProps): ReactElement {
         return null;
     }
 
-    const widgetIsSlicing =
-        widget?.viewModel?.state === "sliced" ||
-        widget?.viewModel?.state === "slicing";
+    const widgetIsSlicing = widget?.viewModel?.state === "sliced" || widget?.viewModel?.state === "slicing";
 
     return (
-        <SliceWidgetWrapper
-            onWidgetCreated={setWidget}
-            {...props}
-            sx={{ pb: 2 }}
-        >
+        <SliceWidgetWrapper onWidgetCreated={setWidget} {...props} sx={{ pb: 2 }}>
             {widgetIsSlicing && (
-                <Link
-                    sx={{ m: 2, cursor: "pointer" }}
-                    onClick={() => widget.viewModel.clear()}
-                >
+                <Link sx={{ m: 2, cursor: "pointer" }} onClick={() => widget.viewModel.clear()}>
                     language-web-incubator-common-clear
                 </Link>
             )}

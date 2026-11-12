@@ -6,15 +6,8 @@ import type TimeSlider from "@arcgis/core/webdoc/widgets/TimeSlider";
 import type EsriTimeSlider from "@arcgis/core/widgets/TimeSlider";
 import { ItemType } from "@vertigis/arcgis-extensions/ItemType";
 import type { MapModel } from "@vertigis/web/mapping/MapModel";
-import {
-    ComponentModelBase,
-    importModel,
-    serializable,
-} from "@vertigis/web/models";
-import type {
-    ComponentModelProperties,
-    PropertyDefs,
-} from "@vertigis/web/models";
+import { ComponentModelBase, importModel, serializable } from "@vertigis/web/models";
+import type { ComponentModelProperties, PropertyDefs } from "@vertigis/web/models";
 
 export type TimeSliderLayout = EsriTimeSlider["layout"];
 export type TimeSliderMode = EsriTimeSlider["mode"];
@@ -94,10 +87,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         }
     }
 
-    public updateTimeSliderWidget = async (
-        widget: EsriTimeSlider,
-        webMap: WebMap
-    ): Promise<void> => {
+    public updateTimeSliderWidget = async (widget: EsriTimeSlider, webMap: WebMap): Promise<void> => {
         // Reset model with default values.
         this.layout = "auto";
         this.loop = true;
@@ -107,11 +97,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         // Check the web map for existing time slider config.
         if (webMap?.widgets?.timeSlider) {
             const timeSlider = webMap.widgets.timeSlider;
-            await this._updateWidgetFromWebMapTimeSlider(
-                widget,
-                timeSlider,
-                webMap
-            );
+            await this._updateWidgetFromWebMapTimeSlider(widget, timeSlider, webMap);
         } else {
             await this._updateWidgetFromLayerTimeInfos(widget, webMap);
         }
@@ -139,10 +125,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         };
     }
 
-    private readonly _updateWidgetFromLayerTimeInfos = async (
-        widget: EsriTimeSlider,
-        map: Map
-    ): Promise<void> => {
+    private readonly _updateWidgetFromLayerTimeInfos = async (widget: EsriTimeSlider, map: Map): Promise<void> => {
         let start, end: Date;
         let timeVisible: boolean;
         for (const tempLayer of map.allLayers.toArray()) {
@@ -150,16 +133,10 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
             // eslint-disable-next-line no-await-in-loop
             await layer.load();
             if (layer?.timeInfo?.fullTimeExtent) {
-                if (
-                    start === undefined ||
-                    start > layer.timeInfo.fullTimeExtent.start
-                ) {
+                if (start === undefined || start > layer.timeInfo.fullTimeExtent.start) {
                     start = layer.timeInfo.fullTimeExtent.start;
                 }
-                if (
-                    end === undefined ||
-                    end < layer.timeInfo.fullTimeExtent.end
-                ) {
+                if (end === undefined || end < layer.timeInfo.fullTimeExtent.end) {
                     end = layer.timeInfo.fullTimeExtent.end;
                 }
                 if (layer.timeInfo) {
@@ -174,8 +151,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         // time extent.
         if (
             widget.fullTimeExtent &&
-            widget.effectiveStops?.[widget.effectiveStops.length - 1] <
-                widget.fullTimeExtent.end
+            widget.effectiveStops?.[widget.effectiveStops.length - 1] < widget.fullTimeExtent.end
         ) {
             widget.effectiveStops.push(widget.fullTimeExtent.end);
         }
@@ -219,8 +195,7 @@ export default class TimeSliderModel extends ComponentModelBase<TimeSliderModelP
         // time extent.
         if (
             widget.fullTimeExtent &&
-            widget.effectiveStops?.[widget.effectiveStops.length - 1] <
-                widget.fullTimeExtent.end
+            widget.effectiveStops?.[widget.effectiveStops.length - 1] < widget.fullTimeExtent.end
         ) {
             widget.effectiveStops.push(widget.fullTimeExtent.end);
         }

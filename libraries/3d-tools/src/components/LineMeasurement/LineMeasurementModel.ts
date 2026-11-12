@@ -1,13 +1,6 @@
 import type { MapModel } from "@vertigis/web/mapping";
-import type {
-    PropertyDefs,
-    ComponentModelProperties,
-} from "@vertigis/web/models";
-import {
-    ComponentModelBase,
-    serializable,
-    importModel,
-} from "@vertigis/web/models";
+import type { PropertyDefs, ComponentModelProperties } from "@vertigis/web/models";
+import { ComponentModelBase, serializable, importModel } from "@vertigis/web/models";
 
 type LineMeasurementModelProperties = ComponentModelProperties;
 

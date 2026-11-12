@@ -11,18 +11,15 @@ import type { ReactElement } from "react";
 
 import type ElevationProfileModel from "./ElevationProfileModel";
 
-export type ElevationProfileWidgetProps = MapWidgetProps<
-    ElevationProfileModel & Accessor
->;
+export type ElevationProfileWidgetProps = MapWidgetProps<ElevationProfileModel & Accessor>;
 
-const ElevationProfileWidgetWrapper = createEsriMapWidget<
-    ElevationProfileModel & Accessor,
-    ElevationProfileWidget
->(ElevationProfileWidget, true, true);
+const ElevationProfileWidgetWrapper = createEsriMapWidget<ElevationProfileModel & Accessor, ElevationProfileWidget>(
+    ElevationProfileWidget,
+    true,
+    true
+);
 
-export default function ElevationProfile(
-    props: ElevationProfileWidgetProps
-): ReactElement {
+export default function ElevationProfile(props: ElevationProfileWidgetProps): ReactElement {
     const { model } = props;
     const { map } = model;
     const [widget, setWidget] = useState<ElevationProfileWidget>();
@@ -102,10 +99,5 @@ export default function ElevationProfile(
         return null;
     }
 
-    return (
-        <ElevationProfileWidgetWrapper
-            onWidgetCreated={setWidget}
-            {...props}
-        ></ElevationProfileWidgetWrapper>
-    );
+    return <ElevationProfileWidgetWrapper onWidgetCreated={setWidget} {...props}></ElevationProfileWidgetWrapper>;
 }
